@@ -16,6 +16,8 @@ app.use(express.static("views"))
 //set port ${PORT} <-- calls from variable (must use ` `)
 const PORT = process.env.PORT || 3000;
 const User= require('./models/user.js')
+const passport= require('passport')
+require('./config/passport')(passport)
 app.use(express.urlencoded({ extended:false}))
 app.use(session({
     secret: process.env.SESSION_SECRET ,
@@ -26,12 +28,15 @@ app.use(session({
   //connect flash
 
   app.use(flash())
-
+//Passport middleware
+app.use(passport.initialize())
+app.use(passport.session())
  
 
   app.use((req,res,next) =>{  
     res.locals.success_msg = req.flash('success_msg')
     res.locals.error_msg = req.flash('error_msg')  
+    res.locals.error = req.flash('error')  
     next()
 
 
@@ -194,3 +199,20 @@ $ matches the end of the string, so if there's anything after the comma and spac
  
 
 )}})
+
+app.post('/',  async (req, res, next) => {
+    passport.authenticate('local', {
+    successRedirect:'/dashboard',
+    failureRedirect:'/',
+    failureFlash:true
+})(req,res,next)
+
+
+
+})
+
+
+
+
+
+
