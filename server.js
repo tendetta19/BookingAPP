@@ -61,6 +61,17 @@ app.get('/', (req, res) => {
     console.log('Home page loaded')
     res.render('index')
 })
+ 
+app.post('/',  async (req, res, next) => {
+    passport.authenticate('local', {
+    successRedirect:'/dashboard',
+    failureRedirect:'/',
+    failureFlash:true
+})(req,res,next)
+
+
+
+})
 
 
 app.get('/register',  (req, res) => {
@@ -200,16 +211,6 @@ $ matches the end of the string, so if there's anything after the comma and spac
 
 )}})
 
-app.post('/',  async (req, res, next) => {
-    passport.authenticate('local', {
-    successRedirect:'/dashboard',
-    failureRedirect:'/',
-    failureFlash:true
-})(req,res,next)
-
-
-
-})
 
 
 
