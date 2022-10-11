@@ -164,7 +164,7 @@ app.post('/forgetpassword',  async (req, res) => {
         errors.push({ msg: "Passwords must be the same"})
     } 
     if(errors.length > 0){ 
-        res.render('register', {
+        res.render('forgetpassword', {
             errors,  
             
         })
