@@ -4,6 +4,7 @@ if (process.env.NODE_ENV !== 'production') {
     //Loading your environment variables is a one-liner:
     require('dotenv').config()
 }
+const {ensureAuthenticated} = require('./config/auth')
 const flash = require('connect-flash')
 const session = require('express-session')
 const mongoose = require('mongoose')
@@ -81,11 +82,15 @@ app.get('/register',  (req, res) => {
 
 
 })
-app.get('/dashboard',  (req, res) => {
+app.get('/dashboard',ensureAuthenticated,  (req, res) => {
  
    
 
-    res.render("dashboard")
+    res.render("dashboard", {
+        name:req.user.fullname
+
+
+    })
 
 
 })
@@ -210,6 +215,21 @@ $ matches the end of the string, so if there's anything after the comma and spac
  
 
 )}})
+
+app.get('/logout',  (req,res)=>{
+    req.logout(function(err){ 
+        req.flash('success_msg', 'You have successfully logged out.')
+        if (err) { return next(err); }
+        res.redirect('/');
+
+    }); 
+
+
+})
+
+
+
+
 
 
 
