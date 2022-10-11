@@ -98,10 +98,43 @@ app.get('/forgetpassword',  (req, res) => {
 
 
 })
+app.get('/settings/changePassword',ensureAuthenticated,  (req, res) => {
+
+
+    res.render("settings/changePassword", {
+        name:req.user.fullname
+
+
+    })
+
+
+})
 app.get('/register',  (req, res) => {
 
 
     res.render("register")
+
+
+})
+app.get('/settings',ensureAuthenticated,  (req, res) => {
+
+
+    res.render("settings", {
+        name:req.user.fullname
+
+
+    })
+
+
+})
+app.get('/settings/payment',ensureAuthenticated,  (req, res) => {
+
+
+    res.render("settings/payment", {
+        name:req.user.fullname
+
+
+    })
 
 
 })
@@ -206,6 +239,55 @@ app.post('/forgetpassword',  async (req, res) => {
 
 )}})
 
+app.post('/changePassword',  async (req, res) => {
+    const {studentID, password, confirmPassword, role} = req.body
+    const hashedpassword = await bcrypt.hash(req.body.password, 10)
+    let errors = []  
+    if (password != confirmPassword){
+        errors.push({ msg: "Passwords must be the same"})
+    } 
+    if(errors.length > 0){ 
+        res.render('forgetpassword', {
+            errors,  
+            
+        })
+    } else{ 
+        User.findOne({
+            studentID: studentID
+
+
+        }, 
+        )
+        
+        .then(user => {
+            if(!user){
+                errors.push({msg: 'There is no user with that ID'})
+                // User exists
+                res.render('changepassword', {
+                    errors,  
+                    
+                })
+            }
+                else  { 
+               User.findOneAndUpdate({studentID: user.studentID},{hashedpassword: hashedpassword})
+                .then(user => {
+                        req.flash(
+                        'success_msg',
+                        'Password reset!'
+                        );
+                        res.redirect('/');
+                    })
+                    .catch(err => console.log(err)); 
+                       
+                    
+
+                
+
+            }
+        }
+ 
+
+)}})
 
            
 app.post('/register',  async (req, res) => {
