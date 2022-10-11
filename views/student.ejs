@@ -42,15 +42,19 @@
 
 <body>
     
-    <div class="content">
-    <p class="mb-4">Welcome <%= name%>, 
-        <h1> Time is a static element<span id="time"> </span></h1></p>
-
-        <a class="btn btn-lg btn-success" href="#">
-          <i class="icon-flag icon-2x pull-center"></i> This is a placeholder button <br>Create a new room</a>
-          <a class="btn btn-lg btn-success" href="#">
-            <i class="icon-flag icon-2x pull-center"></i> This is a placeholder button <br>View your existing rooms</a> 
-        </div>
+    
+<div class="row mt-5">
+  <div class="col-md-6 m-auto">
+  <p class="mb-5">Welcome <%= name%>,</p>
+    <div class="card card-body">
+        <p>Choose an action:</p>
+        <button type="submit" class="btn btn-primary btn-block">Create room</button>
+        <button type="submit" class="btn btn-primary btn-block">View/Edit existing rooms</button> 
+      
+      
+    </div>
+  </div>
+</div>
 
  
 <script src="stylesheets/js/jquery-3.3.1.min.js"></script>
