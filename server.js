@@ -64,8 +64,25 @@ app.get('/', (req, res) => {
 })
  
 app.post('/',  async (req, res, next) => {
+    const {studentID, password} = req.body
+    const authlevel = []
+    User.findOne({
+        studentID: studentID
+
+
+    }, 
+    ).then(user => {
+        authlevel.push('/'+user.role)  
+
+        }
+
+     
+ 
+
+)
+      
     passport.authenticate('local', {
-    successRedirect:'/dashboard',
+    successRedirect:authlevel,
     failureRedirect:'/',
     failureFlash:true
 })(req,res,next)
@@ -88,11 +105,24 @@ app.get('/register',  (req, res) => {
 
 
 })
-app.get('/dashboard',ensureAuthenticated,  (req, res) => {
+app.get('/student',ensureAuthenticated,  (req, res) => {
  
    
 
-    res.render("dashboard", {
+    res.render("student", {
+        name:req.user.fullname
+
+
+    })
+
+
+})
+
+app.get('/staff',ensureAuthenticated,  (req, res) => {
+ 
+   
+
+    res.render("staff", {
         name:req.user.fullname
 
 
@@ -155,8 +185,7 @@ app.post('/forgetpassword',  async (req, res) => {
                     
                 })
             }
-                else  {
-                    console.log(user.hashedpassword)
+                else  { 
                User.findOneAndUpdate({studentID: user.studentID},{hashedpassword: hashedpassword})
                 .then(user => {
                         req.flash(
