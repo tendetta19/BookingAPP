@@ -74,7 +74,13 @@ app.post('/',  async (req, res, next) => {
 
 })
 
+app.get('/forgetpassword',  (req, res) => {
 
+
+    res.render("forgetpassword")
+
+
+})
 app.get('/register',  (req, res) => {
 
 
@@ -102,8 +108,77 @@ app.get('/dashboard',ensureAuthenticated,  (req, res) => {
 The default value is true, but using the default has been deprecated, as the default will change in the future. Please research into this setting and choose what is appropriate to your use-case. Typically, you'll want false.
 
 How do I know if this is necessary for my store? The best way to know is to check with your store if it implements the touch method. If it does, then you can safely set resave: false. If it does not implement the touch method and your store sets an expiration date on stored sessions, then you likely need resave: true. */
+//forgetpassword 
+    
+    
+    
+    
+    
+     
+            
 
 
+
+app.get('/logout', (req, res) => {
+    req.logout(err => {
+        req.flash('success_msg', 'You are logged out');
+        res.redirect('/');
+    });
+   
+  });
+app.post('/forgetpassword',  async (req, res) => {
+    const {studentID, password, confirmPassword, role} = req.body
+    const hashedpassword = await bcrypt.hash(req.body.password, 10)
+    let errors = []  
+    if (password != confirmPassword){
+        errors.push({ msg: "Passwords must be the same"})
+    } 
+    if(errors.length > 0){ 
+        res.render('register', {
+            errors,  
+            
+        })
+    } else{ 
+        User.findOne({
+            studentID: studentID
+
+
+        }, 
+        )
+        
+        .then(user => {
+            if(!user){
+                errors.push({msg: 'There is no user with that ID'})
+                // User exists
+                res.render('forgetpassword', {
+                    errors,  
+                    
+                })
+            }
+                else  {
+                    console.log(user.hashedpassword)
+               User.findOneAndUpdate({studentID: user.studentID},{hashedpassword: hashedpassword})
+                .then(user => {
+                        req.flash(
+                        'success_msg',
+                        'Password reset!'
+                        );
+                        res.redirect('/');
+                    })
+                    .catch(err => console.log(err)); 
+                       
+                    
+
+                
+
+            }
+        }
+ 
+
+)}})
+
+
+           
 app.post('/register',  async (req, res) => {
     const hashedpassword = await bcrypt.hash(req.body.password, 10)
     const {fullname, studentID, email, password, confirmPassword, role} = req.body
@@ -215,25 +290,3 @@ $ matches the end of the string, so if there's anything after the comma and spac
  
 
 )}})
-
-app.get('/logout',  (req,res)=>{
-    req.logout(function(err){ 
-        req.flash('success_msg', 'You have successfully logged out.')
-        if (err) { return next(err); }
-        res.redirect('/');
-
-    }); 
-
-
-})
-
-
-
-
-
-
-
-
-
-
-
