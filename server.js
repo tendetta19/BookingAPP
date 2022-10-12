@@ -17,13 +17,15 @@ app.use(express.static("views"))
 //set port ${PORT} <-- calls from variable (must use ` `)
 const PORT = process.env.PORT || 3000;
 const User= require('./models/user.js')
+const rooms= require('./models/roomcreation.js')
 const passport= require('passport')
+const authlevel = []
 require('./config/passport')(passport)
 app.use(express.urlencoded({ extended:false}))
 app.use(session({
     secret: process.env.SESSION_SECRET ,
     resave: true,
-    saveUninitialized: true, 
+    saveUninitialized: true
   }))
 
   //connect flash
@@ -65,7 +67,7 @@ app.get('/', (req, res) => {
  
 app.post('/',  async (req, res, next) => {
     const {studentID, password} = req.body
-    const authlevel = []
+   
     User.findOne({
         studentID: studentID
 
@@ -116,6 +118,17 @@ app.get('/register',  (req, res) => {
 
 
 })
+app.get('/createroom',ensureAuthenticated,   (req, res) => {
+
+
+    res.render("createroom", {
+        name:req.user.fullname
+
+
+    })
+
+
+})
 app.get('/settings',ensureAuthenticated,  (req, res) => {
 
 
@@ -128,9 +141,7 @@ app.get('/settings',ensureAuthenticated,  (req, res) => {
 
 })
 app.get('/settings/payment',ensureAuthenticated,  (req, res) => {
-
-
-    res.render("settings/payment", {
+      res.render("settings/payment", {
         name:req.user.fullname
 
 
@@ -330,6 +341,109 @@ $ matches the end of the string, so if there's anything after the comma and spac
                             'Account created!'
                             );
                             res.redirect('/');
+                        })
+                        .catch(err => console.log(err));
+
+                }
+
+            }
+
+        
+        //validation passed
+
+
+    
+    
+    /* try {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10)
+        users.push({
+            id: Date.now().toString(),
+            fullname: req.body.fullname,
+            studentID: req.body.studentID,
+            email: req.body.email,
+            password: hashedPassword
+        })
+        res.redirect('/')
+    } catch {
+        res.redirect('/register')
+    }*/
+ 
+
+)}})
+
+
+app.post('/createroom',  async (req, res) => {
+   // console.log(name)
+    const {roomID, price, roomCapacity, openingDate, closingDate, promotionalCode} = req.body
+	const launchStatus = false 
+    const name = req.user.fullname
+    console.log(name)
+    let errors = []
+	// const createdBy = name
+	const bookedBy = ''
+	const createdBy = name
+     /* ^ matches the start of the string.
+[A-Za-z]* matches 0 or more letters (case-insensitive) -- replace * with + to require 1 or more letters.
+, matches a comma followed by a space.
+$ matches the end of the string, so if there's anything after the comma and space then the match will fail.*/
+  
+    if (openingDate > closingDate){
+        errors.push({ msg: "Please ensure your ending date is after your opening date"})
+    }
+    
+  
+    if(errors.length > 0){ 
+        res.render('createroom', {
+            errors,  
+            name:req.user.fullname 
+            
+        })
+    } else{
+        /* Checks if there is any email in the database that is the same as the post request
+            If User.findone returns a result (e.g user), person is already in DB and it'll push an error
+            If it does not return anything (i.e user doesnt exist), use mongomodel to push a new user
+        */
+        rooms.findOne({
+            roomID: roomID
+
+
+        } )
+        
+        .then(user => {
+            if(user){
+                errors.push({msg: 'Room ID has already been created'})
+        
+                res.render('createroom', {
+                    errors, 
+                    name:req.user.fullname 
+                    
+                })
+            }
+                else  {
+                    //Push since user doesnt exist model to create new user
+                    const newRoom = new rooms({
+                        roomID,
+                        roomCapacity,
+                        price, 
+                        openingDate,  
+                        closingDate,
+						promotionalCode,
+						createdBy,
+						bookedBy,
+						launchStatus
+						
+						
+
+
+                    }) 
+                    newRoom
+                        .save()
+                        .then(user => {
+                            req.flash(
+                            'success_msg',
+                            'Booking created!'
+                            );
+                            res.redirect(authlevel);
                         })
                         .catch(err => console.log(err));
 

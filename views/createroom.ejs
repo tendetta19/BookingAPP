@@ -15,7 +15,7 @@
 <!-- Style -->
 <link rel="stylesheet" href="../stylesheets/css/style.css">
 <link rel="icon" href="https://64.media.tumblr.com/bafc236f8913370429d52ee13d363ff9/tumblr_nkm7541saS1r6wywso1_500.gifv">
-<title>Change Password</title>
+<title>Create a room</title>
 </head>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
   <div class="navbar-nav">
@@ -44,50 +44,82 @@
             <div class="row justify-content-center">
               <div class="col-md-8">
                 <div class="mb-4">
-                <h3>Change your password</h3> 
+                <h3>Create a new room</h3> 
                 
-                <%- include('../partials/messages.ejs') %>    
-              <form action="/changePassword" method="post">
+                <%- include('./partials/messages.ejs') %>    
+              <form action="/createroom" method="post">
   
               
                 <div class="form-group">
-                  <label for="ipassword">Old Password</label>
+                  <label for="roomID">Room ID</label>
                   <input 
-                  type="password"
+                  type="text" 
                   class="form-control" 
-                  name="ipassword" 
-                  id="ipassword" 
+                  name="roomID" 
+                  id="roomID"
+                  required
                  />
   
-                </div> 
+                </div>   
+                  
                 <div class="form-group">
-                  <label for="password">New password</label>
-                  <input 
-                  type="password"
-                  class="form-control" 
-                  name="password" 
-                  id="password" 
-                  required/>
-                  
-                </div>
-                <div class="form-group">
-                  <label for="confirmPassword">Confirm your new password</label>
-                  <input
-                  type="password"
-                  class="form-control"
-                  name="confirmPassword"
-                  id="confirmPassword"  
-                  required/>
-                  
-                </div>  
-                
-                  
+                    <label for="roomCapacity">Capacity</label>
+                    <input 
+                    type="number" 
+                    class="form-control" 
+                    name="roomCapacity" 
+                    id="roomCapacity"
+                    required
+                   />
+    
+                  </div>   <div class="form-group">
+                    <label for="price">price</label>
+                    <input 
+                    type="text" 
+                    class="form-control" 
+                    name="price" 
+                    id="price"
+                    required
+                   />
+    
+                  </div>  <div class="form-group">
+                    <label for="promotionalCode">promotionalCode</label>
+                    <input 
+                    type="text" 
+                    class="form-control" 
+                    name="promotionalCode" 
+                    id="promotionalCode"
+                    required
+                   />
+    
+                  </div>  
+                  <div class="form-group">
+                    <label for="openingDate">Opening Date</label>
+                    <input 
+                    type="datetime-local" 
+                    class="form-control" 
+                    name="openingDate" 
+                    id="openingDate"
+                    required
+                   />
+    
+                  </div>      <div class="form-group">
+                    <label for="closingDate">Ending Date</label>
+                    <input 
+                    type="datetime-local" 
+                    class="form-control" 
+                    name="closingDate" 
+                    id="closingDate"
+                    required
+                   />
+    
+                  </div>   
              
                 
            
               
   
-                <input type="submit" value="Change Password" class="btn btn-block btn-primary">
+                <input type="submit" value="create Room" class="btn btn-block btn-primary">
   
                   
               </form>
