@@ -353,20 +353,6 @@ $ matches the end of the string, so if there's anything after the comma and spac
 
 
     
-    
-    /* try {
-        const hashedPassword = await bcrypt.hash(req.body.password, 10)
-        users.push({
-            id: Date.now().toString(),
-            fullname: req.body.fullname,
-            studentID: req.body.studentID,
-            email: req.body.email,
-            password: hashedPassword
-        })
-        res.redirect('/')
-    } catch {
-        res.redirect('/register')
-    }*/
  
 
 )}})
@@ -374,7 +360,7 @@ $ matches the end of the string, so if there's anything after the comma and spac
 
 app.post('/createroom',  async (req, res) => {
    // console.log(name)
-    const {roomID, price, roomCapacity, openingDate, closingDate, promotionalCode} = req.body
+    const {roomID, price, roomCapacity, timeslot, promotionalCode} = req.body
 	const launchStatus = false 
     const name = req.user.fullname
     console.log(name)
@@ -386,9 +372,9 @@ app.post('/createroom',  async (req, res) => {
 [A-Za-z]* matches 0 or more letters (case-insensitive) -- replace * with + to require 1 or more letters.
 , matches a comma followed by a space.
 $ matches the end of the string, so if there's anything after the comma and space then the match will fail.*/
-  
-    if (openingDate > closingDate){
-        errors.push({ msg: "Please ensure your ending date is after your opening date"})
+const pricecheck  = /^[1-9][\.\d]*(,\d+)?$/
+if (!pricecheck.test(price)){
+        errors.push({ msg: "Please enter a valid price"})
     }
     
   
@@ -425,8 +411,7 @@ $ matches the end of the string, so if there's anything after the comma and spac
                         roomID,
                         roomCapacity,
                         price, 
-                        openingDate,  
-                        closingDate,
+                        timeslot,
 						promotionalCode,
 						createdBy,
 						bookedBy,
@@ -441,35 +426,19 @@ $ matches the end of the string, so if there's anything after the comma and spac
                         .then(user => {
                             req.flash(
                             'success_msg',
-                            'Booking created!'
+                            'Booking created! Launch your room to make it available for booking!'
                             );
-                            res.redirect(authlevel);
+                            res.redirect('/createroom');
                         })
                         .catch(err => console.log(err));
 
                 }
 
             }
-
-        
-        //validation passed
+ 
 
 
     
-    
-    /* try {
-        const hashedPassword = await bcrypt.hash(req.body.password, 10)
-        users.push({
-            id: Date.now().toString(),
-            fullname: req.body.fullname,
-            studentID: req.body.studentID,
-            email: req.body.email,
-            password: hashedPassword
-        })
-        res.redirect('/')
-    } catch {
-        res.redirect('/register')
-    }*/
  
 
 )}})

@@ -18,12 +18,8 @@ const UserSchema= new mongoose.Schema(
             type:Number,
             required: true
         }, 
-        openingDate: { 
-            type:Date,
-            required: true
-        }, 
-        closingDate: { 
-            type:Date,
+        timeslot: { 
+            type:String,
             required: true
         }, 
         createdBy: { 
