@@ -29,13 +29,18 @@ a {
 h2 { 
   font-size: 20px; }
  
-
+.form-popup {
+  
+    display: none;
+  }
 @media (max-width: 991.98px) {
   .content .bg {
     height: 500px; } }
 
 .content .contents, .content .bg {
-  width: 50%; }
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto; }
   @media (max-width: 1199.98px) {
     .content .contents, .content .bg {
       width: 100%; } }

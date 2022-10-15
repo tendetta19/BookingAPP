@@ -87,7 +87,8 @@ app.post('/',  async (req, res, next) => {
     successRedirect:authlevel,
     failureRedirect:'/',
     failureFlash:true
-})(req,res,next)
+})
+(req,res,next)
 
 
 

@@ -14,7 +14,7 @@ module.exports = function(passport) {
         }, (studentID, password, done) => {
             //match user with ID
             User.findOne({
-                    studentID: studentID
+                studentID: studentID
                 })
                 .then(user => {
                     //no match (null = error, false = user)
