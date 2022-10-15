@@ -162,16 +162,37 @@ app.get('/student',ensureAuthenticated,  (req, res) => {
 
 
 })
+app.get('/roomData',  (req, res) => {
+    rooms.find({}, function(err, room) { 
+        roomsList = room 
+         
+        res.json({
+            "data": roomsList
+          })
+         
 
-app.get('/staff',ensureAuthenticated,  (req, res) => {
- 
+    }
+    )
    
 
+ 
+
+
+})
+
+
+app.get('/staff',ensureAuthenticated,  (req, res) => {
     res.render("staff", {
-        name:req.user.fullname
+        name:req.user.fullname,
+        
 
 
-    })
+    },
+    
+    )
+     
+
+ 
 
 
 })

@@ -8,7 +8,7 @@ const UserSchema= new mongoose.Schema(
             required: true
         }, 
         price:{
-            type:mongoose.Types.Decimal128,
+            type:String,
             required: true
         },
         promotionalCode: { 
