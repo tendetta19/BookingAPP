@@ -34,20 +34,27 @@ src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
   <a href="/staff" class="nav-link nav-item navbar-brand active" id="home"><i class="fa fa-fw fa-home"></i> Home</a>
 </div>    
 
+
 <div class="btn-group open">
   <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> <%= name%></a>
   <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"> 
   </a>
-  <ul class="dropdown-menu"> 
+  <ul class="dropdown-menu">  
+    <li><a href="/settings"><i class="fa fa-cog "></i> Settings</a></li>
     <li><a href="/logout"><i class="fa fa-sign-out "></i> Logout</a></li>
   </ul>
 </div>
 
 </nav>
 
+</nav>
+
 
 <body> 
-
+  <script src="stylesheets/js/jquery-3.3.1.min.js"></script>
+  <script src="stylesheets/js/popper.min.js"></script>
+  <script src="stylesheets/js/bootstrap.min.js"></script>
+  <script src="stylesheets/js/main.js"></script>  
 
 
 
@@ -107,4 +114,5 @@ $(document).ready(function() {
 });
 
 </script>
+
 </body>
