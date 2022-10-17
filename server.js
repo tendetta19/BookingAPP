@@ -130,6 +130,17 @@ app.get('/createroom',ensureAuthenticated,   (req, res) => {
 
 
 })
+app.get('/editroom',ensureAuthenticated,   (req, res) => {
+
+
+    res.render("editroom", {
+        name:req.user.fullname
+
+
+    })
+
+
+})
 app.get('/settings',ensureAuthenticated,  (req, res) => {
 
 
@@ -382,10 +393,10 @@ $ matches the end of the string, so if there's anything after the comma and spac
 
 app.post('/createroom',  async (req, res) => {
    // console.log(name)
-    const {roomID, price, roomCapacity, timeslot, promotionalCode} = req.body
-	const launchStatus = false 
-    const name = req.user.fullname
-    console.log(name)
+    const {roomID, price, roomCapacity, promotionalCode, launchStatus} = req.body
+	 
+    const timeslot = '' 
+    const name = req.user.fullname 
     let errors = []
 	// const createdBy = name
 	const bookedBy = ''
@@ -450,7 +461,7 @@ if (!pricecheck.test(price)){
                             'success_msg',
                             'Booking created! Launch your room to make it available for booking!'
                             );
-                            res.redirect('/createroom');
+                            res.redirect('/createRoom');
                         })
                         .catch(err => console.log(err));
 
@@ -464,3 +475,88 @@ if (!pricecheck.test(price)){
  
 
 )}})
+
+app.post('/editroom',  async (req, res) => {
+    // console.log(name)
+     const {roomID, price, roomCapacity, promotionalCode, launchStatus} = req.body
+      
+     const timeslot = '' 
+     const name = req.user.fullname 
+     let errors = []
+     // const createdBy = name
+     const bookedBy = ''
+     const createdBy = name
+      /* ^ matches the start of the string.
+ [A-Za-z]* matches 0 or more letters (case-insensitive) -- replace * with + to require 1 or more letters.
+ , matches a comma followed by a space.
+ $ matches the end of the string, so if there's anything after the comma and space then the match will fail.*/
+ const pricecheck  = /^[1-9][\.\d]*(,\d+)?$/
+ if (!pricecheck.test(price)){
+         errors.push({ msg: "Please enter a valid price"})
+     }
+     
+   
+     if(errors.length > 0){ 
+         res.render('editroom', {
+             errors,  
+             name:req.user.fullname 
+             
+         })
+     } else{
+         /* Checks if there is any email in the database that is the same as the post request
+             If User.findone returns a result (e.g user), person is already in DB and it'll push an error
+             If it does not return anything (i.e user doesnt exist), use mongomodel to push a new user
+         */
+         rooms.findOne({
+             roomID: roomID
+ 
+ 
+         } )
+         
+         .then(user => {
+             if(user){
+                 errors.push({msg: 'Room ID has already been created'})
+         
+                 res.render('createroom', {
+                     errors, 
+                     name:req.user.fullname 
+                     
+                 })
+             }
+                 else  {
+                     //Push since user doesnt exist model to create new user
+                     const newRoom = new rooms({
+                         roomID,
+                         roomCapacity,
+                         price, 
+                         timeslot,
+                         promotionalCode,
+                         createdBy,
+                         bookedBy,
+                         launchStatus
+                         
+                         
+ 
+ 
+                     }) 
+                     newRoom
+                         .save()
+                         .then(user => {
+                             req.flash(
+                             'success_msg',
+                             'Booking created! Launch your room to make it available for booking!'
+                             );
+                             res.redirect('/createroom');
+                         })
+                         .catch(err => console.log(err));
+ 
+                 }
+ 
+             }
+  
+ 
+ 
+     
+  
+ 
+ )}})

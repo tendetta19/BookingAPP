@@ -19,8 +19,7 @@ const UserSchema= new mongoose.Schema(
             required: true
         }, 
         timeslot: { 
-            type:String,
-            required: true
+            type:String, 
         }, 
         createdBy: { 
             type:String

@@ -19,8 +19,11 @@
 </head>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
   <div class="navbar-nav">
-  <a href="/student" class="nav-link nav-item navbar-brand active" id="home"><i class="fa fa-fw fa-home"></i> Home</a>
-</div>    
+
+    <a href="/staff" class="nav-link nav-item navbar-brand active" id="home"><i class="fa fa-fw fa-home"></i> Home</a>
+    <a href="/createRoom" class="nav-link nav-item navbar-brand " id="createRoom"> Create Room</a>
+
+  </div>    
 
 <div class="btn-group open">
   <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> <%= name%></a>
@@ -83,14 +86,27 @@
                     <label for="promotionalCode">Promotional Code</label>
                     <input 
                     type="text" 
-                    class="form-control" 
+                    class="form-control"  
                     name="promotionalCode" 
                     id="promotionalCode"
                     required
                    />
     
-                  </div>  
+                  </div>     
                   <div>
+                    <br>
+                    Launch room on Creation? 
+                    <br>
+                    <label>
+                      <input type="radio" name="launchStatus" value="true" >
+                      Yes
+                    </label>
+                    <label>
+                      <input type="radio"name="launchStatus" value="false" >
+                      No
+                    </label>
+                  </div>
+                 <!-- <div>
                     <label for="timeslot">Choose a timeslot:</label>
                    <select name="timeslot" id="role">
                      <option value="0800-1000">0800-1000</option>
@@ -101,13 +117,13 @@
                      <option value="1800-2000">1800-2000</option> 
                      <option value="2000-2200">2000-2200</option> 
                    </select>
-                  </div>
+                  </div>-->
                
                 
            
               
   
-                <input type="submit" value="create Room" class="btn btn-block btn-primary">
+                <input type="submit" value="Create Room" class="btn btn-block btn-primary">
   
                   
               </form>

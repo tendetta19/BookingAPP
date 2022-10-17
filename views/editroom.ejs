@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../stylesheets/fonts/icomoon/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="../stylesheets/css/owl.carousel.min.css">
+
+<!-- Bootastrap CSS -->
+<link rel="stylesheet" href="../stylesheets/css/bootstrap.min.css">
+
+<!-- Style -->
+<link rel="stylesheet" href="../stylesheets/css/style.css">
+<link rel="icon" href="https://64.media.tumblr.com/bafc236f8913370429d52ee13d363ff9/tumblr_nkm7541saS1r6wywso1_500.gifv">
+<title>Edit Existing Room</title>
+</head>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
+  <div class="navbar-nav">
+
+    <a href="/staff" class="nav-link nav-item navbar-brand active" id="home"><i class="fa fa-fw fa-home"></i> Home</a>
+    <a href="/createRoom" class="nav-link nav-item navbar-brand " id="createRoom"> Create Room</a>
+    <a href="/editRoom" class="nav-link nav-item navbar-brand " id="createRoom"> Edit  Room</a>
+
+  </div>    
+
+<div class="btn-group open">
+  <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> <%= name%></a>
+  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"> 
+  </a>
+  <ul class="dropdown-menu">  
+    <li><a href="/settings"><i class="fa fa-cog "></i> Settings</a></li>
+    <li><a href="/logout"><i class="fa fa-sign-out "></i> Logout</a></li>
+  </ul>
+</div>
+
+</nav>
+<body>
+    <div class="content">
+      <div class="container">
+          
+          <div class="col-md-6 contents">
+            <div class="row justify-content-center">
+              <div class="col-md-8">
+                <div class="mb-4">
+                <h3>Edit an existing room</h3> 
+                
+                <%- include('./partials/messages.ejs') %>    
+              <form action="/editroom" method="post">
+  
+              
+                <div class="form-group">
+                  <label for="roomID"></label>
+                  <input 
+                  type="text"  
+                  class="form-control" 
+                  name="roomID" 
+                  id="roomID"
+                  disabled
+                 />
+  
+                </div>   
+                  
+                <div class="form-group">
+                    <label for="roomCapacity">Capacity</label>
+                    <input 
+                    type="number" 
+                    class="form-control" 
+                    name="roomCapacity" 
+                    id="roomCapacity"
+                    required
+                   />
+    
+                  </div>   <div class="form-group">
+                    <label for="price">Price</label>
+                    <input 
+                    type="text" 
+                    class="form-control" 
+                    name="price" 
+                    id="price"
+                    required
+                   />
+    
+                  </div>  <div class="form-group">
+                    <label for="promotionalCode">Promotional Code</label>
+                    <input 
+                    type="text" 
+                    class="form-control"  
+                    name="promotionalCode" 
+                    id="promotionalCode"
+                    required
+                   />
+    
+                  </div>     
+                  <div>
+                    <br>
+                    Launch room on Creation? 
+                    <br>
+                    <label>
+                      <input type="radio" name="launchStatus" value="true" >
+                      Yes
+                    </label>
+                    <label>
+                      <input type="radio"name="launchStatus" value="false" >
+                      No
+                    </label>
+                  </div>
+                 <!-- <div>
+                    <label for="timeslot">Choose a timeslot:</label>
+                   <select name="timeslot" id="role">
+                     <option value="0800-1000">0800-1000</option>
+                     <option value="1000-1200">1000-1200</option>
+                     <option value="1300-1500">1200-1400</option> 
+                     <option value="1500-1700">1400-1600</option> 
+                     <option value="1600-1800">1600-1800</option>
+                     <option value="1800-2000">1800-2000</option> 
+                     <option value="2000-2200">2000-2200</option> 
+                   </select>
+                  </div>-->
+               
+                
+           
+              
+  
+                <input type="submit" value="Edit Room" class="btn btn-block btn-primary">
+  
+                  
+              </form>
+              </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+    <script>
+     const roomID = localStorage.getItem('room-ID') 
+     
+    document.getElementById('roomID').value = roomID
+    </script>
+      <script src="../stylesheets/js/jquery-3.3.1.min.js"></script>
+      <script src="../stylesheets/js/popper.min.js"></script>
+      <script src="../stylesheets/js/bootstrap.min.js"></script>
+      <script src="../stylesheets/js/main.js"></script>  
+      </body>
+      

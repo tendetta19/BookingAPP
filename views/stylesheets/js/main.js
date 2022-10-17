@@ -11,9 +11,4 @@ $(function() {
 	});
 
 });
-
-$(document).ready( function (){
-$('#example').DataTable( {
-	data:roomsList
-});
-})
+ 
