@@ -341,8 +341,7 @@ $ matches the end of the string, so if there's anything after the comma and spac
             studentID: studentID
 
 
-        }, 
-        {
+        ,
             email:email
         })
         
@@ -479,9 +478,10 @@ if (!pricecheck.test(price)){
 app.post('/editroom',  async (req, res) => {
     // console.log(name)
      const {roomID, price, roomCapacity, promotionalCode, launchStatus} = req.body
-      
+    
      const timeslot = '' 
      const name = req.user.fullname 
+     console.log(name)
      let errors = []
      // const createdBy = name
      const bookedBy = ''
@@ -509,14 +509,14 @@ app.post('/editroom',  async (req, res) => {
              If it does not return anything (i.e user doesnt exist), use mongomodel to push a new user
          */
          rooms.findOne({
-             roomID: roomID
- 
- 
-         } )
+             roomID: roomID,
+         
+            createdBy: name
+        })
          
          .then(user => {
              if(!user){
-                 errors.push({msg: 'Room ID does not exist'})
+                 errors.push({msg: 'Room ID does not exist! Make sure you are the owner of this room'})
           
                  res.render('editroom', {
                      errors, 
