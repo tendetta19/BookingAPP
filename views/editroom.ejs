@@ -48,7 +48,7 @@
                 <h3>Edit an existing room</h3> 
                 
                 <%- include('./partials/messages.ejs') %>    
-              <form action="/editroom" method="post">
+              <form action="/editroom" method="post" onload="myFunction()">
   
               
                 <div class="form-group">
@@ -57,8 +57,7 @@
                   type="text"  
                   class="form-control" 
                   name="roomID" 
-                  id="roomID"
-                  disabled
+                  id="roomID"   
                  />
   
                 </div>   
@@ -137,9 +136,11 @@
   </div>
   
     <script>
-     const roomID = localStorage.getItem('room-ID') 
-     
+      
+  
+  const roomID = JSON.parse(localStorage.getItem('room-ID'))  
     document.getElementById('roomID').value = roomID
+ 
     </script>
       <script src="../stylesheets/js/jquery-3.3.1.min.js"></script>
       <script src="../stylesheets/js/popper.min.js"></script>
