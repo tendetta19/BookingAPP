@@ -1,220 +1,205 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<link rel="stylesheet" href="stylesheets/css/style.css">
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="./DataTables/datatables.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/scroller/2.0.7/css/scroller.bootstrap.css">
-
-<link rel="stylesheet" href="stylesheets/fonts/icomoon/style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<link rel="stylesheet" href="stylesheets/css/owl.carousel.min.css">
-  <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="stylesheets/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-<!-- Style -->
-<link rel="icon" href="https://64.media.tumblr.com/bafc236f8913370429d52ee13d363ff9/tumblr_nkm7541saS1r6wywso1_500.gifv">
-<title>Staff Dashboard</title>
-</head>
-
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
-  <div class="navbar-nav">
-  <a href="/staff" class="nav-link nav-item navbar-brand active" id="home"><i class="fa fa-fw fa-home"></i> Home</a>
-  <a href="/createRoom" class="nav-link nav-item navbar-brand " id="createRoom"> Create Room</a>
-  <a href="/editRoom" class="nav-link nav-item navbar-brand " id="editRoom"> Edit  Room</a>
-</div>
-
-
-<div class="btn-group open">
-  <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> <%= name%></a>
-  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-  </a>
-  <ul class="dropdown-menu">
-    <li><a href="/settings"><i class="fa fa-cog "></i> Settings</a></li>
-    <li><a href="/logout"><i class="fa fa-sign-out "></i> Logout</a></li>
-  </ul>
-</div>
-
-</nav>
-
-</nav>
-
-
-<body>
-
-  <script src="stylesheets/js/jquery-3.3.1.min.js"></script>
-  <script src="stylesheets/js/popper.min.js"></script>
-  <script src="stylesheets/js/bootstrap.min.js"></script>
-  <script src="stylesheets/js/main.js"></script>
-
-  <div style="margin-top:5%;"></div>
-
-<div class="container">
-      <ul class="nav nav-tabs">
-          <li class="nav-item">
-              <a href="#rooms" class="nav-link active" data-toggle="tab">Rooms</a>
-          </li>
-          <li class="nav-item">
-              <a href="#bookings" class="nav-link" data-toggle="tab">Bookings</a>
-          </li>
-      </ul>
-      <div class="tab-content">
-          <div class="tab-pane fade show active" id="rooms">
-              <p>  <table id="example"style="width: 100%" >
-                    <thead>
-                        <tr>
-                          <th scope="col">ID</th>
-                            <th scope="col">Room ID</th>
-                    <th scope="col">Price ($)</th>
-                    <th scope="col">Promotional Code</th>
-                    <th scope="col">Room Capacity</th>
-                    <th scope="col">Timeslot</th>
-                    <th scope="col">Created By</th>
-                    <th scope="col">Booked By</th>
-                    <th scope="col">Launch Status</th>
-        <th scope="col">Launch Start Date</th> 
-        <th scope="col">Launch End Date</th> 
-                        </tr>
-                    </thead>
-                </table></p>
-          </div>
-          <div class="tab-pane fade" id="bookings">
-              <p>  <table id="lala"style="width: 100%" >
-                    <thead>
-                        <tr>
-                          <th scope="col">ID</th>
-                            <th scope="col">Room ID</th>
-                    <th scope="col">Price ($)</th>
-                    <th scope="col">Promotional Code</th>
-                    <th scope="col">Room Capacity</th>
-                    <th scope="col">Timeslot</th>
-                    <th scope="col">Created By</th>
-                    <th scope="col">Booked By</th>
-                    <th scope="col">Launch Status</th>
-        <th scope="col">Launch Start Date</th> 
-        <th scope="col">Launch End Date</th> 
-                        </tr>
-                    </thead>
-                </table></p>
-          </div>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link rel="stylesheet" href="stylesheets/css/style.css">
+      <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="./DataTables/datatables.css">
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/scroller/2.0.7/css/scroller.bootstrap.css">
+      <link rel="stylesheet" href="stylesheets/fonts/icomoon/style.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="stylesheets/css/owl.carousel.min.css">
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+      <link rel="stylesheet" href="stylesheets/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <!-- Style -->
+      <link rel="icon" href="https://64.media.tumblr.com/bafc236f8913370429d52ee13d363ff9/tumblr_nkm7541saS1r6wywso1_500.gifv">
+      <title>Staff Dashboard</title>
+   </head>
+   <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
+      <div class="navbar-nav">
+         <a href="/staff" class="nav-link nav-item navbar-brand active" id="home"><i class="fa fa-fw fa-home"></i> Home</a>
+         <a href="/createRoom" class="nav-link nav-item navbar-brand " id="createRoom"> Create Room</a>
+         <a href="/editRoom" class="nav-link nav-item navbar-brand " id="editRoom"> Edit  Room</a>
       </div>
-  </div>
-
-
-<!-- TABLE --><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="/DataTables/datatables.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/scroller/2.0.7/css/scroller.dataTables.min.css">
-<script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script> 
-<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.2.3/js/dataTables.buttons.min.js">
-</script>
-<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/scroller/2.0.7/js/dataTables.scroller.js">
-</script>
-
-<script type="text/javascript" class="init">
-
-$(document).ready(function() { 
-  
-
-  // Create a new DataTable object
-  table = $('#example').DataTable({
-
-
-       "lengthMenu": [ [15, 50, 100, -1], [15, 50, 100, "All"] ],
-       "pagingType": "simple",
-       scrollY: 400,
-       select: true,
-    deferRender:    true,
-    scroller:       true,
-       scrollCollapse: true,
-       order: [[ 1, 'asc' ]],
-       ajax: {
-         url: '/roomData',
-       },
-       columns: [
-           { data: '_id',
-                visible: false, },
-           { data: 'roomID' },
-           { data: 'price' },
-           { data: 'promotionalCode' },
-           { data: 'roomCapacity' },
-           { data: 'timeslot',
-                visible: false },
-           { data: 'createdBy',
-                visible: false },
-           { data: 'bookedBy',
-                visible: false },
-           { data: 'launchStatus' },
-           { data: 'launchstartdate' },
-           { data: 'launchenddate' }
-         ]
-       })
-
-
-       table = $('#lala').DataTable({
-
-
-            "lengthMenu": [ [15, 50, 100, -1], [15, 50, 100, "All"] ],
-            "pagingType": "simple",
-            scrollY: 400,
-            select: false,
-
-            deferRender:    true,
-    scroller:       true,
-            scrollCollapse: true,
-            order: [[ 1, 'asc' ]],
-            ajax: {
-              url: '/roomData',
-            },
-            columns: [
-                { data: '_id',
-                     visible: false, },
-                { data: 'roomID' },
-                { data: 'price' },
-                { data: 'promotionalCode' },
-                { data: 'roomCapacity' },
-                { data: 'timeslot' },
-                { data: 'createdBy' },
-                { data: 'bookedBy' },
-                { data: 'launchStatus' },
-				
-           { data: 'launchstartdate' },
-           { data: 'launchenddate' }
-              ]
-            }) 
-       
-
-       $('#example tbody').on('click', 'tr', function () {
-        var data = table.row(this).data();
-
-        if ($(this).hasClass('selected')) {
-            $(this).removeClass('selected');
-        } else {
-            table.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');
-            obtainroomID= data.roomID
-            localStorage.setItem('room-ID',obtainroomID)
-        }
-
-    })
- 
-} );;
-
- 
-
-
-
-
-</script>
-<script src="../views/stylesheets/js/jquery-3.3.1.min.js"></script>
-         <script src="../views/stylesheets/js/popper.min.js"></script>
-         <script src="../views/stylesheets/js/bootstrap.min.js"></script>
-         <script src="../views/stylesheets/js/main.js"></script> 
-</body>
+      <div class="btn-group open">
+         <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> <%= name%></a>
+         <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+         </a>
+         <ul class="dropdown-menu">
+            <li><a href="/settings"><i class="fa fa-cog "></i> Settings</a></li>
+            <li><a href="/logout"><i class="fa fa-sign-out "></i> Logout</a></li>
+         </ul>
+      </div>
+   </nav>
+   </nav>
+   <body>
+      <script src="stylesheets/js/jquery-3.3.1.min.js"></script>
+      <script src="stylesheets/js/popper.min.js"></script>
+      <script src="stylesheets/js/bootstrap.min.js"></script>
+      <script src="stylesheets/js/main.js"></script>
+      <div style="margin-top:5%;"></div>
+      <div class="container">
+         <ul class="nav nav-tabs">
+            <li class="nav-item">
+               <a href="#rooms" class="nav-link active" data-toggle="tab">Rooms</a>
+            </li>
+            <li class="nav-item">
+               <a href="#bookings" class="nav-link" data-toggle="tab">Bookings</a>
+            </li>
+         </ul>
+         <div class="tab-content">
+            <div class="tab-pane fade show active" id="rooms">
+               <p>  
+               <table id="example"style="width: 100%" >
+                  <thead>
+                     <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Room ID</th>
+                        <th scope="col">Price ($)</th>
+                        <th scope="col">Promotional Code</th>
+                        <th scope="col">Room Capacity</th>
+                        <th scope="col">Timeslot</th>
+                        <th scope="col">Created By</th>
+                        <th scope="col">Booked By</th>
+                        <th scope="col">Launch Status</th>
+                        <th scope="col">Launch Start Date</th>
+                        <th scope="col">Launch End Date</th>
+                     </tr>
+                  </thead>
+               </table>
+               </p>
+            </div>
+            <div class="tab-pane fade" id="bookings">
+               <p>  
+               <table id="lala"style="width: 100%" >
+                  <thead>
+                     <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Room ID</th>
+                        <th scope="col">Price ($)</th>
+                        <th scope="col">Promotional Code</th>
+                        <th scope="col">Room Capacity</th>
+                        <th scope="col">Timeslot</th>
+                        <th scope="col">Created By</th>
+                        <th scope="col">Booked By</th>
+                        <th scope="col">Launch Status</th>
+                        <th scope="col">Launch Start Date</th>
+                        <th scope="col">Launch End Date</th>
+                     </tr>
+                  </thead>
+               </table>
+               </p>
+            </div>
+         </div>
+      </div>
+      <!-- TABLE -->
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="/DataTables/datatables.css">
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/scroller/2.0.7/css/scroller.dataTables.min.css">
+      <script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script> 
+      <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+      <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+      <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.2.3/js/dataTables.buttons.min.js"></script>
+      <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/scroller/2.0.7/js/dataTables.scroller.js"></script>
+      <script type="text/javascript" class="init">
+         $(document).ready(function() { 
+           
+         
+           // Create a new DataTable object
+           table = $('#example').DataTable({
+         
+         
+                "lengthMenu": [ [15, 50, 100, -1], [15, 50, 100, "All"] ],
+                "pagingType": "simple",
+                scrollY: 400,
+                select: true,
+             deferRender:    true,
+             scroller:       true,
+                scrollCollapse: true,
+                order: [[ 1, 'asc' ]],
+                ajax: {
+                  url: '/roomData',
+                },
+                columns: [
+                    { data: '_id',
+                         visible: false, },
+                    { data: 'roomID' },
+                    { data: 'price' },
+                    { data: 'promotionalCode' },
+                    { data: 'roomCapacity' },
+                    { data: 'timeslot',
+                         visible: false },
+                    { data: 'createdBy',
+                         visible: false },
+                    { data: 'bookedBy',
+                         visible: false },
+                    { data: 'launchStatus' },
+                    { data: 'launchstartdate' },
+                    { data: 'launchenddate' }
+                  ]
+                })
+         
+         
+                table = $('#lala').DataTable({
+         
+         
+                     "lengthMenu": [ [15, 50, 100, -1], [15, 50, 100, "All"] ],
+                     "pagingType": "simple",
+                     scrollY: 400,
+                     select: false,
+         
+                     deferRender:    true,
+             scroller:       true,
+                     scrollCollapse: true,
+                     order: [[ 1, 'asc' ]],
+                     ajax: {
+                       url: '/roomData',
+                     },
+                     columns: [
+                         { data: '_id',
+                              visible: false, },
+                         { data: 'roomID' },
+                         { data: 'price' },
+                         { data: 'promotionalCode' },
+                         { data: 'roomCapacity' },
+                         { data: 'timeslot' },
+                         { data: 'createdBy' },
+                         { data: 'bookedBy' },
+                         { data: 'launchStatus' },
+         				
+                    { data: 'launchstartdate' },
+                    { data: 'launchenddate' }
+                       ]
+                     }) 
+                
+         
+                $('#example tbody').on('click', 'tr', function () {
+                 var data = table.row(this).data();
+         
+                 if ($(this).hasClass('selected')) {
+                     $(this).removeClass('selected');
+                 } else {
+                     table.$('tr.selected').removeClass('selected');
+                     $(this).addClass('selected');
+                     obtainroomID= data.roomID
+                     localStorage.setItem('room-ID',obtainroomID)
+                 }
+         
+             })
+          
+         } );;
+         
+          
+         
+         
+         
+         
+      </script>
+      <script src="../views/stylesheets/js/jquery-3.3.1.min.js"></script>
+      <script src="../views/stylesheets/js/popper.min.js"></script>
+      <script src="../views/stylesheets/js/bootstrap.min.js"></script>
+      <script src="../views/stylesheets/js/main.js"></script> 
+   </body>
