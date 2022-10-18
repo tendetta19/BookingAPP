@@ -41,6 +41,15 @@ h2 {
 @media (max-width: 991.98px) {
   .content .bg {
     height: 500px; } }
+.launch {
+
+  
+    display:none;
+    
+}
+.launch.active {
+  display: block
+}
 
 .content .contents, .content .bg {
   width: 50%;

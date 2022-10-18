@@ -27,6 +27,10 @@ const UserSchema= new mongoose.Schema(
             type:String
         }, launchStatus: { 
             type:String
+        },  launchstartdate: { 
+            type:String
+        },  launchenddate: { 
+            type:String
         }, 
         date: {
             type:Date,

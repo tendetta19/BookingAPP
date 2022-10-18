@@ -392,7 +392,7 @@ $ matches the end of the string, so if there's anything after the comma and spac
 
 app.post('/createroom',  async (req, res) => {
    // console.log(name)
-    const {roomID, price, roomCapacity, promotionalCode, launchStatus} = req.body
+    const {roomID, price, roomCapacity, promotionalCode, launchStatus,launchstartdate,launchenddate} = req.body
 	 
     const timeslot = '' 
     const name = req.user.fullname 
@@ -447,7 +447,9 @@ if (!pricecheck.test(price)){
 						promotionalCode,
 						createdBy,
 						bookedBy,
-						launchStatus
+						launchStatus,
+                        launchenddate,
+                        launchstartdate
 						
 						
 

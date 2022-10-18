@@ -98,11 +98,11 @@
                     Launch room on Creation? 
                     <br>
                     <label>
-                      <input type="radio" name="launchStatus" value="true" >
+                      <input id="launchTrue"onclick="img(0)" class="form-switch" type="radio" name="launchStatus" value="true" >
                       Yes
                     </label>
                     <label>
-                      <input type="radio"name="launchStatus" value="false" >
+                      <input id="launchFalse" onclick="img(1)"class="form-switch" type="radio"name="launchStatus" value="false" >
                       No
                     </label>
                   </div>
@@ -119,10 +119,40 @@
                    </select>
                   </div>-->
                
-                
-           
+                <div class="launch" id="launchgroup">
+                    From
+                    <div class="form-group">
+                  
+                    <label for="launchstartdate"></label>
+                    <input 
+                    type="date" 
+                    class="form-control"  
+                    name="launchstartdate" 
+                    id="launchstartdate"
+                    min="2022-01-01"
+                    max="2099-12-31" 
+                   />
+    
+                  </div> 
               
+                  <br> 
+                  To 
+                    <div class="form-group">
+                  
+                    <label for="launchenddate"></label>
+                    <input 
+                    type="date" 
+                    class="form-control"  
+                    name="launchenddate" 
+                    id="launchenddate"
+                    min="2022-01-01"
+                    max="2099-12-31" 
+                   />
+    
+                  </div> 
+                </div>
   
+                  <br> 
                 <input type="submit" value="Create Room" class="btn btn-block btn-primary">
   
                   
@@ -135,10 +165,20 @@
     </div>
   </div>
   
-    
-      <script src="../stylesheets/js/jquery-3.3.1.min.js"></script>
-      <script src="../stylesheets/js/popper.min.js"></script>
-      <script src="../stylesheets/js/bootstrap.min.js"></script>
-      <script src="../stylesheets/js/main.js"></script>  
+    <script>
+      function img(x)
+      {if(x==0)
+        document.getElementById('launchgroup').style.display='block'
+        else
+        document.getElementById('launchgroup').style.display='none'
+       return
+      
+      
+      }
+    </script>
+      <script src="../views/stylesheets/js/jquery-3.3.1.min.js"></script>
+      <script src="../views/stylesheets/js/popper.min.js"></script>
+      <script src="../views/stylesheets/js/bootstrap.min.js"></script>
+      <script src="../views/stylesheets/js/main.js"></script>  
       </body>
       
