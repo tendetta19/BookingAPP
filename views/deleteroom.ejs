@@ -15,14 +15,15 @@
 <!-- Style -->
 <link rel="stylesheet" href="stylesheets/css/style.css">
 <link rel="icon" href="https://64.media.tumblr.com/bafc236f8913370429d52ee13d363ff9/tumblr_nkm7541saS1r6wywso1_500.gifv">
-<title>Edit Existing Room</title>
+<title>Delete Room</title>
 </head>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
   <div class="navbar-nav">
 
     <a href="/staff" class="nav-link nav-item navbar-brand active" id="home"><i class="fa fa-fw fa-home"></i> Home</a>
     <a href="/createRoom" class="nav-link nav-item navbar-brand " id="createRoom"> Create Room</a>
-    <a href="/editRoom" class="nav-link nav-item navbar-brand " id="createRoom"> Edit  Room</a>
+    <a href="/editRoom" class="nav-link nav-item navbar-brand " id="editroom"> Edit  Room</a>
+    <a href="/deleteRoom" class="nav-link nav-item navbar-brand " id="deleteroom"> Delete  Room</a>
 
   </div>    
 
@@ -45,7 +46,7 @@
             <div class="row justify-content-center">
               <div class="col-md-8">
                 <div class="mb-4">
-                <h3>Edit an existing room</h3> 
+                <h3>Delete existing room</h3> 
                 
                 <%- include('./partials/messages.ejs') %>    
               <form action="/editroom" method="post">
@@ -64,24 +65,24 @@
                 </div>   
                   
                 <div class="form-group field--not-empty">
-                  <label for="roomCapacity">Capacity</label>
-                  <input 
-                  type="number" 
-                  class="form-control" 
-                  name="roomCapacity" 
-                  id="roomCapacity"
-                  readonly
-                 />
-  
-                </div>    
-                <div class="form-group field--not-empty">
+                    <label for="roomCapacity">Capacity</label>
+                    <input 
+                    type="number" 
+                    class="form-control" 
+                    name="roomCapacity" 
+                    id="roomCapacity"
+                    readonly
+                   />
+    
+                  </div>  
+                  <div class="form-group field--not-empty">
                     <label for="price">Price</label>
                     <input 
                     type="text" 
                     class="form-control" 
                     name="price" 
                     id="price"
-                    required
+                    readonly
                    />
     
                   </div>  
@@ -92,55 +93,32 @@
                     class="form-control"  
                     name="promotionalCode" 
                     id="promotionalCode"
-                    required
+                    readonly
                    />
     
-                  </div>     
-                  <div>
-                    <br>
-                    Set launch status
-                    <br>
-                    <label>
-                      <input id="launchTrue"onclick="img(0)"  class="form-switch" type="radio" name="launchStatus" value="true" >
-                      Yes
-                    </label>
-                    <label>
-                      <input id="launchFalse" onclick="img(1)"class="form-switch" type="radio"name="launchStatus" value="false" >
-                      No
-                    </label>
-                  </div>
-                  <div   id="launchgroup">
-                    From
-                    <div class="form-group">
-                  
-                    <label for="launchstartdate"></label>
+                  </div>        <div class="form-group field--not-empty">
+                    <label for="launchstartdate">Launch Start Date</label>
                     <input 
-                    type="date" 
+                    type="text" 
                     class="form-control"  
                     name="launchstartdate" 
                     id="launchstartdate"
-                    min="2022-01-01"
-                    max="2099-12-31" 
+                    readonly
                    />
     
-                  </div> 
-              
-                  <br> 
-                  To 
-                    <div class="form-group">
-                  
-                    <label for="launchenddate"></label>
+                  </div>       <div class="form-group field--not-empty">
+                    <label for="launchenddate">Launch End Date</label>
                     <input 
-                    type="date" 
+                    type="text" 
                     class="form-control"  
                     name="launchenddate" 
                     id="launchenddate"
-                    min="2022-01-01"
-                    max="2099-12-31" 
+                    readonly
                    />
     
-                  </div> 
-                </div>
+                  </div>    
+               
+                
                  <!-- <div>
                     <label for="timeslot">Choose a timeslot:</label>
                    <select name="timeslot" id="role">
@@ -176,7 +154,9 @@
   </div>
   
     <script>
-      const roomID = JSON.parse(localStorage.getItem('room-ID')) 
+      
+  
+  const roomID = JSON.parse(localStorage.getItem('room-ID')) 
   const price = JSON.parse(localStorage.getItem('price-ID'))  
   const promotionalCode = JSON.parse(localStorage.getItem('promotionalCode-ID'))  
   const roomCapacity = JSON.parse(localStorage.getItem('roomCapacity-ID'))  
@@ -185,11 +165,13 @@
   const launchenddate = localStorage.getItem('launchenddate-ID')
   
     document.getElementById('roomID').value = roomID 
-    document.getElementById('roomCapacity').value = roomCapacity
     
     document.getElementById('promotionalCode').value = promotionalCode
     document.getElementById('price').value = price
-    document.getElementById('roomID').value = roomID
+    document.getElementById('roomCapacity').value = roomCapacity
+    
+    document.getElementById('launchstartdate').value = launchstartdate
+    document.getElementById('launchenddate').value = launchenddate 
     function img(x)
       {if(x==0)
         document.getElementById('launchgroup').style.display='block'

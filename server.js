@@ -19,7 +19,6 @@ const PORT = process.env.PORT || 3000;
 const User= require('./models/user.js')
 const rooms= require('./models/roomcreation.js')
 const passport= require('passport')
-const authlevel = []
 require('./config/passport')(passport)
 app.use(express.urlencoded({ extended:false}))
 app.use(session({
@@ -67,6 +66,7 @@ app.get('/', (req, res) => {
  
 app.post('/',  async (req, res, next) => {
     const {studentID, password} = req.body
+const authlevel = []
    
     User.findOne({
         studentID: studentID
@@ -87,9 +87,11 @@ app.post('/',  async (req, res, next) => {
     successRedirect:authlevel,
     failureRedirect:'/',
     failureFlash:true
-})
-(req,res,next)
+}) 
+     
 
+(req,res,next)
+delete authlevel
 
 
 })
@@ -191,7 +193,21 @@ app.get('/roomData',  (req, res) => {
 
 })
 
+app.get('/deleteroom',ensureAuthenticated,  (req, res) => {
+    res.render("deleteroom", {
+        name:req.user.fullname,
+        
 
+
+    },
+    
+    )
+     
+
+ 
+
+
+})
 app.get('/staff',ensureAuthenticated,  (req, res) => {
     res.render("staff", {
         name:req.user.fullname,
@@ -479,16 +495,15 @@ if (!pricecheck.test(price)){
 
 app.post('/editroom',  async (req, res) => {
     // console.log(name)
-     const {roomID, price, roomCapacity, promotionalCode, launchStatus} = req.body
+    let {roomID, price, roomCapacity, promotionalCode, launchStatus,launchstartdate,launchenddate,deleteroom} = req.body
+	 console.log(deleteroom)
     
      const timeslot = '' 
-     const name = req.user.fullname 
-     console.log(name)
+     const name = req.user.fullname  
      let errors = []
      // const createdBy = name
      const bookedBy = ''
-     const createdBy = name
-     console.log(req.body)
+     const createdBy = name 
       /* ^ matches the start of the string.
  [A-Za-z]* matches 0 or more letters (case-insensitive) -- replace * with + to require 1 or more letters.
  , matches a comma followed by a space.
@@ -498,14 +513,65 @@ app.post('/editroom',  async (req, res) => {
          errors.push({ msg: "Please enter a valid price"})
      }
      
-   
+if (launchstartdate>launchenddate){
+        errors.push({ msg: "Please ensure your launch end date is after your launch start date"})
+    }
+    
+  
      if(errors.length > 0){ 
          res.render('editroom', {
              errors,  
              name:req.user.fullname 
              
          })
-     } else{
+     } else{ 
+        if(deleteroom==='true'){ 
+            rooms.findOne({
+                roomID: roomID,
+            
+               createdBy: name
+
+
+            })
+            .then(user => {
+                if(!user){
+                    errors.push({msg: 'Room ID does not exist! Make sure you are the owner of this room'})
+             
+                    res.render('editroom', {
+                        errors, 
+                        name:req.user.fullname 
+                        
+                    })
+                }
+                else  { 
+                   rooms.deleteMany({roomID: user.roomID}, 
+   
+                        
+                       
+                       
+                       
+                       
+                       )
+                    .then(user => {
+                            req.flash(
+                            'success_msg',
+                            'Room deleted!'
+                            );
+                            res.redirect('/staff');
+                        })
+                        .catch(err => console.log(err)); 
+                           
+                        
+    
+                    
+    
+                }
+    
+                })
+
+
+        }else{
+        
          /* Checks if there is any email in the database that is the same as the post request
              If User.findone returns a result (e.g user), person is already in DB and it'll push an error
              If it does not return anything (i.e user doesnt exist), use mongomodel to push a new user
@@ -531,7 +597,10 @@ app.post('/editroom',  async (req, res) => {
                     {price: price,
                     roomCapacity: roomCapacity, 
                     promotionalCode: promotionalCode, 
-                    launchStatus: launchStatus
+                    launchStatus: launchStatus,
+                    launchstartdate: launchstartdate,
+                    launchenddate: launchenddate
+
                      
                     
                     
@@ -542,7 +611,7 @@ app.post('/editroom',  async (req, res) => {
                          req.flash(
                          'success_msg',
                          'Room updated!'
-                         );
+                         ); 
                          res.redirect('/staff');
                      })
                      .catch(err => console.log(err)); 
@@ -560,4 +629,4 @@ app.post('/editroom',  async (req, res) => {
      
   
  
- )}})
+ )}}})
