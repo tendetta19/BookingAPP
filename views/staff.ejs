@@ -54,8 +54,8 @@
 
 
 
-  <div style="margin-top:5%;"></div> 
-<div class="container" style="width:100%;">
+  <div style="margin-top:5%;">
+<div class="container" style="width:100%">
   <a href="/createRoom">
     <button class="dt-button"   type="button"><span>Create Room</span></button>
   </a>  
@@ -67,24 +67,57 @@
   </a>  
    
   <p>
-    <table id="example" >
-        <thead>
-            <tr>
-              <th scope="col">ID</th>
-                <th scope="col">Room ID</th>
-        <th scope="col">Price ($)</th>
-        <th scope="col">Promotional Code</th>
-        <th scope="col">Room Capacity</th>
-        <th scope="col">Timeslot</th>
-        <th scope="col">Created By</th>
-        <th scope="col">Booked By</th>
-        <th scope="col">Launch Status</th> 
-        <th scope="col">Launch Start Date</th> 
-        <th scope="col">Launch End Date</th> 
-            </tr>
-        </thead>
-    </table></p>
+  
+  <ul class="nav nav-tabs">
+      <li class="nav-item">
+          <a href="#rooms" class="nav-link active" data-toggle="tab">Rooms</a>
+      </li>
+      <li class="nav-item">
+          <a href="#bookings" class="nav-link" data-toggle="tab">Bookings</a>
+      </li>
+  </ul>
+  <div class="tab-content">
+      <div class="tab-pane fade show active" id="rooms">
+          <p>  <table id="example"style="width:100%" >
+                <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                        <th scope="col">Room ID</th>
+                <th scope="col">Price ($)</th>
+                <th scope="col">Promotional Code</th>
+                <th scope="col">Room Capacity</th>
+                <th scope="col">Timeslot</th>
+                <th scope="col">Created By</th>
+                <th scope="col">Booked By</th>
+                <th scope="col">Launch Status</th>
+    <th scope="col">Launch Start Date</th> 
+    <th scope="col">Launch End Date</th> 
+                    </tr>
+                </thead>
+            </table></p>
+      </div>
+      <div class="tab-pane fade" id="bookings">
+          <p>  <table id="lala" style="width:100%">
+                <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                        <th scope="col">Room ID</th>
+                <th scope="col">Price ($)</th>
+                <th scope="col">Promotional Code</th>
+                <th scope="col">Room Capacity</th>
+                <th scope="col">Timeslot</th>
+                <th scope="col">Created By</th>
+                <th scope="col">Booked By</th>
+                <th scope="col">Launch Status</th>
+    <th scope="col">Launch Start Date</th> 
+    <th scope="col">Launch End Date</th> 
+                    </tr>
+                </thead>
+            </table></p>
+      </div>
+    </div> 
   </div>
+</div>
 
 <!-- TABLE -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
@@ -99,34 +132,73 @@
 $(document).ready(function() {
   // Create a new DataTable object
   table = $('#example').DataTable({
-    
-  
-       "lengthMenu": [ [15, 50, 100, -1], [15, 50, 100, "All"] ],
-       "pagingType": "simple",
-       scrollY: 400,
-       select: true,
-       
-       scrollCollapse: true,
-       order: [[ 1, 'asc' ]],
-       ajax: {
-         url: '/roomData',
-       },
-       columns: [
-           { data: '_id', 
-                visible: false, },
-           { data: 'roomID' },
-           { data: 'price' },
-           { data: 'promotionalCode' },
-           { data: 'roomCapacity' },
-           { data: 'timeslot' },
-           { data: 'createdBy' },
-           { data: 'bookedBy' },
-           { data: 'launchStatus' },
-           { data: 'launchstartdate' },
-           { data: 'launchenddate' }
-         ]
-       })
-    
+
+
+"lengthMenu": [ [15, 50, 100, -1], [15, 50, 100, "All"] ],
+"pagingType": "simple",
+scrollY: 400,
+select: true,
+
+scrollCollapse: true,
+order: [[ 1, 'asc' ]],
+ajax: {
+  url: '/roomData',
+},
+columns: [
+    { data: '_id',
+         visible: false, },
+    { data: 'roomID' },
+    { data: 'price' },
+    { data: 'promotionalCode' },
+    { data: 'roomCapacity' },
+    { data: 'timeslot',
+         visible: false },
+    { data: 'createdBy',
+         visible: false },
+    { data: 'bookedBy',
+         visible: false },
+    { data: 'launchStatus' },
+    { data: 'launchstartdate' },
+    { data: 'launchenddate' }
+  ]
+})
+
+
+table = $('#lala').DataTable({
+
+
+     "lengthMenu": [ [15, 50, 100, -1], [15, 50, 100, "All"] ],
+     "pagingType": "simple",
+     scrollY: 400,
+     select: false,
+
+     scroller:       true,
+     scrollCollapse: true,
+     order: [[ 1, 'asc' ]],
+     ajax: {
+       url: '/roomData',
+     },
+     columns: [
+         { data: '_id',
+              visible: false, },
+         { data: 'roomID' },
+         { data: 'price' },
+         { data: 'promotionalCode' },
+         { data: 'roomCapacity' },
+         { data: 'timeslot' },
+         { data: 'createdBy' },
+         { data: 'bookedBy' },
+         { data: 'launchStatus' },
+ 
+    { data: 'launchstartdate' },
+    { data: 'launchenddate' }
+       ]
+     }) 
+     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+$($.fn.dataTable.tables(true)).DataTable()
+table.scroller.measure();
+});
+
        $('#example tbody').on('click', 'tr', function () {
         var data = table.row(this).data();
        
