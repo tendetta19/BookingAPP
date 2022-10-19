@@ -203,11 +203,24 @@ table.scroller.measure();
                  var data = table.row(this).data(); 
          
                  if ($(this).hasClass('selected')) {
-                     $(this).removeClass('selected'); 
+                     $(this).removeClass('selected');
                  } else {
                      table.$('tr.selected').removeClass('selected');
                      $(this).addClass('selected');
-       
+            var obtainroomID = data.roomID 
+            
+            var obtainlaunchstartdate  = data.launchstartdate 
+            var obtainlaunchenddate  = data.launchenddate 
+            var obtainprice = data.price 
+            var obtainpromotionalCode = data.promotionalCode  
+            var obtainroomCapacity = data.roomCapacity  
+            localStorage.setItem('room-ID',obtainroomID)
+            
+            localStorage.setItem('launchstartdate-ID',obtainlaunchstartdate) 
+            localStorage.setItem('launchenddate-ID',obtainlaunchenddate)
+            localStorage.setItem('price-ID',obtainprice) 
+            localStorage.setItem('promotionalCode-ID',obtainpromotionalCode)
+            localStorage.setItem('roomCapacity-ID',obtainroomCapacity) 
         }
         
     });
