@@ -100,7 +100,7 @@
                     Set launch status
                     <br>
                     <label>
-                      <input id="launchTrue"onclick="img(0)"  class="form-switch" type="radio" name="launchStatus" value="true" >
+                      <input id="launchTrue"onclick="img(0)"  class="form-switch" type="radio" name="launchStatus" checked value="true" >
                       Yes
                     </label>
                     <label>
@@ -118,6 +118,7 @@
                     class="form-control"  
                     name="launchstartdate" 
                     id="launchstartdate"
+                    value="launchstartdate"
                     min="2022-01-01"
                     max="2099-12-31" 
                    />
@@ -134,6 +135,7 @@
                     class="form-control"  
                     name="launchenddate" 
                     id="launchenddate"
+                    value="launchenddate"
                     min="2022-01-01"
                     max="2099-12-31" 
                    />
@@ -184,6 +186,8 @@
     document.getElementById('promotionalCode').value = promotionalCode
     document.getElementById('price').value = price
     document.getElementById('roomID').value = roomID
+    document.getElementById('launchstartdate').value = launchstartdate
+    document.getElementById('launchenddate').value = launchenddate
     function img(x)
       {if(x==0)
         document.getElementById('launchgroup').style.display='block'

@@ -52,7 +52,7 @@ app.use(passport.session())
 const db = process.env.CONNECTIONSTRING 
  
 //connect to Mongo (returns a promise)The Promise object represents the eventual completion (or failure) of an asynchronous operation and its resulting value.
-mongoose.connect('db', { useNewURLParser: true })
+mongoose.connect(db, { useNewURLParser: true })
 //successfulcallback
     .then(()=> console.log('MongoDB connected'))
     .catch(err => console.log(err))
