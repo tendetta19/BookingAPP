@@ -573,98 +573,139 @@ if (launchstartdate>launchenddate){
         }}})
 
 
-app.post('/editroom',  async (req, res) => {
-    // console.log(name)
-    let {roomID, price, roomCapacity, promotionalCode, launchStatus,launchstartdate,launchenddate} = req.body
+        app.post('/editroom',  async (req, res) => {
+            // console.log(name)
+            let {roomID, price, roomCapacity, promotionalCode, launchStatus,launchstartdate,launchenddate,deleteroom} = req.body
 
-     const timeslot = ''
-     const name = req.user.fullname
-     let errors = []
-     // const createdBy = name
-     const bookedBy = ''
-     const createdBy = name
-      /* ^ matches the start of the string.
- [A-Za-z]* matches 0 or more letters (case-insensitive) -- replace * with + to require 1 or more letters.
- , matches a comma followed by a space.
- $ matches the end of the string, so if there's anything after the comma and space then the match will fail.*/
- const pricecheck  = /^[1-9][\.\d]*(,\d+)?$/
- if (!pricecheck.test(price)){
-         errors.push({ msg: "Please enter a valid price"})
-     }
+             const timeslot = ''
+             const name = req.user.fullname
+             let errors = []
+             // const createdBy = name
+             const bookedBy = ''
+             const createdBy = name
+              /* ^ matches the start of the string.
+         [A-Za-z]* matches 0 or more letters (case-insensitive) -- replace * with + to require 1 or more letters.
+         , matches a comma followed by a space.
+         $ matches the end of the string, so if there's anything after the comma and space then the match will fail.*/
+         const pricecheck  = /^[1-9][\.\d]*(,\d+)?$/
+         if (!pricecheck.test(price)){
+                 errors.push({ msg: "Please enter a valid price"})
+             }
 
-if (launchstartdate>launchenddate){
-        errors.push({ msg: "Please ensure your launch end date is after your launch start date"})
-    }
-
-
-     if(errors.length > 0){
-         res.render('editroom', {
-             errors,
-             name:req.user.fullname
-
-         })
-     } else{
+        if (launchstartdate>launchenddate){
+                errors.push({ msg: "Please ensure your launch end date is after your launch start date"})
+            }
 
 
-
-
-         /* Checks if there is any email in the database that is the same as the post request
-             If User.findone returns a result (e.g user), person is already in DB and it'll push an error
-             If it does not return anything (i.e user doesnt exist), use mongomodel to push a new user
-         */
-         rooms.findOne({
-             roomID: roomID,
-
-            createdBy: name
-        })
-
-         .then(user => {
-             if(!user){
-                 errors.push({msg: 'Room ID does not exist! Make sure you are the owner of this room'})
-
+             if(errors.length > 0){
                  res.render('editroom', {
                      errors,
                      name:req.user.fullname
 
                  })
-             }
-             else  {
-                rooms.findOneAndUpdate({roomID: user.roomID},
-                    {price: price,
-                    roomCapacity: roomCapacity,
-                    promotionalCode: promotionalCode,
-                    launchStatus: launchStatus,
-                    launchstartdate: launchstartdate,
-                    launchenddate: launchenddate
+             } else{
+                if(deleteroom==='true'){
+                    rooms.findOne({
+                        roomID: roomID,
 
-
-
-
+                       createdBy: name
 
 
                     })
+                    .then(user => {
+                        if(!user){
+                            errors.push({msg: 'Room ID does not exist! Make sure you are the owner of this room'})
+
+                            res.render('editroom', {
+                                errors,
+                                name:req.user.fullname
+
+                            })
+                        }
+                        else  {
+                           rooms.deleteMany({roomID: user.roomID},
+
+
+
+
+
+
+                               )
+                            .then(user => {
+                                    req.flash(
+                                    'success_msg',
+                                    'Room deleted!'
+                                    );
+                                    res.redirect('/staff');
+                                })
+                                .catch(err => console.log(err));
+
+
+
+
+
+                        }
+
+                        })
+
+
+                }else{
+
+                 /* Checks if there is any email in the database that is the same as the post request
+                     If User.findone returns a result (e.g user), person is already in DB and it'll push an error
+                     If it does not return anything (i.e user doesnt exist), use mongomodel to push a new user
+                 */
+                 rooms.findOne({
+                     roomID: roomID,
+
+                    createdBy: name
+                })
+
                  .then(user => {
-                         req.flash(
-                         'success_msg',
-                         'Room updated!'
-                         );
-                         res.redirect('/staff');
-                     })
-                     .catch(err => console.log(err));
+                     if(!user){
+                         errors.push({msg: 'Room ID does not exist! Make sure you are the owner of this room'})
+
+                         res.render('editroom', {
+                             errors,
+                             name:req.user.fullname
+
+                         })
+                     }
+                     else  {
+                        rooms.findOneAndUpdate({roomID: user.roomID},
+                            {price: price,
+                            roomCapacity: roomCapacity,
+                            promotionalCode: promotionalCode,
+                            launchStatus: launchStatus,
+                            launchstartdate: launchstartdate,
+                            launchenddate: launchenddate
 
 
 
 
 
-             }
 
-             }
+                            })
+                         .then(user => {
+                                 req.flash(
+                                 'success_msg',
+                                 'Room updated!'
+                                 );
+                                 res.redirect('/staff');
+                             })
+                             .catch(err => console.log(err));
+
+
+
+
+
+                     }
+
+                     }
 
 
 
 
 
 
- )}
-
-})
+         )}}})

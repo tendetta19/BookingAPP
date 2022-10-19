@@ -125,6 +125,7 @@
 
                   </div>
 
+                  <input type="hidden" id="deleteroom" name="deleteroom" value="false">
                   <br>
                   To
                     <div class="form-group">
@@ -157,8 +158,9 @@
                <br>
                 <input type="submit" value="Edit Room" class="btn btn-block btn-primary">
                 <input type="button" value="Delete Room"  data-toggle="modal" data-target="#exampleModalCenter" class="bg-danger btn btn-block btn-primary">
-
+              </div>
 <!-- Modal -->
+<div>
               <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
@@ -173,13 +175,12 @@
                     </div>
                     <div class="modal-footer justify-content-center">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <input type="submit" onclick="change()" value="Delete" id="deleteroom" class="btn btn-danger">
-
+                      <input type="submit" value="Delete" onclick="myFunction()" class="btn btn-danger">
                     </div>
                   </div>
                 </div>
               </div>
-
+</div>
 
               </form>
               </div>
@@ -215,14 +216,10 @@
        return
 
       }
+      function myFunction() {
+        document.getElementById('deleteroom').value='true'
+}
     </script>
-    <script>
-    function change()
-    {
-      deleteroom = 'true'
-    }
-
-</script>
 
       <script src="stylesheets/js/jquery-3.3.1.min.js"></script>
       <script src="stylesheets/js/popper.min.js"></script>
