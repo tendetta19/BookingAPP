@@ -503,7 +503,11 @@ app.post('/editroom',  async (req, res) => {
      let errors = []
      // const createdBy = name
      const bookedBy = ''
+<<<<<<< HEAD
      const createdBy = name 
+=======
+     const createdBy = name
+>>>>>>> parent of 8f1e212 (finished room edit)
       /* ^ matches the start of the string.
  [A-Za-z]* matches 0 or more letters (case-insensitive) -- replace * with + to require 1 or more letters.
  , matches a comma followed by a space.
@@ -583,15 +587,23 @@ if (launchstartdate>launchenddate){
         })
          
          .then(user => {
+<<<<<<< HEAD
              if(!user){
                  errors.push({msg: 'Room ID does not exist! Make sure you are the owner of this room'})
           
                  res.render('editroom', {
+=======
+             if(user){
+                 errors.push({msg: 'Room ID has already been created'})
+         
+                 res.render('createroom', {
+>>>>>>> parent of 8f1e212 (finished room edit)
                      errors, 
                      name:req.user.fullname 
                      
                  })
              }
+<<<<<<< HEAD
              else  { 
                 rooms.findOneAndUpdate({roomID: user.roomID},
                     {price: price,
@@ -617,10 +629,36 @@ if (launchstartdate>launchenddate){
                      .catch(err => console.log(err)); 
                         
                      
+=======
+                 else  {
+                     //Push since user doesnt exist model to create new user
+                     const newRoom = new rooms({
+                         roomID,
+                         roomCapacity,
+                         price, 
+                         timeslot,
+                         promotionalCode,
+                         createdBy,
+                         bookedBy,
+                         launchStatus
+                         
+                         
+>>>>>>> parent of 8f1e212 (finished room edit)
  
-                 
  
-             }
+                     }) 
+                     newRoom
+                         .save()
+                         .then(user => {
+                             req.flash(
+                             'success_msg',
+                             'Booking created! Launch your room to make it available for booking!'
+                             );
+                             res.redirect('/createroom');
+                         })
+                         .catch(err => console.log(err));
+ 
+                 }
  
              }
   
