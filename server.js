@@ -507,6 +507,9 @@ app.post('/editroom',  async (req, res) => {
      const createdBy = name 
 =======
      const createdBy = name
+<<<<<<< HEAD
+>>>>>>> parent of 8f1e212 (finished room edit)
+=======
 >>>>>>> parent of 8f1e212 (finished room edit)
       /* ^ matches the start of the string.
  [A-Za-z]* matches 0 or more letters (case-insensitive) -- replace * with + to require 1 or more letters.
@@ -588,21 +591,28 @@ if (launchstartdate>launchenddate){
          
          .then(user => {
 <<<<<<< HEAD
+<<<<<<< HEAD
              if(!user){
                  errors.push({msg: 'Room ID does not exist! Make sure you are the owner of this room'})
           
                  res.render('editroom', {
 =======
+=======
+>>>>>>> parent of 8f1e212 (finished room edit)
              if(user){
                  errors.push({msg: 'Room ID has already been created'})
          
                  res.render('createroom', {
+<<<<<<< HEAD
+>>>>>>> parent of 8f1e212 (finished room edit)
+=======
 >>>>>>> parent of 8f1e212 (finished room edit)
                      errors, 
                      name:req.user.fullname 
                      
                  })
              }
+<<<<<<< HEAD
 <<<<<<< HEAD
              else  { 
                 rooms.findOneAndUpdate({roomID: user.roomID},
@@ -630,6 +640,8 @@ if (launchstartdate>launchenddate){
                         
                      
 =======
+=======
+>>>>>>> parent of 8f1e212 (finished room edit)
                  else  {
                      //Push since user doesnt exist model to create new user
                      const newRoom = new rooms({
@@ -643,6 +655,9 @@ if (launchstartdate>launchenddate){
                          launchStatus
                          
                          
+<<<<<<< HEAD
+>>>>>>> parent of 8f1e212 (finished room edit)
+=======
 >>>>>>> parent of 8f1e212 (finished room edit)
  
  
