@@ -50,8 +50,9 @@ app.use(passport.session())
 
 //keys
 const db = process.env.CONNECTIONSTRING 
+ 
 //connect to Mongo (returns a promise)The Promise object represents the eventual completion (or failure) of an asynchronous operation and its resulting value.
-mongoose.connect(db, { useNewURLParser: true })
+mongoose.connect('db', { useNewURLParser: true })
 //successfulcallback
     .then(()=> console.log('MongoDB connected'))
     .catch(err => console.log(err))
@@ -493,10 +494,9 @@ if (!pricecheck.test(price)){
 
 )}})
 
-app.post('/editroom',  async (req, res) => {
+app.post('/deleteroom',  async (req, res) => {
     // console.log(name)
     let {roomID, price, roomCapacity, promotionalCode, launchStatus,launchstartdate,launchenddate,deleteroom} = req.body
-	 console.log(deleteroom)
     
      const timeslot = '' 
      const name = req.user.fullname  
@@ -519,7 +519,7 @@ if (launchstartdate>launchenddate){
     
   
      if(errors.length > 0){ 
-         res.render('editroom', {
+         res.render('deleteroom', {
              errors,  
              name:req.user.fullname 
              
@@ -570,7 +570,43 @@ if (launchstartdate>launchenddate){
                 })
 
 
-        }else{
+        }}})
+
+ 
+app.post('/editroom',  async (req, res) => {
+    // console.log(name)
+    let {roomID, price, roomCapacity, promotionalCode, launchStatus,launchstartdate,launchenddate} = req.body
+ 
+     const timeslot = '' 
+     const name = req.user.fullname  
+     let errors = []
+     // const createdBy = name
+     const bookedBy = ''
+     const createdBy = name 
+      /* ^ matches the start of the string.
+ [A-Za-z]* matches 0 or more letters (case-insensitive) -- replace * with + to require 1 or more letters.
+ , matches a comma followed by a space.
+ $ matches the end of the string, so if there's anything after the comma and space then the match will fail.*/
+ const pricecheck  = /^[1-9][\.\d]*(,\d+)?$/
+ if (!pricecheck.test(price)){
+         errors.push({ msg: "Please enter a valid price"})
+     }
+     
+if (launchstartdate>launchenddate){
+        errors.push({ msg: "Please ensure your launch end date is after your launch start date"})
+    }
+    
+  
+     if(errors.length > 0){ 
+         res.render('editroom', {
+             errors,  
+             name:req.user.fullname 
+             
+         })
+     } else{ 
+       
+
+      
         
          /* Checks if there is any email in the database that is the same as the post request
              If User.findone returns a result (e.g user), person is already in DB and it'll push an error
@@ -629,4 +665,4 @@ if (launchstartdate>launchenddate){
      
   
  
- )}}})
+ )}})

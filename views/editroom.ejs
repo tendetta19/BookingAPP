@@ -20,9 +20,9 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
   <div class="navbar-nav">
 
-    <a href="/staff" class="nav-link nav-item navbar-brand active" id="home"><i class="fa fa-fw fa-home"></i> Home</a>
+    <a href="/staff" class="nav-link nav-item navbar-brand " id="home"><i class="fa fa-fw fa-home"></i> Home</a>
     <a href="/createRoom" class="nav-link nav-item navbar-brand " id="createRoom"> Create Room</a>
-    <a href="/editRoom" class="nav-link nav-item navbar-brand " id="createRoom"> Edit  Room</a>
+    <a href="/editRoom" class="nav-link nav-item navbar-brand active" id="createRoom"> Edit  Room</a>
 
   </div>    
 
@@ -69,8 +69,7 @@
                   type="number" 
                   class="form-control" 
                   name="roomCapacity" 
-                  id="roomCapacity"
-                  readonly
+                  id="roomCapacity" 
                  />
   
                 </div>    
@@ -154,12 +153,7 @@
                    </select>
                   </div>-->
                <br>
-                  <div class="d-flex mb-5 align-items-center">
-                    <label class="alert alert-danger"><span class="caption">Delete room?</span>
-                      <input type="checkbox" name="deleteroom" value="true" id="deleteroom"/>
                  
-                    </label>
-                  </div>
            
               
   
@@ -176,7 +170,7 @@
   </div>
   
     <script>
-      const roomID = JSON.parse(localStorage.getItem('room-ID')) 
+  const roomID = JSON.parse(localStorage.getItem('room-ID')) 
   const price = JSON.parse(localStorage.getItem('price-ID'))  
   const promotionalCode = JSON.parse(localStorage.getItem('promotionalCode-ID'))  
   const roomCapacity = JSON.parse(localStorage.getItem('roomCapacity-ID'))  

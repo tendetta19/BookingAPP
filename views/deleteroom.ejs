@@ -20,10 +20,10 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
   <div class="navbar-nav">
 
-    <a href="/staff" class="nav-link nav-item navbar-brand active" id="home"><i class="fa fa-fw fa-home"></i> Home</a>
+    <a href="/staff" class="nav-link nav-item navbar-brand " id="home"><i class="fa fa-fw fa-home"></i> Home</a>
     <a href="/createRoom" class="nav-link nav-item navbar-brand " id="createRoom"> Create Room</a>
     <a href="/editRoom" class="nav-link nav-item navbar-brand " id="editroom"> Edit  Room</a>
-    <a href="/deleteRoom" class="nav-link nav-item navbar-brand " id="deleteroom"> Delete  Room</a>
+    <a href="/deleteRoom" class="nav-link nav-item navbar-brand active " id="deleteroom"> Delete  Room</a>
 
   </div>    
 
@@ -49,7 +49,7 @@
                 <h3>Delete existing room</h3> 
                 
                 <%- include('./partials/messages.ejs') %>    
-              <form action="/editroom" method="post">
+              <form action="/deleteroom" method="post">
   
               
                 <div class="form-group field--not-empty">
@@ -134,14 +134,14 @@
                <br>
                   <div class="d-flex mb-5 align-items-center">
                     <label class="alert alert-danger"><span class="caption">Delete room?</span>
-                      <input type="checkbox" name="deleteroom" value="true" id="deleteroom"/>
+                      <input type="checkbox" name="deleteroom" value="true" id="deleteroom" required/>
                  
                     </label>
                   </div>
            
               
   
-                <input type="submit" value="Edit Room" class="btn btn-block btn-primary">
+                <input type="submit" value="Delete Room" class="btn btn-block btn-primary">
   
                   
               </form>
