@@ -24,13 +24,13 @@
     <a href="/createRoom" class="nav-link nav-item navbar-brand " id="createRoom"> Create Room</a>
     <a href="/editRoom" class="nav-link nav-item navbar-brand active" id="createRoom"> Edit  Room</a>
 
-  </div>    
+  </div>
 
 <div class="btn-group open">
   <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> <%= name%></a>
-  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"> 
+  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
   </a>
-  <ul class="dropdown-menu">  
+  <ul class="dropdown-menu">
     <li><a href="/settings"><i class="fa fa-cog "></i> Settings</a></li>
     <li><a href="/logout"><i class="fa fa-sign-out "></i> Logout</a></li>
   </ul>
@@ -40,61 +40,61 @@
 <body>
     <div class="content">
       <div class="container">
-          
+
           <div class="col-md-6 contents">
             <div class="row justify-content-center">
               <div class="col-md-8">
                 <div class="mb-4">
-                <h3>Edit an existing room</h3> 
-                
-                <%- include('./partials/messages.ejs') %>    
+                <h3>Edit an existing room</h3>
+
+                <%- include('./partials/messages.ejs') %>
               <form action="/editroom" method="post">
-  
-              
+
+
                 <div class="form-group field--not-empty">
                   <label for="roomID">Room ID</label>
-                  <input 
-                  type="text"  
-                  class="form-control" 
-                  name="roomID" 
-                  id="roomID"   
+                  <input
+                  type="text"
+                  class="form-control"
+                  name="roomID"
+                  id="roomID"
                   readonly
                  />
-  
-                </div>   
-                  
+
+                </div>
+
                 <div class="form-group field--not-empty">
                   <label for="roomCapacity">Capacity</label>
-                  <input 
-                  type="number" 
-                  class="form-control" 
-                  name="roomCapacity" 
-                  id="roomCapacity" 
+                  <input
+                  type="number"
+                  class="form-control"
+                  name="roomCapacity"
+                  id="roomCapacity"
                  />
-  
-                </div>    
+
+                </div>
                 <div class="form-group field--not-empty">
                     <label for="price">Price</label>
-                    <input 
-                    type="text" 
-                    class="form-control" 
-                    name="price" 
+                    <input
+                    type="text"
+                    class="form-control"
+                    name="price"
                     id="price"
                     required
                    />
-    
-                  </div>  
+
+                  </div>
                   <div class="form-group field--not-empty">
                     <label for="promotionalCode">Promotional Code</label>
-                    <input 
-                    type="text" 
-                    class="form-control"  
-                    name="promotionalCode" 
+                    <input
+                    type="text"
+                    class="form-control"
+                    name="promotionalCode"
                     id="promotionalCode"
                     required
                    />
-    
-                  </div>     
+
+                  </div>
                   <div>
                     <br>
                     Set launch status
@@ -111,78 +111,98 @@
                   <div   id="launchgroup">
                     From
                     <div class="form-group">
-                  
+
                     <label for="launchstartdate"></label>
-                    <input 
-                    type="date" 
-                    class="form-control"  
-                    name="launchstartdate" 
+                    <input
+                    type="date"
+                    class="form-control"
+                    name="launchstartdate"
                     id="launchstartdate"
                     value="launchstartdate"
                     min="2022-01-01"
-                    max="2099-12-31" 
+                    max="2099-12-31"
                    />
-    
-                  </div> 
-              
-                  <br> 
-                  To 
+
+                  </div>
+
+                  <input type="hidden" id="deleteroom" name="deleteroom" value="false">
+                  <br>
+                  To
                     <div class="form-group">
-                  
+
                     <label for="launchenddate"></label>
-                    <input 
-                    type="date" 
-                    class="form-control"  
-                    name="launchenddate" 
+                    <input
+                    type="date"
+                    class="form-control"
+                    name="launchenddate"
                     id="launchenddate"
                     value="launchenddate"
                     min="2022-01-01"
-                    max="2099-12-31" 
+                    max="2099-12-31"
                    />
-    
-                  </div> 
+
+                  </div>
                 </div>
                  <!-- <div>
                     <label for="timeslot">Choose a timeslot:</label>
                    <select name="timeslot" id="role">
                      <option value="0800-1000">0800-1000</option>
                      <option value="1000-1200">1000-1200</option>
-                     <option value="1300-1500">1200-1400</option> 
-                     <option value="1500-1700">1400-1600</option> 
+                     <option value="1300-1500">1200-1400</option>
+                     <option value="1500-1700">1400-1600</option>
                      <option value="1600-1800">1600-1800</option>
-                     <option value="1800-2000">1800-2000</option> 
-                     <option value="2000-2200">2000-2200</option> 
+                     <option value="1800-2000">1800-2000</option>
+                     <option value="2000-2200">2000-2200</option>
                    </select>
                   </div>-->
                <br>
-                 
-           
-              
-  
                 <input type="submit" value="Edit Room" class="btn btn-block btn-primary">
-  
-                  
+                <input type="button" value="Delete Room"  data-toggle="modal" data-target="#exampleModalCenter" class="bg-danger btn btn-block btn-primary">
+              </div>
+<!-- Modal -->
+<div>
+              <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h6 class="modal-title" id="exampleModalLongTitle">Delete Room</h6>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body text-center">
+                      Are you sure you want to delete this room?
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <input type="submit" value="Delete" onclick="myFunction()" class="btn btn-danger">
+                    </div>
+                  </div>
+                </div>
+              </div>
+</div>
+
               </form>
               </div>
           </div>
-          
+
         </div>
       </div>
     </div>
   </div>
-  
+
     <script>
-  const roomID =  (localStorage.getItem('room-ID')) 
-  const price =  (localStorage.getItem('price-ID'))  
-  const promotionalCode =  (localStorage.getItem('promotionalCode-ID'))  
-  const roomCapacity =  (localStorage.getItem('roomCapacity-ID'))  
-  
+  const roomID =  (localStorage.getItem('room-ID'))
+  const price =  (localStorage.getItem('price-ID'))
+  const promotionalCode =  (localStorage.getItem('promotionalCode-ID'))
+  const roomCapacity =  (localStorage.getItem('roomCapacity-ID'))
+
   const launchstartdate = localStorage.getItem('launchstartdate-ID')
   const launchenddate = localStorage.getItem('launchenddate-ID')
-  
-    document.getElementById('roomID').value = roomID 
+
+    document.getElementById('roomID').value = roomID
     document.getElementById('roomCapacity').value = roomCapacity
-    
+
     document.getElementById('promotionalCode').value = promotionalCode
     document.getElementById('price').value = price
     document.getElementById('roomID').value = roomID
@@ -194,14 +214,15 @@
         else
         document.getElementById('launchgroup').style.display='none'
        return
-      
-      
+
       }
+      function myFunction() {
+        document.getElementById('deleteroom').value='true'
+}
     </script>
-      
+
       <script src="stylesheets/js/jquery-3.3.1.min.js"></script>
       <script src="stylesheets/js/popper.min.js"></script>
       <script src="stylesheets/js/bootstrap.min.js"></script>
-      <script src="stylesheets/js/main.js"></script>  
+      <script src="stylesheets/js/main.js"></script>
       </body>
-      
