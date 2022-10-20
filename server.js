@@ -68,28 +68,31 @@ app.get('/', (req, res) => {
 app.post('/',  async (req, res, next) => {
     const {studentID, password} = req.body
 const authlevel = []
-   
+
     User.findOne({
         studentID: studentID
 
 
-    }, 
+    },
     ).then(user => {
-        authlevel.push('/'+user.role)  
+        if(user){ 
 
-        }
-
-     
  
+        authlevel.push('/'+user.role)
+
+        }}
+
+
+
 
 )
-      
+
     passport.authenticate('local', {
     successRedirect:authlevel,
     failureRedirect:'/',
     failureFlash:true
-}) 
-     
+})
+
 
 (req,res,next)
 delete authlevel

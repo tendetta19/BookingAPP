@@ -18,7 +18,7 @@ module.exports = function(passport) {
                 })
                 .then(user => {
                     //no match (null = error, false = user)
-                    if (!user) {
+                    if (!user) { 
                         return done(null, false, {
                             message: 'That student ID is not registered'
                         })
