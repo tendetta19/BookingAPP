@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="stylesheets/fonts/icomoon/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="stylesheets/css/owl.carousel.min.css">
+
+<!-- Bootastrap CSS -->
+<link rel="stylesheet" href="stylesheets/css/bootstrap.min.css">
+
+<!-- Style -->
+<link rel="stylesheet" href="stylesheets/css/style.css">
+<link rel="icon" href="https://64.media.tumblr.com/bafc236f8913370429d52ee13d363ff9/tumblr_nkm7541saS1r6wywso1_500.gifv">
+<title>Create a room</title>
+</head>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
+  <div class="navbar-nav">
+
+    <a href="/staffDash" class="nav-link nav-item navbar-brand active" id="home"><i class="fa fa-fw fa-home"></i> Home</a>
+
+  </div>
+
+<div class="btn-group open">
+  <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> <%= name%></a>
+  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+  </a>
+  <ul class="dropdown-menu">
+    <li><a href="/settings"><i class="fa fa-cog "></i> Settings</a></li>
+    <li><a href="/logout"><i class="fa fa-sign-out "></i> Logout</a></li>
+  </ul>
+</div>
+
+</nav>
+<body>
+  <div class='container-fluid'>
+  <div class='row vh-100'>
+    <div class='col-2 h-100 bg-light'>
+      <div style="margin-top:25%;">
+        <nav class="nav nav-pills nav-fill flex-column">
+        <a class="nav-link active" href="#">Dashboard</a>
+        <a class="nav-link" href="/staff">Room Booking</a>
+        <a class="nav-link disabled" href="#">Student Consultation</a>
+        <a class="nav-link disabled" href="#">Timetable</a>
+      </nav>
+      </div>
+    </div>
+
+      <div class='col-10 border'>
+        <div style="margin-top:5%;">
+          Welcome!
+          <div class='row'>
+            <div class='col'>
+              <div class="card-deck">
+                <div class="card">
+                  <div class="card-body text-center">
+                    <i class="fa fa-book text-primary" style="font-size: 90px"></i>
+                  </div>
+                    <div class="card-footer">
+                      <h5 class="card-title text-center text-primary">Room Booking System</h5>
+                      <a href="/staff" class="stretched-link"></a>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-body text-center">
+                    <i class="fa fa-comments text-muted" style="font-size: 90px"></i>
+                  </div>
+                  <div class="card-footer">
+                    <h5 class="card-title text-center text-muted">Student Consultation</h5>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-body text-center">
+                    <i class="fa fa-calendar text-muted" style="font-size: 90px"></i>
+                  </div>
+                  <div class="card-footer">
+                    <h5 class="card-title text-center text-muted">Timetable</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+      <script src="stylesheets/js/jquery-3.3.1.min.js"></script>
+      <script src="stylesheets/js/popper.min.js"></script>
+      <script src="stylesheets/js/bootstrap.min.js"></script>
+      <script src="stylesheets/js/main.js"></script>
+      </body>
