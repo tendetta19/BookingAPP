@@ -4,6 +4,7 @@ if (process.env.NODE_ENV !== 'production') {
     //Loading your environment variables is a one-liner:
     require('dotenv').config()
 }
+const datejs =require('datejs')
 const {ensureAuthenticated} = require('./config/auth')
 const flash = require('connect-flash')
 const session = require('express-session')
@@ -188,7 +189,7 @@ app.get('/student',ensureAuthenticated,  (req, res) => {
 
 
 })
-app.get('/roomData',  (req, res) => {
+app.get('/roomData',ensureAuthenticated,  (req, res) => {
     rooms.find({}, function(err, room) {
         roomsList = room
 
@@ -421,8 +422,9 @@ $ matches the end of the string, so if there's anything after the comma and spac
 
 app.post('/createroom',  async (req, res) => {
    // console.log(name)
-    const {roomID, price, roomCapacity, promotionalCode, launchStatus,launchstartdate,launchenddate} = req.body
+    const {roomID, price, roomCapacity, promotionalCode, launchStatus,launchstartdate,launchenddate,openinghour,closinghour} = req.body
 
+  
     const timeslot = ''
     const name = req.user.fullname
     let errors = []
@@ -433,9 +435,13 @@ app.post('/createroom',  async (req, res) => {
 [A-Za-z]* matches 0 or more letters (case-insensitive) -- replace * with + to require 1 or more letters.
 , matches a comma followed by a space.
 $ matches the end of the string, so if there's anything after the comma and space then the match will fail.*/
+const timecheck = /[0][0]$/
 const pricecheck  = /^[1-9][\.\d]*(,\d+)?$/
 if (!pricecheck.test(price)){
         errors.push({ msg: "Please enter a valid price"})
+    }
+if (!timecheck.test(openinghour) && !timecheck.test(closinghour)){
+        errors.push({ msg: "Please enter a valid time ending with :00"})
     }
 
 
@@ -445,7 +451,18 @@ if (!pricecheck.test(price)){
             name:req.user.fullname
 
         })
-    } else{
+    } else{ 
+        const timerange= (openinghour+' - '+ closinghour)
+        const timesplit =  String(closinghour).slice(0, 2)- String(openinghour).slice(0, 2)
+        const timeslots =[]
+        
+        for (let i = 1; i <= timesplit; i++) { 
+            upperlimit= parseFloat(String(openinghour).slice(0,2))+ parseFloat(i-1)+":00"
+            lowerlimit= parseFloat(String(openinghour).slice(0, 2)) + parseFloat(i) +":00"
+            finaltimeslot= "{"+ i+": "+upperlimit +'-'+lowerlimit+"}"
+            timeslots.push(finaltimeslot);
+           
+          } 
         /* Checks if there is any email in the database that is the same as the post request
             If User.findone returns a result (e.g user), person is already in DB and it'll push an error
             If it does not return anything (i.e user doesnt exist), use mongomodel to push a new user
@@ -477,8 +494,10 @@ if (!pricecheck.test(price)){
 						createdBy,
 						bookedBy,
 						launchStatus,
-                        launchenddate,
-                        launchstartdate
+                        launchstartdate,
+                        launchenddate, 
+                        timerange,
+                        timeslots
 
 
 

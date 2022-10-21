@@ -31,7 +31,12 @@ const UserSchema= new mongoose.Schema(
             type:String
         },  launchenddate: { 
             type:String
-        }, 
+        }, timerange: { 
+            type:String,
+            required: true
+        }, timeslots: {            
+            type:Array
+        },
         date: {
             type:Date,
             required: true,

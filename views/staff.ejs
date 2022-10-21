@@ -97,6 +97,8 @@
                 <th scope="col">Launch Status</th>
                 <th scope="col">Launch Start Date</th>
                 <th scope="col">Launch End Date</th>
+                <th scope="col">Timerange</th>
+                <th scope="col">Timeslots</th> 
                     </tr>
                 </thead>
             </table></p>
@@ -116,6 +118,9 @@
                 <th scope="col">Launch Status</th>
     <th scope="col">Launch Start Date</th>
     <th scope="col">Launch End Date</th>
+    <th scope="col">Timerange</th>
+    <th scope="col">Timeslots</th> 
+
                     </tr>
                 </thead>
             </table></p>
@@ -162,9 +167,13 @@ columns: [
          visible: false },
     { data: 'bookedBy',
          visible: false },
-    { data: 'launchStatus' },
+    { data: 'launchStatus',
+         visible: false, },
     { data: 'launchstartdate' },
-    { data: 'launchenddate' }
+    { data: 'launchenddate' },
+    { data: 'timerange' },
+    { data: 'timeslots',
+              visible: false,  }
   ]
 })
 
@@ -187,16 +196,26 @@ table1 = $('#lala').DataTable({
          { data: '_id',
               visible: false, },
          { data: 'roomID' },
-         { data: 'price' },
-         { data: 'promotionalCode' },
-         { data: 'roomCapacity' },
+         { data: 'price' ,
+         visible: false, },
+         { data: 'promotionalCode',
+         visible: false, },
+         { data: 'roomCapacity' ,
+         visible: false, },
          { data: 'timeslot' },
-         { data: 'createdBy' },
+         { data: 'createdBy' ,
+         visible: false, },
          { data: 'bookedBy' },
-         { data: 'launchStatus' },
-
-    { data: 'launchstartdate' },
-    { data: 'launchenddate' }
+         { data: 'launchStatus',
+         visible: false, },
+    { data: 'launchstartdate' ,
+         visible: false, },
+    { data: 'launchenddate' ,
+         visible: false, },
+    { data: 'timerange' ,
+         visible: false, },
+    { data: 'timeslots',
+              visible: false, },
        ]
      })
      $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
