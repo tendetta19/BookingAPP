@@ -49,13 +49,12 @@
       </div>
     </div>
 
-      <div class='col-10 border'>
+      <div class='col-8 border'>
     <div class="content">
       <div class="container">
 
-          <div class="col-md-6 contents">
             <div class="row justify-content-center">
-              <div class="col-md-8">
+              <div class="col-md-4 contents">
                 <div class="mb-4">
                 <h3>Create a new room</h3>
 
@@ -131,10 +130,10 @@
                    </select>
                   </div>-->
 
-                <div class="launch" id="launchgroup">
+                <div class="launch row" id="launchgroup">
+                  <div class="col">
                     From
                     <div class="form-group">
-
                     <label for="launchstartdate"></label>
                     <input
                     type="date"
@@ -144,13 +143,12 @@
                     min="2022-01-01"
                     max="2099-12-31"
                    />
-
+                    </div>
                   </div>
 
-                  <br>
-                  To
+                  <div class="col">
+                    To
                     <div class="form-group">
-
                     <label for="launchenddate"></label>
                     <input
                     type="date"
@@ -160,9 +158,26 @@
                     min="2022-01-01"
                     max="2099-12-31"
                    />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    From
+                    <div class="form-group">
+                    <label for="launchstarttime">Start Time</label>
+                    <input
+                    type="text"
+                    class="form-control"
+                    name="launchstarttime"
+                    id="launchstarttime"
+                   />
+                 </div>
+                  </div>
+                  <div class="col">
 
                   </div>
                 </div>
+              </div>
 
                   <br>
                 <input type="submit" value="Create Room" class="btn btn-block btn-primary">
@@ -174,16 +189,18 @@
 
         </div>
       </div>
-    </div>
+
   </div>
 </div>
+  <div class='col-2 h-100 bg-light'>
+    </div>
 </div>
   </div>
 
     <script>
       function img(x)
       {if(x==0)
-        document.getElementById('launchgroup').style.display='block'
+        document.getElementById('launchgroup').style.display='flex'
         else
         document.getElementById('launchgroup').style.display='none'
        return
