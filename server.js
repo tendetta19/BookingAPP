@@ -78,7 +78,7 @@ const authlevel = []
         if(user){
         authlevel.push('/'+user.role)}
 
-        }}
+        }
 
 
 
