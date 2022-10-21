@@ -122,6 +122,17 @@ app.get('/register',  (req, res) => {
 
 
 })
+app.get('/staffDash',ensureAuthenticated,   (req, res) => {
+
+
+    res.render("staffDash", {
+        name:req.user.fullname
+
+
+    })
+
+
+})
 app.get('/createroom',ensureAuthenticated,   (req, res) => {
 
 
