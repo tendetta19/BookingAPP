@@ -20,7 +20,7 @@ module.exports = function(passport) {
                     //no match (null = error, false = user)
                     if (!user) { 
                         return done(null, false, {
-                            message: 'That student ID is not registered'
+                            message: 'That ID is not registered'
                         })
                     }
                     //keep going since user exists; match password (user.password) is from db

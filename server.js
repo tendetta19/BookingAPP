@@ -67,7 +67,9 @@ app.get('/', (req, res) => {
 })
 
 app.post('/',  async (req, res, next) => {
-    const {studentID, password} = req.body
+    const {studentID, password} = req.body 
+    
+    const lastlogin= new Date().toLocaleString("en-US", {timeZone: "Asia/Singapore"})
 const authlevel = []
 
     User.findOne({
@@ -77,6 +79,14 @@ const authlevel = []
     },
     ).then(user => {
         if(user){
+            
+            User.findOneAndUpdate({studentID: user.studentID},{lastlogin: lastlogin})   
+            .then(user => {
+                console.log("Last login updated to "+ lastlogin)
+            })
+            .catch(err => console.log(err));
+            
+
         authlevel.push('/'+user.role)}
 
         }
@@ -135,6 +145,17 @@ app.get('/staffDash',ensureAuthenticated,   (req, res) => {
 
 
 })
+app.get('/admin',ensureAuthenticated,   (req, res) => {
+
+
+    res.render("admin", {
+        name:req.user.fullname
+
+
+    })
+
+
+})
 app.get('/createroom',ensureAuthenticated,   (req, res) => {
 
 
@@ -182,10 +203,10 @@ app.get('/student',ensureAuthenticated,  (req, res) => {
 
 
     res.render("student", {
-        name:req.user.fullname
+        name:req.user.fullname,
 
 
-    })
+    }) 
 
 
 })
@@ -257,6 +278,30 @@ How do I know if this is necessary for my store? The best way to know is to chec
 
 
 app.get('/logout', (req, res) => {
+    const lastlogout= new Date().toLocaleString("en-US", {timeZone: "Asia/Singapore"})
+    studentID= req.user.studentID  
+    User.findOne({
+        studentID: studentID
+
+
+
+    },
+    ).then(user => {
+        if(user){       
+            User.findOneAndUpdate({studentID: user.studentID},{lastlogout: lastlogout})   
+            .then(user => {
+                console.log("Last logout updated to "+ lastlogout)
+            })
+            .catch(err => console.log(err));
+            
+ 
+
+        }}
+
+
+
+
+)
     req.logout(err => {
         req.flash('success_msg', 'You are logged out');
         res.redirect('/');
@@ -325,6 +370,8 @@ app.post('/changePassword',  async (req, res) => {
 app.post('/register',  async (req, res) => {
     const hashedpassword = await bcrypt.hash(req.body.password, 10)
     const {fullname, studentID, email, password, confirmPassword, role} = req.body
+    const lastlogin = 'hi'
+    const lastlogout = 'hi'
     const noWhitespacelength = /^(?=.*\s)/;
     const pwLength= /^.{5,16}$/;
     /* ^ matches the start of the string.
@@ -391,7 +438,9 @@ $ matches the end of the string, so if there's anything after the comma and spac
                         studentID,
                         email,
                         hashedpassword,
-                        role
+                        role,
+                        lastlogin,
+                        lastlogout
 
 
                     })
