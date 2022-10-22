@@ -228,6 +228,24 @@ app.get('/roomData',ensureAuthenticated,  (req, res) => {
 
 })
 
+app.get('/userData',ensureAuthenticated,  (req, res) => {
+    User.find({}, function(err, user) {
+        Userslist = user
+
+        res.json({
+            "data": Userslist
+          })
+
+
+    }
+    )
+
+
+
+
+
+})
+
 app.get('/deleteroom',ensureAuthenticated,  (req, res) => {
     res.render("deleteroom", {
         name:req.user.fullname,
