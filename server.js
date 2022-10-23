@@ -135,7 +135,13 @@ app.get('/register',  (req, res) => {
 
 })
 app.get('/staffDash',ensureAuthenticated,   (req, res) => {
-
+    role=req.user.role
+    if(role === 'admin'){ 
+        res.redirect('/admin')
+    }if(role === 'student'){ 
+        res.redirect('/student')
+    }
+    else{
 
     res.render("staffDash", {
         name:req.user.fullname
@@ -144,10 +150,15 @@ app.get('/staffDash',ensureAuthenticated,   (req, res) => {
     })
 
 
-})
+}})
 app.get('/admin',ensureAuthenticated,   (req, res) => {
-
-
+role=req.user.role
+if(role === 'staff'){ 
+    res.redirect('/staff')
+}if(role === 'student'){ 
+    res.redirect('/student')
+}
+else{
     res.render("admin", {
         name:req.user.fullname
 
@@ -155,10 +166,16 @@ app.get('/admin',ensureAuthenticated,   (req, res) => {
     })
 
 
-})
+}})
 app.get('/createroom',ensureAuthenticated,   (req, res) => {
 
-
+    role=req.user.role
+    if(role === 'admin'){ 
+        res.redirect('/admin')
+    }if(role === 'student'){ 
+        res.redirect('/student')
+    }
+    else{
     res.render("createroom", {
         name:req.user.fullname
 
@@ -166,10 +183,16 @@ app.get('/createroom',ensureAuthenticated,   (req, res) => {
     })
 
 
-})
+}})
 app.get('/editroom',ensureAuthenticated,   (req, res) => {
 
-
+    role=req.user.role
+    if(role === 'admin'){ 
+        res.redirect('/admin')
+    }if(role === 'student'){ 
+        res.redirect('/student')
+    }
+    else{
     res.render("editroom", {
         name:req.user.fullname
 
@@ -177,7 +200,7 @@ app.get('/editroom',ensureAuthenticated,   (req, res) => {
     })
 
 
-})
+}})
 app.get('/settings',ensureAuthenticated,  (req, res) => {
 
 
@@ -190,7 +213,13 @@ app.get('/settings',ensureAuthenticated,  (req, res) => {
 
 })
 app.get('/createaccount',ensureAuthenticated,  (req, res) => {
-
+    role=req.user.role
+    if(role === 'staff'){ 
+        res.redirect('/staff')
+    }if(role === 'student'){ 
+        res.redirect('/student')
+    }
+    else{
 
     res.render("createaccount", {
         name:req.user.fullname
@@ -199,7 +228,7 @@ app.get('/createaccount',ensureAuthenticated,  (req, res) => {
     })
 
 
-})
+}})
 app.get('/settings/payment',ensureAuthenticated,  (req, res) => {
       res.render("settings/payment", {
         name:req.user.fullname
@@ -210,16 +239,28 @@ app.get('/settings/payment',ensureAuthenticated,  (req, res) => {
 
 })
 app.get('/editaccount',ensureAuthenticated,  (req, res) => {
-    res.render("editaccount", {
+    role=req.user.role
+    if(role === 'staff'){ 
+        res.redirect('/staff')
+    }if(role === 'student'){ 
+        res.redirect('/student')
+    }
+    else{ res.render("editaccount", {
       name:req.user.fullname
 
 
   })
 
 
-})
+}})
 app.get('/student',ensureAuthenticated,  (req, res) => {
-
+    role=req.user.role
+    if(role === 'staff'){ 
+        res.redirect('/staff')
+    }if(role === 'admin'){ 
+        res.redirect('/admin')
+    }
+    else{
 
 
     res.render("student", {
@@ -229,9 +270,15 @@ app.get('/student',ensureAuthenticated,  (req, res) => {
     }) 
 
 
-})
+}})
 app.get('/roomData',ensureAuthenticated,  (req, res) => {
-    rooms.find({}, function(err, room) {
+    role=req.user.role
+    if(role === 'admin'){ 
+        res.redirect('/admin')
+    }if(role === 'student'){ 
+        res.redirect('/student')
+    }
+    else{ rooms.find({}, function(err, room) {
         roomsList = room
 
         res.json({
@@ -246,9 +293,15 @@ app.get('/roomData',ensureAuthenticated,  (req, res) => {
 
 
 
-})
+}})
 
-app.get('/userData',ensureAuthenticated,  (req, res) => {
+app.get('/userData',ensureAuthenticated,  (req, res) => {role=req.user.role
+    if(role === 'staff'){ 
+        res.redirect('/staff')
+    }if(role === 'student'){ 
+        res.redirect('/student')
+    }
+    else{
     User.find({}, function(err, user) {
         Userslist = user
 
@@ -264,24 +317,15 @@ app.get('/userData',ensureAuthenticated,  (req, res) => {
 
 
 
-})
-
-app.get('/deleteroom',ensureAuthenticated,  (req, res) => {
-    res.render("deleteroom", {
-        name:req.user.fullname,
-
-
-
-    },
-
-    )
-
-
-
-
-
-})
+}}) 
 app.get('/staff',ensureAuthenticated,  (req, res) => {
+    role=req.user.role
+if(role === 'admin'){ 
+    res.redirect('/admin')
+}if(role === 'student'){ 
+    res.redirect('/student')
+}
+else{
     res.render("staff", {
         name:req.user.fullname,
 
@@ -295,7 +339,7 @@ app.get('/staff',ensureAuthenticated,  (req, res) => {
 
 
 
-})
+}})
 // bodyParser get data from form express.urlencoded() is a method inbuilt in express to recognize the incoming Request Object as strings or array
 
 
