@@ -38,7 +38,7 @@
 <body>
   <div class='container-fluid'>
   <div class='row vh-100'>
-    <div class='col-2 h-100 bg-light'>
+    <div class='col-sm-2 h-100 bg-light'>
       <div style="margin-top:25%;">
         <nav class="nav nav-pills nav-fill flex-column">
         <a class="nav-link" href="/staffDash">Dashboard</a>
@@ -48,75 +48,67 @@
       </nav>
       </div>
     </div>
-
-      <div class='col-8 border'>
-    <div class="content">
-      <div class="container">
-
-            <div class="row justify-content-center">
-              <div class="col-md-4 contents">
-                <div class="mb-4">
-                <h3>Create a new room</h3>
-
+      <div class='col-sm-8 content border'>
+        <div class="row justify-content-center">
+          <div class="col-md-4 mb-4 contents">
+          <h3>Create a new room</h3>
                 <%- include('./partials/messages.ejs') %>
-              <form action="/createroom" method="post">
+            <form action="/createroom" method="post">
+              <div class="form-group">
+                <label for="roomID">Room ID</label>
+                <input
+                type="text"
+                class="form-control"
+                name="roomID"
+                id="roomID"
+                required
+                />
+              </div>
 
-
-                <div class="form-group">
-                  <label for="roomID">Room ID</label>
+              <div class="form-group">
+                  <label for="roomCapacity">Capacity</label>
                   <input
-                  type="text"
+                  type="number"
                   class="form-control"
-                  name="roomID"
-                  id="roomID"
+                  name="roomCapacity"
+                  id="roomCapacity"
                   required
-                 />
+                  />
+              </div>
 
-                </div>
+              <div class="form-group">
+                <label for="price">Price</label>
+                <input
+                type="text"
+                class="form-control"
+                name="price"
+                id="price"
+                required
+                />
+              </div>
 
-                <div class="form-group">
-                    <label for="roomCapacity">Capacity</label>
-                    <input
-                    type="number"
-                    class="form-control"
-                    name="roomCapacity"
-                    id="roomCapacity"
-                    required
-                   />
-
-                  </div>   <div class="form-group">
-                    <label for="price">Price</label>
-                    <input
-                    type="text"
-                    class="form-control"
-                    name="price"
-                    id="price"
-                    required
-                   />
-
-                  </div>  <div class="form-group">
-                    <label for="promotionalCode">Promotional Code</label>
-                    <input
-                    type="text"
-                    class="form-control"
-                    name="promotionalCode"
-                    id="promotionalCode"
-                   />
-
-                  </div>
-                  <div>
-                    <br>
-                    Launch room on Creation?
-                    <br>
-                    <label>
-                      <input id="launchTrue"onclick="img(0)" class="form-switch" type="radio" name="launchStatus" value="true" >
-                      Yes
-                    </label>
-                    <label>
-                      <input id="launchFalse" onclick="img(1)"class="form-switch" checked type="radio"name="launchStatus" value="false" >
-                      No
-                    </label>
-                  </div>
+              <div class="form-group">
+                <label for="promotionalCode">Promotional Code</label>
+                <input
+                type="text"
+                class="form-control"
+                name="promotionalCode"
+                id="promotionalCode"
+                />
+              </div>
+              <div>
+              <br>
+              Launch room on Creation?
+              <br>
+              <label>
+                <input id="launchTrue"onclick="img(0)" class="form-switch" type="radio" name="launchStatus" value="true" >
+                  Yes
+              </label>
+              <label>
+                <input id="launchFalse" onclick="img(1)"class="form-switch" checked type="radio"name="launchStatus" value="false" >
+                  No
+              </label>
+              </div>
                  <!-- <div>
                     <label for="timeslot">Choose a timeslot:</label>
                    <select name="timeslot" id="role">
@@ -131,61 +123,62 @@
                   </div>-->
 
                 <div class="launch row" id="launchgroup">
-                  <div class="col">
-                    From
-                    <div class="form-group">
-                    <label for="launchstartdate"></label>
-                    <input
-                    type="date"
-                    class="form-control"
-                    name="launchstartdate"
-                    id="launchstartdate"
-                    min="2022-01-01"
-                    max="2099-12-31"
-                   />
+                  <div class="col-12">
+                    <h5>Date</h5>
+                  </div>
+
+                    <div class="col">
+                      From
+                      <div class="form-group">
+                        <label for="launchstartdate"></label>
+                        <input
+                        type="date"
+                        class="form-control"
+                        name="launchstartdate"
+                        id="launchstartdate"
+                        min="2022-01-01"
+                        max="2099-12-31"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col">
+                      To
+                      <div class="form-group">
+                        <label for="launchenddate"></label>
+                        <input
+                        type="date"
+                        class="form-control"
+                        name="launchenddate"
+                      id="launchenddate"
+                      min="2022-01-01"
+                      max="2099-12-31"
+                      />
                     </div>
                   </div>
 
+                  <div class="col-12">
+                    <h5>Duration</h5>
+                  </div>
+
                   <div class="col">
-                    To
-                    <div class="form-group">
-                    <label for="launchenddate"></label>
-                    <input
-                    type="date"
-                    class="form-control"
-                    name="launchenddate"
-                    id="launchenddate"
-                    min="2022-01-01"
-                    max="2099-12-31"
-                   />
+                    <label for="timeslot">Timeslot from</label>
+                    <input type="time" min="08:00:00" max="18:00:00" name= "openinghour"value="openinghour" required>
+                    to
+                    <input type="time" min="08:00:00" max="18:00:00" name="closinghour" value="closinghour" required>
                   </div>
                 </div>
-                
-              </div>
-            </div>  <div>
-              <label for="timeslot">Timeslot from</label>
-              <input type="time" min="08:00:00" max="18:00:00" name= "openinghour"value="openinghour" required>
- to 
-              <input type="time" min="08:00:00" max="18:00:00" name="closinghour" value="closinghour" required>
-            </div>
 
-                  <br>
                 <input type="submit" value="Create Room" class="btn btn-block btn-primary">
-
-
-              </form>
               </div>
+            </form>
           </div>
-
+          </div>
+        </div>
+        <div class='col-2 h-100 bg-light'>
         </div>
       </div>
-
-  </div>
-</div>
-  <div class='col-2 h-100 bg-light'>
     </div>
-</div>
-  </div>
 
     <script>
       function img(x)

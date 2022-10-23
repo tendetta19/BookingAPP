@@ -67,8 +67,8 @@ app.get('/', (req, res) => {
 })
 
 app.post('/',  async (req, res, next) => {
-    const {studentID, password} = req.body 
-    
+    const {studentID, password} = req.body
+
     const lastlogin= new Date().toLocaleString("en-US", {timeZone: "Asia/Singapore"})
 const authlevel = []
 
@@ -79,13 +79,13 @@ const authlevel = []
     },
     ).then(user => {
         if(user){
-            
-            User.findOneAndUpdate({studentID: user.studentID},{lastlogin: lastlogin})   
+
+            User.findOneAndUpdate({studentID: user.studentID},{lastlogin: lastlogin})
             .then(user => {
                 console.log("Last login updated to "+ lastlogin)
             })
             .catch(err => console.log(err));
-            
+
 
         authlevel.push('/'+user.role)}
 
@@ -217,7 +217,7 @@ app.get('/student',ensureAuthenticated,  (req, res) => {
         name:req.user.fullname,
 
 
-    }) 
+    })
 
 
 })
@@ -308,7 +308,7 @@ How do I know if this is necessary for my store? The best way to know is to chec
 
 app.get('/logout', (req, res) => {
     const lastlogout= new Date().toLocaleString("en-US", {timeZone: "Asia/Singapore"})
-    studentID= req.user.studentID  
+    studentID= req.user.studentID
     User.findOne({
         studentID: studentID
 
@@ -316,14 +316,14 @@ app.get('/logout', (req, res) => {
 
     },
     ).then(user => {
-        if(user){       
-            User.findOneAndUpdate({studentID: user.studentID},{lastlogout: lastlogout})   
+        if(user){
+            User.findOneAndUpdate({studentID: user.studentID},{lastlogout: lastlogout})
             .then(user => {
                 console.log("Last logout updated to "+ lastlogout)
             })
             .catch(err => console.log(err));
-            
- 
+
+
 
         }}
 
@@ -605,7 +605,7 @@ app.post('/createroom',  async (req, res) => {
    // console.log(name)
     const {roomID, price, roomCapacity, promotionalCode, launchStatus,launchstartdate,launchenddate,openinghour,closinghour} = req.body
 
-  
+
     const timeslot = ''
     const name = req.user.fullname
     let errors = []
@@ -632,18 +632,18 @@ if (!timecheck.test(openinghour) && !timecheck.test(closinghour)){
             name:req.user.fullname
 
         })
-    } else{ 
+    } else{
         const timerange= (openinghour+' - '+ closinghour)
         const timesplit =  String(closinghour).slice(0, 2)- String(openinghour).slice(0, 2)
         const timeslots =[]
-        
-        for (let i = 1; i <= timesplit; i++) { 
+
+        for (let i = 1; i <= timesplit; i++) {
             upperlimit= parseFloat(String(openinghour).slice(0,2))+ parseFloat(i-1)+":00"
             lowerlimit= parseFloat(String(openinghour).slice(0, 2)) + parseFloat(i) +":00"
             finaltimeslot= "{"+ i+": "+upperlimit +'-'+lowerlimit+"}"
             timeslots.push(finaltimeslot);
-           
-          } 
+
+          }
         /* Checks if there is any email in the database that is the same as the post request
             If User.findone returns a result (e.g user), person is already in DB and it'll push an error
             If it does not return anything (i.e user doesnt exist), use mongomodel to push a new user
@@ -676,7 +676,7 @@ if (!timecheck.test(openinghour) && !timecheck.test(closinghour)){
 						bookedBy,
 						launchStatus,
                         launchstartdate,
-                        launchenddate, 
+                        launchenddate,
                         timerange,
                         timeslots
 
@@ -867,14 +867,14 @@ if (launchstartdate>launchenddate){
                     const timerange= (openinghour+' - '+ closinghour)
                     const timesplit =  String(closinghour).slice(0, 2)- String(openinghour).slice(0, 2)
                     const timeslots =[]
-                    
-                    for (let i = 1; i <= timesplit; i++) { 
+
+                    for (let i = 1; i <= timesplit; i++) {
                         upperlimit= parseFloat(String(openinghour).slice(0,2))+ parseFloat(i-1)+":00"
                         lowerlimit= parseFloat(String(openinghour).slice(0, 2)) + parseFloat(i) +":00"
                         finaltimeslot= "{"+ i+": "+upperlimit +'-'+lowerlimit+"}"
                         timeslots.push(finaltimeslot);
-                       
-                      } 
+
+                      }
                  /* Checks if there is any email in the database that is the same as the post request
                      If User.findone returns a result (e.g user), person is already in DB and it'll push an error
                      If it does not return anything (i.e user doesnt exist), use mongomodel to push a new user
