@@ -189,6 +189,17 @@ app.get('/settings',ensureAuthenticated,  (req, res) => {
 
 
 })
+app.get('/createaccount',ensureAuthenticated,  (req, res) => {
+
+
+    res.render("createaccount", {
+        name:req.user.fullname
+
+
+    })
+
+
+})
 app.get('/settings/payment',ensureAuthenticated,  (req, res) => {
       res.render("settings/payment", {
         name:req.user.fullname
@@ -487,6 +498,109 @@ $ matches the end of the string, so if there's anything after the comma and spac
 )}})
 
 
+
+app.post('/createaccount',  async (req, res) => {
+    const hashedpassword = await bcrypt.hash(req.body.password, 10)
+    const {fullname, studentID, email, password, confirmPassword, role} = req.body
+    const lastlogin = ''
+    const lastlogout = ''
+    const noWhitespacelength = /^(?=.*\s)/;
+    const pwLength= /^.{5,16}$/;
+    /* ^ matches the start of the string.
+[A-Za-z]* matches 0 or more letters (case-insensitive) -- replace * with + to require 1 or more letters.
+, matches a comma followed by a space.
+$ matches the end of the string, so if there's anything after the comma and space then the match will fail.*/
+    const noLetters = /^[A-Za-z]*, $/
+    let errors = []
+    const fullnamecheck = /^([^0-9]*)$/
+    const IDcheck = /^.{7,7}$/
+
+    if (!fullnamecheck.test(fullname)){
+        errors.push({ msg: "Please do not include any numbers in your name"})
+    }
+    if (fullnamecheck.test(studentID)){
+        errors.push({ msg: "Please only include numbers in your Student ID"})
+    }  if (!IDcheck.test(studentID)){
+        errors.push({ msg: "Please ensure your Student ID is 7 numbers long"})
+    }
+   if (noWhitespacelength.test(password)){
+        errors.push({ msg: "Password must not contain any white spaces"})
+    }
+    if (!pwLength.test(password)){
+        errors.push({ msg: "Password must be 5 Characters Long"})
+    }
+    if (password != confirmPassword){
+        errors.push({ msg: "Passwords must be the same"})
+    }
+
+    /*if(password.length < 6){
+         errors.push({ msg: "Password should at least be 6 characters long"})
+}*/
+    if(errors.length > 0){
+        res.render('createaccount', {
+            errors,
+
+        })
+    } else{
+        /* Checks if there is any email in the database that is the same as the post request
+            If User.findone returns a result (e.g user), person is already in DB and it'll push an error
+            If it does not return anything (i.e user doesnt exist), use mongomodel to push a new user
+        */
+        User.findOne({
+            studentID: studentID
+
+
+        ,
+            email:email
+        })
+
+        .then(user => {
+            if(user){
+                errors.push({msg: 'Student ID/Email is already in use'})
+                // User exists
+                res.render('createaccount', {
+                    errors,
+
+                })
+            }
+                else  {
+                    //Push since user doesnt exist model to create new user
+                    const newUser = new User({
+                        fullname,
+                        studentID,
+                        email,
+                        hashedpassword,
+                        role,
+                        lastlogin,
+                        lastlogout
+
+
+                    })
+                    newUser
+                        .save()
+                        .then(user => {
+                            req.flash(
+                            'success_msg',
+                            'Account created!'
+                            );
+                            res.redirect('/admin');
+                        })
+                        .catch(err => console.log(err));
+
+                }
+
+            }
+
+
+        //validation passed
+
+
+
+
+
+)}})
+
+
 app.post('/createroom',  async (req, res) => {
    // console.log(name)
     const {roomID, price, roomCapacity, promotionalCode, launchStatus,launchstartdate,launchenddate,openinghour,closinghour} = req.body
@@ -673,7 +787,7 @@ if (launchstartdate>launchenddate){
 
         app.post('/editroom',  async (req, res) => {
             // console.log(name)
-            let {roomID, price, roomCapacity, promotionalCode, launchStatus,launchstartdate,launchenddate,deleteroom} = req.body
+            let {roomID, price, roomCapacity, promotionalCode, launchStatus,launchstartdate,launchenddate,deleteroom,openinghour,closinghour} = req.body
 
              const timeslot = ''
              const name = req.user.fullname
@@ -681,6 +795,7 @@ if (launchstartdate>launchenddate){
              // const createdBy = name
              const bookedBy = ''
              const createdBy = name
+
               /* ^ matches the start of the string.
          [A-Za-z]* matches 0 or more letters (case-insensitive) -- replace * with + to require 1 or more letters.
          , matches a comma followed by a space.
@@ -749,6 +864,17 @@ if (launchstartdate>launchenddate){
 
                 }else{
 
+                    const timerange= (openinghour+' - '+ closinghour)
+                    const timesplit =  String(closinghour).slice(0, 2)- String(openinghour).slice(0, 2)
+                    const timeslots =[]
+                    
+                    for (let i = 1; i <= timesplit; i++) { 
+                        upperlimit= parseFloat(String(openinghour).slice(0,2))+ parseFloat(i-1)+":00"
+                        lowerlimit= parseFloat(String(openinghour).slice(0, 2)) + parseFloat(i) +":00"
+                        finaltimeslot= "{"+ i+": "+upperlimit +'-'+lowerlimit+"}"
+                        timeslots.push(finaltimeslot);
+                       
+                      } 
                  /* Checks if there is any email in the database that is the same as the post request
                      If User.findone returns a result (e.g user), person is already in DB and it'll push an error
                      If it does not return anything (i.e user doesnt exist), use mongomodel to push a new user
@@ -776,7 +902,9 @@ if (launchstartdate>launchenddate){
                             promotionalCode: promotionalCode,
                             launchStatus: launchStatus,
                             launchstartdate: launchstartdate,
-                            launchenddate: launchenddate
+                            launchenddate: launchenddate,
+                            timerange:timerange,
+                            timeslots: timeslots
 
 
 

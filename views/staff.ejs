@@ -263,13 +263,17 @@ table.scroller.measure();
             var obtainprice = data.price
             var obtainpromotionalCode = data.promotionalCode
             var obtainroomCapacity = data.roomCapacity
-            localStorage.setItem('room-ID',obtainroomID)
+            
+            var obtainopeninghour = data.openinghour
+            
+            localStorage.setItem('room-ID',obtainroomID) 
 
             localStorage.setItem('launchstartdate-ID',obtainlaunchstartdate)
             localStorage.setItem('launchenddate-ID',obtainlaunchenddate)
             localStorage.setItem('price-ID',obtainprice)
             localStorage.setItem('promotionalCode-ID',obtainpromotionalCode)
             localStorage.setItem('roomCapacity-ID',obtainroomCapacity)
+            localStorage.setItem('openinghour-ID',obtainopeninghour)
         }
 
     });
