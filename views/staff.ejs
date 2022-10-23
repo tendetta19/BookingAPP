@@ -238,6 +238,7 @@ table.scroller.measure();
             var obtainprice = data.price
             var obtainpromotionalCode = data.promotionalCode
             var obtainroomCapacity = data.roomCapacity
+            var obtaintimerange= data.timerange 
             localStorage.setItem('room-ID',obtainroomID)
 
             localStorage.setItem('launchstartdate-ID',obtainlaunchstartdate)
@@ -245,6 +246,7 @@ table.scroller.measure();
             localStorage.setItem('price-ID',obtainprice)
             localStorage.setItem('promotionalCode-ID',obtainpromotionalCode)
             localStorage.setItem('roomCapacity-ID',obtainroomCapacity)
+            localStorage.setItem('timerange-ID',obtaintimerange)
         }
 
     });
@@ -257,6 +259,7 @@ table.scroller.measure();
                      table1.$('tr.selected').removeClass('selected');
                      $(this).addClass('selected');
             var obtainroomID = data.roomID
+            
 
             var obtainlaunchstartdate  = data.launchstartdate
             var obtainlaunchenddate  = data.launchenddate
