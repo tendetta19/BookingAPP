@@ -213,7 +213,42 @@
 
     </div>
 
-e
+
+    <script>
+  const roomID =  (localStorage.getItem('room-ID'))
+  const price =  (localStorage.getItem('price-ID'))
+  const promotionalCode =  (localStorage.getItem('promotionalCode-ID'))
+  const roomCapacity =  (localStorage.getItem('roomCapacity-ID'))
+
+  const launchstartdate = localStorage.getItem('launchstartdate-ID')
+  const launchenddate = localStorage.getItem('launchenddate-ID') 
+  const timerange = localStorage.getItem('timerange-ID')  
+  
+  var openinghour = timerange.slice(0,5)
+  var closinghour = timerange.slice(-5)
+    document.getElementById('roomID').value = roomID
+    document.getElementById('roomCapacity').value = roomCapacity
+
+    document.getElementById('promotionalCode').value = promotionalCode
+    document.getElementById('price').value = price
+    document.getElementById('roomID').value = roomID
+    document.getElementById('launchstartdate').value = launchstartdate
+    document.getElementById('launchenddate').value = launchenddate 
+    document.getElementById('openinghour').value = openinghour 
+    document.getElementById('closinghour').value = closinghour 
+    function img(x)
+      {if(x==0)
+        document.getElementById('launchgroup').style.display='block'
+        else
+        document.getElementById('launchgroup').style.display='none'
+       return
+
+      }
+      function myFunction() {
+        document.getElementById('deleteroom').value='true'
+}
+    </script>
+
       <script src="stylesheets/js/jquery-3.3.1.min.js"></script>
       <script src="stylesheets/js/popper.min.js"></script>
       <script src="stylesheets/js/bootstrap.min.js"></script>
