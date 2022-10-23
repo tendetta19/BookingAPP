@@ -858,7 +858,10 @@ if (launchstartdate>launchenddate){
          if (!pricecheck.test(price)){
                  errors.push({ msg: "Please enter a valid price"})
              }
-
+             if (launchStatus==='true' && !timecheck.test(openinghour) && !timecheck.test(closinghour)){
+                errors.push({ msg: "Please enter a valid time ending with :00"})
+            }
+        
         if (launchstartdate>launchenddate){
                 errors.push({ msg: "Please ensure your launch end date is after your launch start date"})
             }
