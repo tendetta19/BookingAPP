@@ -35,7 +35,7 @@
 </div>
 
 </nav>
-<body>
+<body onload="img(0)">
   <div class='container-fluid'>
   <div class='row vh-100'>
     <div class='col-sm-2 h-100 bg-light'>
@@ -102,11 +102,11 @@
               Launch room on Creation?
               <br>
               <label>
-                <input id="launchTrue"onclick="img(0)" class="form-switch" checked type="radio" name="launchStatus" value="true" >
+                <input id="launchTrue"onclick="img(0)" class="form-switch" type="radio" name="launchStatus" checked value="true" >
                   Yes
               </label>
               <label>
-                <input id="launchFalse" onclick="img(1)"class="form-switch"  type="radio"name="launchStatus" value="false" >
+                <input id="launchFalse" onclick="img(1)"class="form-switch" type="radio"name="launchStatus" value="false" >
                   No
               </label>
               </div>
@@ -152,9 +152,9 @@
 
                   <div class="col">
                     <label for="timeslot">Timeslot from</label>
-                    <input type="time" min="08:00:00" max="18:00:00" id="openinghour" name= "openinghour"value="openinghour"  >
+                    <input type="time" min="08:00:00" max="18:00:00" id="openinghour" name= "openinghour"value="openinghour">
                     to
-                    <input type="time" min="08:00:00" max="18:00:00" id="closinghour" name="closinghour" value="closinghour"  >
+                    <input type="time" min="08:00:00" max="18:00:00" id="closinghour" name="closinghour" value="closinghour">
                   </div>
                 </div>
 
