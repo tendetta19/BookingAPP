@@ -209,6 +209,15 @@ app.get('/settings/payment',ensureAuthenticated,  (req, res) => {
 
 
 })
+app.get('/editaccount',ensureAuthenticated,  (req, res) => {
+    res.render("editaccount", {
+      name:req.user.fullname
+
+
+  })
+
+
+})
 app.get('/student',ensureAuthenticated,  (req, res) => {
 
 
