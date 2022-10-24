@@ -63,7 +63,7 @@ app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
     console.log('Home page loaded')
-    res.render('index')
+    res.render('./user/index')
 })
 
 app.post('/',  async (req, res, next) => {
@@ -86,7 +86,7 @@ const authlevel = []
             })
             .catch(err => console.log(err));
 
-
+                
         authlevel.push('/'+user.role+"Dash")}
 
         }
@@ -112,7 +112,7 @@ delete authlevel
 app.get('/forgetpassword',  (req, res) => {
 
 
-    res.render("forgetpassword")
+    res.render("./user/forgetpassword")
 
 
 })
@@ -130,7 +130,7 @@ app.get('/settings/changePassword',ensureAuthenticated,  (req, res) => {
 app.get('/register',  (req, res) => {
 
 
-    res.render("register")
+    res.render("./user/register")
 
 
 })
@@ -144,7 +144,7 @@ app.get('/staffDash',ensureAuthenticated,   (req, res) => {
     }
     if(role === 'staff'){
 
-    res.render("staffDash", {
+    res.render("./user/staff/staffDash", {
         name:req.user.fullname
 
 
@@ -162,7 +162,7 @@ app.get('/studentDash',ensureAuthenticated,   (req, res) => {
     }
     if(role === 'student'){
 
-    res.render("studentDash", {
+    res.render("./user/student/studentDash", {
         name:req.user.fullname
 
 
@@ -179,7 +179,7 @@ if(role === 'staff'){
 }
 if(role === 'admin'){
 
-    res.render("admin", {
+    res.render("./user/admin/admin", {
         name:req.user.fullname
 
 
@@ -196,7 +196,7 @@ app.get('/createroom',ensureAuthenticated,   (req, res) => {
     }
     if(role === 'staff'){
 
-    res.render("createroom", {
+    res.render("./user/staff/createroom", {
         name:req.user.fullname
 
 
@@ -213,7 +213,7 @@ app.get('/editroom',ensureAuthenticated,   (req, res) => {
         res.redirect('/student')
     }
     if(role === 'staff'){
-    res.render("editroom", {
+    res.render("./user/staff/editroom", {
         name:req.user.fullname
 
 
@@ -224,7 +224,7 @@ app.get('/editroom',ensureAuthenticated,   (req, res) => {
 app.get('/settings',ensureAuthenticated,  (req, res) => {
 
 
-    res.render("settings", {
+    res.render("./user/settings", {
         name:req.user.fullname
 
 
@@ -241,7 +241,7 @@ app.get('/createaccount',ensureAuthenticated,  (req, res) => {
         res.redirect('/student')
     }
     if(role === 'admin'){
-    res.render("createaccount", {
+    res.render("./user/staff/createaccount", {
         name:req.user.fullname
 
 
@@ -266,7 +266,7 @@ app.get('/editaccount',ensureAuthenticated,  (req, res) => {
         res.redirect('/student')
     }
     if(role === 'admin'){
-    res.render("editaccount", {
+    res.render("./user/admin/editaccount", {
       name:req.user.fullname
 
 
@@ -284,7 +284,7 @@ app.get('/student',ensureAuthenticated,  (req, res) => {
     }
     if(role === 'student'){
 
-    res.render("student", {
+    res.render("./user/students/student", {
         name:req.user.fullname,
 
 
@@ -345,7 +345,7 @@ app.get('/staff',ensureAuthenticated,  (req, res) => { role=req.user.role
         res.redirect('/student')
     }
     if(role === 'staff'){
-    res.render("staff", {
+    res.render("./user/staff/staff", {
         name:req.user.fullname,
 
 
@@ -417,7 +417,7 @@ app.post('/forgetpassword',  async (req, res) => {
         errors.push({ msg: "Passwords must be the same"})
     }
     if(errors.length > 0){
-        res.render('forgetpassword', {
+        res.render('./user/forgetpassword', {
             errors,
 
         })
@@ -433,7 +433,7 @@ app.post('/forgetpassword',  async (req, res) => {
             if(!user){
                 errors.push({msg: 'There is no user with that ID'})
                 // User exists
-                res.render('forgetpassword', {
+                res.render('./user/forgetpassword', {
                     errors,
 
                 })
@@ -506,7 +506,7 @@ $ matches the end of the string, so if there's anything after the comma and spac
          errors.push({ msg: "Password should at least be 6 characters long"})
 }*/
     if(errors.length > 0){
-        res.render('register', {
+        res.render('./user/register', {
             errors,
 
         })
@@ -527,7 +527,7 @@ $ matches the end of the string, so if there's anything after the comma and spac
             if(user){
                 errors.push({msg: 'Student ID/Email is already in use'})
                 // User exists
-                res.render('register', {
+                res.render('./user/register', {
                     errors,
 
                 })
@@ -609,7 +609,7 @@ $ matches the end of the string, so if there's anything after the comma and spac
          errors.push({ msg: "Password should at least be 6 characters long"})
 }*/
     if(errors.length > 0){
-        res.render('createaccount', {
+        res.render('./user/admin/createaccount', {
             errors,
 
         })
@@ -630,7 +630,7 @@ $ matches the end of the string, so if there's anything after the comma and spac
             if(user){
                 errors.push({msg: 'Student ID/Email is already in use'})
                 // User exists
-                res.render('createaccount', {
+                res.render('./user/admin/createaccount', {
                     errors,
 
                 })
@@ -699,7 +699,7 @@ if (launchStatus==='true' && !timecheck.test(openinghour) && !timecheck.test(clo
 
 
     if(errors.length > 0){
-        res.render('createroom', {
+        res.render('./user/staff/createroom', {
             errors,
             name:req.user.fullname
 
@@ -730,7 +730,7 @@ if (launchStatus==='true' && !timecheck.test(openinghour) && !timecheck.test(clo
             if(user){
                 errors.push({msg: 'Room ID already exists!'})
 
-                res.render('createroom', {
+                res.render('./user/staff/createroom', {
                     errors,
                     name:req.user.fullname
 
@@ -803,7 +803,7 @@ if (launchstartdate>launchenddate){
 
 
      if(errors.length > 0){
-         res.render('deleteroom', {
+         res.render('./user/staff/deleteroom', {
              errors,
              name:req.user.fullname
 
@@ -821,7 +821,7 @@ if (launchstartdate>launchenddate){
                 if(!user){
                     errors.push({msg: 'Room ID does not exist! Make sure you are the owner of this room'})
 
-                    res.render('editroom', {
+                    res.render('./user/staff/editroom', {
                         errors,
                         name:req.user.fullname
 
@@ -886,7 +886,7 @@ if (launchstartdate>launchenddate){
 
 
              if(errors.length > 0){
-                 res.render('editroom', {
+                 res.render('./user/staff/editroom', {
                      errors,
                      name:req.user.fullname
 
@@ -904,7 +904,7 @@ if (launchstartdate>launchenddate){
                         if(!user){
                             errors.push({msg: 'Room ID does not exist! Make sure you are the owner of this room'})
 
-                            res.render('editroom', {
+                            res.render('./user/staff/editroom', {
                                 errors,
                                 name:req.user.fullname
 
@@ -964,7 +964,7 @@ if (launchstartdate>launchenddate){
                      if(!user){
                          errors.push({msg: 'Room ID does not exist! Make sure you are the owner of this room'})
 
-                         res.render('editroom', {
+                         res.render('./user/staff/editroom', {
                              errors,
                              name:req.user.fullname
 

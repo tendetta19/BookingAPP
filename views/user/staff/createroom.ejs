@@ -15,7 +15,7 @@
 <!-- Style -->
 <link rel="stylesheet" href="stylesheets/css/style.css">
 <link rel="icon" href="https://64.media.tumblr.com/bafc236f8913370429d52ee13d363ff9/tumblr_nkm7541saS1r6wywso1_500.gifv">
-<title>Edit an existing room</title>
+<title>Create a room</title>
 </head>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
   <div class="navbar-nav">
@@ -35,7 +35,7 @@
 </div>
 
 </nav>
-<body onload="img(0)">
+<body>
   <div class='container-fluid'>
   <div class='row vh-100'>
     <div class='col-sm-2 h-100 bg-light'>
@@ -51,10 +51,10 @@
       <div class='col-sm-8 content border'>
         <div class="row justify-content-center">
           <div class="col-md-4 mb-4 contents">
-          <h3>Edit an existing room</h3>
-                <%- include('./partials/messages.ejs') %>
-            <form action="/editroom" method="post">
-              <div class="form-group field--not-empty">
+          <h3>Create a new room</h3>
+                <%- include('../../../views/partials/messages.ejs') %>
+            <form action="/createroom" method="post">
+              <div class="form-group">
                 <label for="roomID">Room ID</label>
                 <input
                 type="text"
@@ -62,11 +62,10 @@
                 name="roomID"
                 id="roomID"
                 required
-                readonly
                 />
               </div>
 
-              <div class="form-group field--not-empty">
+              <div class="form-group">
                   <label for="roomCapacity">Capacity</label>
                   <input
                   type="number"
@@ -77,7 +76,7 @@
                   />
               </div>
 
-              <div class="form-group field--not-empty">
+              <div class="form-group">
                 <label for="price">Price</label>
                 <input
                 type="text"
@@ -88,7 +87,7 @@
                 />
               </div>
 
-              <div class="form-group field--not-empty">
+              <div class="form-group">
                 <label for="promotionalCode">Promotional Code</label>
                 <input
                 type="text"
@@ -102,14 +101,26 @@
               Launch room on Creation?
               <br>
               <label>
-                <input id="launchTrue"onclick="img(0)" class="form-switch" type="radio" name="launchStatus" checked value="true" >
+                <input id="launchTrue"onclick="img(0)" class="form-switch" type="radio" name="launchStatus" value="true" >
                   Yes
               </label>
               <label>
-                <input id="launchFalse" onclick="img(1)"class="form-switch" type="radio"name="launchStatus" value="false" >
+                <input id="launchFalse" onclick="img(1)"class="form-switch" checked type="radio"name="launchStatus" value="false" >
                   No
               </label>
               </div>
+                 <!-- <div>
+                    <label for="timeslot">Choose a timeslot:</label>
+                   <select name="timeslot" id="role">
+                     <option value="0800-1000">0800-1000</option>
+                     <option value="1000-1200">1000-1200</option>
+                     <option value="1300-1500">1200-1400</option>
+                     <option value="1500-1700">1400-1600</option>
+                     <option value="1600-1800">1600-1800</option>
+                     <option value="1800-2000">1800-2000</option>
+                     <option value="2000-2200">2000-2200</option>
+                   </select>
+                  </div>-->
 
                 <div class="launch row" id="launchgroup">
                   <div class="col-12">
@@ -130,7 +141,7 @@
                         />
                       </div>
                     </div>
-                  <input type="hidden" id="deleteroom" name="deleteroom" value="false">
+
                     <div class="col">
                       To
                       <div class="form-group">
@@ -152,38 +163,14 @@
 
                   <div class="col">
                     <label for="timeslot">Timeslot from</label>
-                    <input type="time" min="08:00:00" max="18:00:00" id="openinghour" name= "openinghour"value="openinghour">
+                    <input type="time" min="08:00:00" max="18:00:00" name= "openinghour"value="openinghour" >
                     to
-                    <input type="time" min="08:00:00" max="18:00:00" id="closinghour" name="closinghour" value="closinghour">
+                    <input type="time" min="08:00:00" max="18:00:00" name="closinghour" value="closinghour" >
                   </div>
                 </div>
-
                 <br>
-                 <input type="submit" value="Edit Room" class="btn btn-block btn-primary">
-                 <input type="button" value="Delete Room"  data-toggle="modal" data-target="#exampleModalCenter" class="bg-danger btn btn-block btn-primary">
-               </div>
- <!-- Modal -->
- <div>
-               <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                 <div class="modal-dialog modal-dialog-centered" role="document">
-                   <div class="modal-content">
-                     <div class="modal-header">
-                       <h6 class="modal-title" id="exampleModalLongTitle">Delete Room</h6>
-                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                       </button>
-                     </div>
-                     <div class="modal-body text-center">
-                       Are you sure you want to delete this room?
-                     </div>
-                     <div class="modal-footer justify-content-center">
-                       <button type="button" id=deleteroom class="btn btn-secondary" data-dismiss="modal">Close</button>
-                       <input type="submit" value="Delete" onclick="myFunction()" class="btn btn-danger">
-                     </div>
-                   </div>
-                 </div>
-               </div>
- </div>
+                <input type="submit" value="Create Room" class="btn btn-block btn-primary">
+              </div>
             </form>
           </div>
           </div>
@@ -191,42 +178,19 @@
         <div class='col-2 h-100 bg-light'>
         </div>
       </div>
+    </div>
 
     <script>
-  const roomID =  (localStorage.getItem('room-ID'))
-  const price =  (localStorage.getItem('price-ID'))
-  const promotionalCode =  (localStorage.getItem('promotionalCode-ID'))
-  const roomCapacity =  (localStorage.getItem('roomCapacity-ID'))
-
-  const launchstartdate = localStorage.getItem('launchstartdate-ID')
-  const launchenddate = localStorage.getItem('launchenddate-ID')
-  const timerange = localStorage.getItem('timerange-ID')
-
-  var openinghour = timerange.slice(0,5)
-  var closinghour = timerange.slice(-5)
-    document.getElementById('roomID').value = roomID
-    document.getElementById('roomCapacity').value = roomCapacity
-
-    document.getElementById('promotionalCode').value = promotionalCode
-    document.getElementById('price').value = price
-    document.getElementById('roomID').value = roomID
-    document.getElementById('launchstartdate').value = launchstartdate
-    document.getElementById('launchenddate').value = launchenddate
-    document.getElementById('openinghour').value = openinghour
-    document.getElementById('closinghour').value = closinghour
-    function img(x)
+      function img(x)
       {if(x==0)
-        document.getElementById('launchgroup').style.display='block'
+        document.getElementById('launchgroup').style.display='flex'
         else
         document.getElementById('launchgroup').style.display='none'
        return
 
-      }
-      function myFunction() {
-        document.getElementById('deleteroom').value='true'
-}
-    </script>
 
+      }
+    </script>
       <script src="stylesheets/js/jquery-3.3.1.min.js"></script>
       <script src="stylesheets/js/popper.min.js"></script>
       <script src="stylesheets/js/bootstrap.min.js"></script>
