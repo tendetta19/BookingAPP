@@ -337,7 +337,7 @@ app.get('/userData',ensureAuthenticated,  (req, res) => {
 }})
 
 
-app.get('/staffa',ensureAuthenticated,  (req, res) => { role=req.user.role
+app.get('/staff',ensureAuthenticated,  (req, res) => { role=req.user.role
     if(role === 'admin'){
         res.redirect('/adminDash')
     }if(role === 'student'){
@@ -967,7 +967,7 @@ if (launchstartdate>launchenddate){
              // const createdBy = name
              const bookedBy = ''
              const createdBy = name
-
+             const timecheck = /[0][0]$/
               /* ^ matches the start of the string.
          [A-Za-z]* matches 0 or more letters (case-insensitive) -- replace * with + to require 1 or more letters.
          , matches a comma followed by a space.
