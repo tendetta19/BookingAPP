@@ -10,21 +10,21 @@ const User = require('../models/user')
 module.exports = function(passport) {
     passport.use(
         new LocalStrategy({
-            usernameField: 'studentID'
-        }, (studentID, password, done) => {
+            usernameField: 'userID'
+        }, (userID, password, done) => {
             //match user with ID
             User.findOne({
-                studentID: studentID
+                userID: userID
                 })
                 .then(user => {
                     //no match (null = error, false = user)
-                    if (!user) { 
+                    if (!user) {
                         return done(null, false, {
                             message: 'That ID is not registered'
                         })
                     }
                     //keep going since user exists; match password (user.password) is from db
-                   
+
                     bcrypt.compare(password, user.hashedpassword, (err, isMatch) => {
                             if (err) throw err;
                             if (isMatch) {
