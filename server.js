@@ -67,26 +67,26 @@ app.get('/', (req, res) => {
 })
 
 app.post('/',  async (req, res, next) => {
-    const {studentID, password} = req.body
+    const {userID, password} = req.body
 
     const lastlogin= new Date().toLocaleString("en-US", {timeZone: "Asia/Singapore"})
 const authlevel = []
 
     User.findOne({
-        studentID: studentID
+        userID: userID
 
 
     },
     ).then(user => {
         if(user){
 
-            User.findOneAndUpdate({studentID: user.studentID},{lastlogin: lastlogin})
+            User.findOneAndUpdate({userID: user.userID},{lastlogin: lastlogin})
             .then(user => {
                 console.log("Last login updated to "+ lastlogin)
             })
             .catch(err => console.log(err));
 
-                
+
         authlevel.push('/'+user.role+"Dash")}
 
         }
@@ -138,9 +138,9 @@ app.get('/staffDash',ensureAuthenticated,   (req, res) => {
 
     role=req.user.role
     if(role === 'admin'){
-        res.redirect('/admin')
+        res.redirect('/adminDash')
     }if(role === 'student'){
-        res.redirect('/student')
+        res.redirect('/studentDash')
     }
     if(role === 'staff'){
 
@@ -156,9 +156,9 @@ app.get('/studentDash',ensureAuthenticated,   (req, res) => {
 
     role=req.user.role
     if(role === 'admin'){
-        res.redirect('/admin')
+        res.redirect('/adminDash')
     }if(role === 'staff'){
-        res.redirect('/staff')
+        res.redirect('/staffDash')
     }
     if(role === 'student'){
 
@@ -170,16 +170,16 @@ app.get('/studentDash',ensureAuthenticated,   (req, res) => {
 
 
 }})
-app.get('/admin',ensureAuthenticated,   (req, res) => {
+app.get('/adminDash',ensureAuthenticated,   (req, res) => {
 role=req.user.role
 if(role === 'staff'){
-    res.redirect('/staff')
+    res.redirect('/staffDash')
 }if(role === 'student'){
-    res.redirect('/student')
+    res.redirect('/studentDash')
 }
 if(role === 'admin'){
 
-    res.render("./user/admin/admin", {
+    res.render("./user/admin/adminDash", {
         name:req.user.fullname
 
 
@@ -190,9 +190,9 @@ if(role === 'admin'){
 app.get('/createroom',ensureAuthenticated,   (req, res) => {
     role=req.user.role
     if(role === 'admin'){
-        res.redirect('/admin')
+        res.redirect('/adminDash')
     }if(role === 'student'){
-        res.redirect('/student')
+        res.redirect('/studentDash')
     }
     if(role === 'staff'){
 
@@ -208,9 +208,9 @@ app.get('/editroom',ensureAuthenticated,   (req, res) => {
 
     role=req.user.role
     if(role === 'admin'){
-        res.redirect('/admin')
+        res.redirect('/adminDash')
     }if(role === 'student'){
-        res.redirect('/student')
+        res.redirect('/studentDash')
     }
     if(role === 'staff'){
     res.render("./user/staff/editroom", {
@@ -236,12 +236,12 @@ app.get('/createaccount',ensureAuthenticated,  (req, res) => {
 
     role=req.user.role
     if(role === 'staff'){
-        res.redirect('/staff')
+        res.redirect('/staffDash')
     }if(role === 'student'){
-        res.redirect('/student')
+        res.redirect('/studentDash')
     }
     if(role === 'admin'){
-    res.render("./user/staff/createaccount", {
+    res.render("./user/admin/createaccount", {
         name:req.user.fullname
 
 
@@ -261,9 +261,9 @@ app.get('/settings/payment',ensureAuthenticated,  (req, res) => {
 app.get('/editaccount',ensureAuthenticated,  (req, res) => {
     role=req.user.role
     if(role === 'staff'){
-        res.redirect('/staff')
+        res.redirect('/staffDash')
     }if(role === 'student'){
-        res.redirect('/student')
+        res.redirect('/studentDash')
     }
     if(role === 'admin'){
     res.render("./user/admin/editaccount", {
@@ -278,13 +278,13 @@ app.get('/student',ensureAuthenticated,  (req, res) => {
 
     role=req.user.role
     if(role === 'admin'){
-        res.redirect('/admin')
+        res.redirect('/adminDash')
     }if(role === 'staff'){
-        res.redirect('/staff')
+        res.redirect('/staffDash')
     }
     if(role === 'student'){
 
-    res.render("./user/students/student", {
+    res.render("./user/student/student", {
         name:req.user.fullname,
 
 
@@ -313,10 +313,10 @@ app.get('/roomData',ensureAuthenticated,  (req, res) => {
 app.get('/userData',ensureAuthenticated,  (req, res) => {
     role=req.user.role
     if(role === 'staff'){
-        res.redirect('/staff')
-    }if(role === 'student'){
-        console.log("student")
-        res.redirect('/student')
+        res.redirect('/staffDash')
+    }
+    if(role === 'student'){
+        res.redirect('/studentDash')
     }
     if(role === 'admin'){
     User.find({}, function(err, user) {
@@ -337,12 +337,12 @@ app.get('/userData',ensureAuthenticated,  (req, res) => {
 }})
 
 
-app.get('/staff',ensureAuthenticated,  (req, res) => { role=req.user.role
+app.get('/staffa',ensureAuthenticated,  (req, res) => { role=req.user.role
     if(role === 'admin'){
-        res.redirect('/admin')
+        res.redirect('/adminDash')
     }if(role === 'student'){
         console.log("student")
-        res.redirect('/student')
+        res.redirect('/studentDash')
     }
     if(role === 'staff'){
     res.render("./user/staff/staff", {
@@ -380,16 +380,16 @@ How do I know if this is necessary for my store? The best way to know is to chec
 
 app.get('/logout', (req, res) => {
     const lastlogout= new Date().toLocaleString("en-US", {timeZone: "Asia/Singapore"})
-    studentID= req.user.studentID
+    userID= req.user.userID
     User.findOne({
-        studentID: studentID
+        userID: userID
 
 
 
     },
     ).then(user => {
         if(user){
-            User.findOneAndUpdate({studentID: user.studentID},{lastlogout: lastlogout})
+            User.findOneAndUpdate({userID: user.userID},{lastlogout: lastlogout})
             .then(user => {
                 console.log("Last logout updated to "+ lastlogout)
             })
@@ -410,7 +410,7 @@ app.get('/logout', (req, res) => {
 
   });
 app.post('/forgetpassword',  async (req, res) => {
-    const {studentID, password, confirmPassword} = req.body
+    const {userID, password, confirmPassword} = req.body
     const hashedpassword = await bcrypt.hash(req.body.password, 10)
     let errors = []
     if (password != confirmPassword){
@@ -423,7 +423,7 @@ app.post('/forgetpassword',  async (req, res) => {
         })
     } else{
         User.findOne({
-            studentID: studentID
+            userID: userID
 
 
         },
@@ -439,7 +439,7 @@ app.post('/forgetpassword',  async (req, res) => {
                 })
             }
                 else  {
-               User.findOneAndUpdate({studentID: user.studentID},{hashedpassword: hashedpassword})
+               User.findOneAndUpdate({userID: user.userID},{hashedpassword: hashedpassword})
                 .then(user => {
                         req.flash(
                         'success_msg',
@@ -470,7 +470,7 @@ app.post('/changePassword',  async (req, res) => {
 
 app.post('/register',  async (req, res) => {
     const hashedpassword = await bcrypt.hash(req.body.password, 10)
-    const {fullname, studentID, email, password, confirmPassword, role} = req.body
+    const {fullname, userID, email, password, confirmPassword, role} = req.body
     const lastlogin = 'hi'
     const lastlogout = 'hi'
     const noWhitespacelength = /^(?=.*\s)/;
@@ -487,9 +487,9 @@ $ matches the end of the string, so if there's anything after the comma and spac
     if (!fullnamecheck.test(fullname)){
         errors.push({ msg: "Please do not include any numbers in your name"})
     }
-    if (fullnamecheck.test(studentID)){
+    if (fullnamecheck.test(userID)){
         errors.push({ msg: "Please only include numbers in your Student ID"})
-    }  if (!IDcheck.test(studentID)){
+    }  if (!IDcheck.test(userID)){
         errors.push({ msg: "Please ensure your Student ID is 7 numbers long"})
     }
    if (noWhitespacelength.test(password)){
@@ -516,7 +516,7 @@ $ matches the end of the string, so if there's anything after the comma and spac
             If it does not return anything (i.e user doesnt exist), use mongomodel to push a new user
         */
         User.findOne({
-            studentID: studentID
+            userID: userID
 
 
         ,
@@ -536,7 +536,7 @@ $ matches the end of the string, so if there's anything after the comma and spac
                     //Push since user doesnt exist model to create new user
                     const newUser = new User({
                         fullname,
-                        studentID,
+                        userID,
                         email,
                         hashedpassword,
                         role,
@@ -573,7 +573,7 @@ $ matches the end of the string, so if there's anything after the comma and spac
 
 app.post('/createaccount',  async (req, res) => {
     const hashedpassword = await bcrypt.hash(req.body.password, 10)
-    const {fullname, studentID, email, password, confirmPassword, role} = req.body
+    const {fullname, userID, email, password, confirmPassword, role} = req.body
     const lastlogin = ''
     const lastlogout = ''
     const noWhitespacelength = /^(?=.*\s)/;
@@ -590,9 +590,9 @@ $ matches the end of the string, so if there's anything after the comma and spac
     if (!fullnamecheck.test(fullname)){
         errors.push({ msg: "Please do not include any numbers in your name"})
     }
-    if (fullnamecheck.test(studentID)){
+    if (fullnamecheck.test(userID)){
         errors.push({ msg: "Please only include numbers in your Student ID"})
-    }  if (!IDcheck.test(studentID)){
+    }  if (!IDcheck.test(userID)){
         errors.push({ msg: "Please ensure your Student ID is 7 numbers long"})
     }
    if (noWhitespacelength.test(password)){
@@ -619,7 +619,7 @@ $ matches the end of the string, so if there's anything after the comma and spac
             If it does not return anything (i.e user doesnt exist), use mongomodel to push a new user
         */
         User.findOne({
-            studentID: studentID
+            userID: userID
 
 
         ,
@@ -639,7 +639,7 @@ $ matches the end of the string, so if there's anything after the comma and spac
                     //Push since user doesnt exist model to create new user
                     const newUser = new User({
                         fullname,
-                        studentID,
+                        userID,
                         email,
                         hashedpassword,
                         role,
@@ -655,7 +655,7 @@ $ matches the end of the string, so if there's anything after the comma and spac
                             'success_msg',
                             'Account created!'
                             );
-                            res.redirect('/admin');
+                            res.redirect('/adminDash');
                         })
                         .catch(err => console.log(err));
 
@@ -671,6 +671,106 @@ $ matches the end of the string, so if there's anything after the comma and spac
 
 
 )}})
+
+app.post('/editaccount',  async (req, res) => {
+    const {fullname, userID, email, role,deleteAccount} = req.body
+    const noWhitespacelength = /^(?=.*\s)/;
+    /* ^ matches the start of the string.
+[A-Za-z]* matches 0 or more letters (case-insensitive) -- replace * with + to require 1 or more letters.
+, matches a comma followed by a space.
+$ matches the end of the string, so if there's anything after the comma and space then the match will fail.*/
+    const noLetters = /^[A-Za-z]*, $/
+    let errors = []
+    const fullnamecheck = /^([^0-9]*)$/
+
+    if (!fullnamecheck.test(fullname)){
+        errors.push({ msg: "Please do not include any numbers in your name"})
+    }
+
+    if(errors.length > 0){
+        res.render('./user/admin/editaccount', {
+            errors,
+            name:req.user.fullname
+
+        })
+    } else{
+      if(deleteAccount==='true'){
+        User.findOne({
+          userID: userID
+
+        })
+        .then(user => {
+            if(!user){
+                errors.push({msg: 'User ID does not exist!'})
+
+                res.render('./user/admin/editaccount', {
+                    errors,
+                    name:req.user.fullname
+
+                })
+            }
+            else {
+              User.deleteMany({userID: user.userID},
+            )
+            .then(user => {
+                    req.flash(
+                    'success_msg',
+                    'Room deleted!'
+                    );
+                    res.redirect('/adminDash');
+                })
+                .catch(err => console.log(err));
+
+              }
+            })
+          }else{
+        /* Checks if there is any email in the database that is the same as the post request
+            If User.findone returns a result (e.g user), person is already in DB and it'll push an error
+            If it does not return anything (i.e user doesnt exist), use mongomodel to push a new user
+        */
+        User.findOne({
+            userID: userID
+
+
+
+      })
+
+        .then(user => {
+            if(!user){
+                errors.push({msg: 'WTF'})
+                // User exists
+                res.render('./user/admin/editaccount', {
+                    errors,
+
+                })
+            }
+              else {
+                User.findOneAndUpdate({userID: user.userID},
+                  {fullname: fullname,
+                  role: role,
+                  email: email
+
+                })
+             .then(user => {
+                     req.flash(
+                     'success_msg',
+                     'Account updated!'
+                     );
+                     res.redirect('/adminDash');
+                 })
+                 .catch(err => console.log(err));
+               }
+
+             }
+
+
+        //validation passed
+
+
+
+
+
+)}}})
 
 
 app.post('/createroom',  async (req, res) => {

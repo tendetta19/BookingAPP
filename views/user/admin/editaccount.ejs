@@ -1,1 +1,148 @@
-aaaa
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="stylesheets/fonts/icomoon/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="stylesheets/css/owl.carousel.min.css">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="stylesheets/css/bootstrap.min.css">
+
+<!-- Style -->
+<link rel="stylesheet" href="stylesheets/css/style.css">
+<link rel="icon" href="https://64.media.tumblr.com/bafc236f8913370429d52ee13d363ff9/tumblr_nkm7541saS1r6wywso1_500.gifv">
+<title>Edit a user account</title>
+
+
+</head>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
+    <div class="navbar-nav">
+        <a href="/adminDash" class="nav-link nav-item navbar-brand" id="home"><i class="fa fa-fw fa-home"></i> Home</a>
+
+    </div>
+
+
+</nav>
+<body>
+
+
+    <div class="content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <img src="stylesheets/images/undraw_remotely_2j6y.svg" alt="Image" class="img-fluid">
+          </div>
+          <div class="col-md-6 contents">
+            <div class="row justify-content-center">
+              <div class="col-md-8">
+                <div class="mb-4">
+                <h3>Edit User Account</h3>
+
+                <%- include('../../../views/partials/messages.ejs') %>
+              <form action="/editaccount" method="post">
+
+                <div class="form-group first field--not-empty">
+                  <label for="fullname">Full name</label>
+                  <input
+                  type="text"
+                  class="form-control"
+                  name="fullname"
+                  id="fullname"
+                  required
+                  value="<%= typeof fullname != 'undefined' ? fullname: ''%>"/>
+
+                </div>
+                <div class="form-group field--not-empty">
+                  <label for="userID">ID</label>
+                  <input
+                  type="text"
+                  class="form-control"
+                  name="userID"
+                  id="userID"
+                  required
+                  readonly
+                  value="<%= typeof userID != 'undefined' ? userID: ''%>"/>
+
+                </div>
+                <div class="form-group field--not-empty">
+                  <label for="email">Email</label>
+                  <input
+                  type="email"
+                  class="form-control"
+                  name="email"
+                  id="email"
+                  required  >
+
+                </div>
+
+                <div>
+                  <label for="role">Choose your role:</label>
+                 <select name="role" id="role">
+                   <option value="student">Student</option>
+                   <option value="staff">Staff</option>
+                 </select>
+                </div>
+
+
+                <input type="hidden" id="deleteAccount" name="deleteAccount" value="false">
+                <input type="submit" value="Edit account" class="btn btn-block btn-primary">
+                <input type="button" value="Delete account"  data-toggle="modal" data-target="#exampleModalCenter" class="bg-danger btn btn-block btn-primary">
+                <!-- Modal -->
+                <div>
+                              <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h6 class="modal-title" id="exampleModalLongTitle">Delete Account</h6>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                      Are you sure you want to delete this account?
+                                    </div>
+                                    <div class="modal-footer justify-content-center">
+                                      <button type="button" id=deleteAccount class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                      <input type="submit" value="Delete" onclick="myFunction()" class="btn btn-danger">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                </div>
+
+              </form>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+<script>
+  const fullname =  (localStorage.getItem('fullname-ID'))
+  const userID =  (localStorage.getItem('user-ID'))
+  const email =  (localStorage.getItem('email-ID'))
+  const role =  (localStorage.getItem('role-ID'))
+
+  document.getElementById('fullname').value = fullname
+  document.getElementById('userID').value = userID
+  document.getElementById('email').value = email
+  document.getElementById('role').value = role
+
+  function myFunction() {
+  document.getElementById('deleteAccount').value='true'
+}
+  </script>
+      <script src="stylesheets/js/jquery-3.3.1.min.js"></script>
+      <script src="stylesheets/js/popper.min.js"></script>
+      <script src="stylesheets/js/bootstrap.min.js"></script>
+      <script src="stylesheets/js/main.js"></script>
+    </body>
+</html>

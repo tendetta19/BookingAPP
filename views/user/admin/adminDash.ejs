@@ -23,7 +23,7 @@
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
   <div class="navbar-nav">
-  <a href="/admin" class="nav-link nav-item navbar-brand" id="home"><i class="fa fa-fw fa-home"></i> Home</a>
+  <a href="/adminDash" class="nav-link nav-item active navbar-brand" id="home"><i class="fa fa-fw fa-home"></i> Home</a>
 </div>
 
 
@@ -53,8 +53,8 @@
 <div class='row vh-100'>
   <div class='col-2 h-100 bg-light'>
     <div style="margin-top:25%;">
-      <nav class="nav nav-pills nav-fill flex-column"> 
-      <a class="nav-link active" href="#">User Data</a> 
+      <nav class="nav nav-pills nav-fill flex-column">
+      <a class="nav-link active" href="#">User Data</a>
     </nav>
     </div>
   </div>
@@ -70,7 +70,7 @@
 
   <p>
 
- 
+
            <table id="example"style="width:100%" >
                 <thead>
                     <tr>
@@ -82,12 +82,12 @@
                 <th scope="col">Role</th>
                 <th scope="col">Last Login</th>
                 <th scope="col">Last Logout</th>
-                <th scope="col">Date Created</th> 
+                <th scope="col">Date Created</th>
                     </tr>
                 </thead>
             </table></p>
-      </div> 
-        
+      </div>
+
       </div>
     </div>
   </div>
@@ -122,7 +122,7 @@ columns: [
     { data: '_id',
          visible: false, },
     { data: 'fullname' },
-    { data: 'studentID' },
+    { data: 'userID' },
     { data: 'email' },
     { data: 'hashedpassword' },
     { data: 'role'},
@@ -133,34 +133,30 @@ columns: [
 })
 
 
- 
+$('#example tbody').on('click', 'tr', function () {
+           var data = table.row(this).data();
 
-      $('#example tbody').on('click', 'tr', function () {
-                 var data = table.row(this).data();
+           if ($(this).hasClass('selected')) {
+               $(this).removeClass('selected');
+           } else {
+               table.$('tr.selected').removeClass('selected');
+               $(this).addClass('selected');
 
-                 if ($(this).hasClass('selected')) {
-                     $(this).removeClass('selected');
-                 } else {
-                     table.$('tr.selected').removeClass('selected');
-                     $(this).addClass('selected');
-           /* var obtainroomID = data.roomID
+      var obtainfullname = data.fullname
+      var obtainuserid  = data.userID
+      var obtainemail  = data.email
+      var obtainrole = data.role
 
-            var obtainlaunchstartdate  = data.launchstartdate
-            var obtainlaunchenddate  = data.launchenddate
-            var obtainprice = data.price
-            var obtainpromotionalCode = data.promotionalCode
-            var obtainroomCapacity = data.roomCapacity
-            localStorage.setItem('room-ID',obtainroomID)
+      localStorage.setItem('fullname-ID',obtainfullname)
+      localStorage.setItem('user-ID',obtainuserid)
+      localStorage.setItem('email-ID',obtainemail)
+      localStorage.setItem('role-ID',obtainrole)
 
-            localStorage.setItem('launchstartdate-ID',obtainlaunchstartdate)
-            localStorage.setItem('launchenddate-ID',obtainlaunchenddate)
-            localStorage.setItem('price-ID',obtainprice)
-            localStorage.setItem('promotionalCode-ID',obtainpromotionalCode)
-            localStorage.setItem('roomCapacity-ID',obtainroomCapacity)*/
+
         }
 
     });
-   
+
 
 });
 

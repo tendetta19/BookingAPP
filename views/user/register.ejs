@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8">  
- 
+<head><meta charset="utf-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
@@ -23,16 +23,16 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
     <div class="navbar-nav">
         <a href="/" class="nav-link nav-item navbar-brand" id="home"><i class="fa fa-fw fa-home"></i> Home</a>
-     
+
         <a href="/register" class="nav-link nav-item active" id="Register">Register</a>
-    
-    </div>  
+
+    </div>
 
 
 </nav>
 <body>
 
- 
+
     <div class="content">
       <div class="container">
         <div class="row">
@@ -43,52 +43,52 @@
             <div class="row justify-content-center">
               <div class="col-md-8">
                 <div class="mb-4">
-                <h3>Sign Up</h3> 
-                
-  <%- include('../partials/messages.ejs') %> 
+                <h3>Sign Up</h3>
+
+  <%- include('../partials/messages.ejs') %>
               <form action="/register" method="post">
-  
+
                 <div class="form-group first">
                   <label for="fullname">Full name</label>
-                  <input 
-                  type="text" 
-                  class="form-control" 
-                  name="fullname" 
+                  <input
+                  type="text"
+                  class="form-control"
+                  name="fullname"
                   id="fullname"
                   required
                   value="<%= typeof fullname != 'undefined' ? fullname: ''%>"/>
-  
+
                 </div>
                 <div class="form-group">
-                  <label for="studentID">ID</label>
-                  <input 
+                  <label for="userID">ID</label>
+                  <input
                   type="text"
                   class="form-control"
-                  name="studentID"
-                  id="studentID"
-                  required 
-                  value="<%= typeof studentID != 'undefined' ? studentID: ''%>"/>
-  
+                  name="userID"
+                  id="userID"
+                  required
+                  value="<%= typeof userID != 'undefined' ? userID: ''%>"/>
+
                 </div>
                 <div class="form-group">
                   <label for="email">Email</label>
-                  <input 
+                  <input
                   type="email"
                   class="form-control"
-                  name="email"  
-                  id="email" 
+                  name="email"
+                  id="email"
                   required  >
-  
+
                 </div>
                 <div class="form-group">
                   <label for="password">Password</label>
-                  <input 
+                  <input
                   type="password"
-                  class="form-control" 
-                  name="password" 
-                  id="password" 
+                  class="form-control"
+                  name="password"
+                  id="password"
                   required/>
-                  
+
                 </div>
                 <div class="form-group last mb-4">
                   <label for="confirmPassword">Confirm your password</label>
@@ -96,45 +96,45 @@
                   type="password"
                   class="form-control"
                   name="confirmPassword"
-                  id="confirmPassword"  
+                  id="confirmPassword"
                   required/>
-                  
-                </div>  
+
+                </div>
                 <div>
                   <label for="role">Choose your role:</label>
                  <select name="role" id="role">
                    <option value="student">Student</option>
-                   <option value="staff">Staff</option> 
+                   <option value="staff">Staff</option>
                  </select>
                 </div>
-             
-                
+
+
                 <div class="d-flex mb-5 align-items-center">
                   <label class="control control--checkbox mb-0"><span class="caption">Creating an account means you're okay with our Terms and Conditions and our  Privacy Policy.</span>
                     <input type="checkbox" checked="checked"/>
                     <div class="control__indicator"></div>
                   </label>
                 </div>
-               
-              
-  
+
+
+
                 <input type="submit" value="Register" class="btn btn-block btn-primary">
-  
-                  
+
+
               </form>
               </div>
             </div>
-            
+
           </div>
-          
+
         </div>
       </div>
     </div>
-  
-    
+
+
       <script src="stylesheets/js/jquery-3.3.1.min.js"></script>
       <script src="stylesheets/js/popper.min.js"></script>
       <script src="stylesheets/js/bootstrap.min.js"></script>
-      <script src="stylesheets/js/main.js"></script>  
+      <script src="stylesheets/js/main.js"></script>
     </body>
 </html>

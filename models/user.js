@@ -2,12 +2,12 @@ const mongoose = require('mongoose')
 const UserSchema= new mongoose.Schema(
 
 
-    { 
+    {
         fullname:{
             type:String,
             required: true
         },
-        studentID:{
+        userID:{
             type:String,
             required: true,
             unique:false
@@ -16,28 +16,28 @@ const UserSchema= new mongoose.Schema(
             type:String,
             required: true
         },
-        hashedpassword: { 
+        hashedpassword: {
             type:String,
             required: true
-        }, 
-        role: { 
+        },
+        role: {
             type:String,
             required: true
-        }, 
+        },
         date: {
             type:Date,
             required: true,
             default: Date.now,
-        }, 
-        
+        },
+
         lastlogin: {
             type:String
-        }, 
+        },
         lastlogout: {
             type:String
-        } 
-        
-    
+        }
+
+
     })
 
     //createmodel ingular name of the collection your model is for.
