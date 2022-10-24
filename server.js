@@ -87,7 +87,7 @@ const authlevel = []
             .catch(err => console.log(err));
 
 
-        authlevel.push('/'+user.role)}
+        authlevel.push('/'+user.role+"Dash")}
 
         }
 
@@ -137,12 +137,12 @@ app.get('/register',  (req, res) => {
 app.get('/staffDash',ensureAuthenticated,   (req, res) => {
 
     role=req.user.role
-    if(role === 'admin'){  
+    if(role === 'admin'){
         res.redirect('/admin')
-    }if(role === 'student'){  
+    }if(role === 'student'){
         res.redirect('/student')
     }
-    if(role === 'staff'){ 
+    if(role === 'staff'){
 
     res.render("staffDash", {
         name:req.user.fullname
@@ -152,14 +152,32 @@ app.get('/staffDash',ensureAuthenticated,   (req, res) => {
 
 
 }})
+app.get('/studentDash',ensureAuthenticated,   (req, res) => {
+
+    role=req.user.role
+    if(role === 'admin'){
+        res.redirect('/admin')
+    }if(role === 'staff'){
+        res.redirect('/staff')
+    }
+    if(role === 'student'){
+
+    res.render("studentDash", {
+        name:req.user.fullname
+
+
+    })
+
+
+}})
 app.get('/admin',ensureAuthenticated,   (req, res) => {
 role=req.user.role
-if(role === 'staff'){  
+if(role === 'staff'){
     res.redirect('/staff')
-}if(role === 'student'){  
+}if(role === 'student'){
     res.redirect('/student')
 }
-if(role === 'admin'){ 
+if(role === 'admin'){
 
     res.render("admin", {
         name:req.user.fullname
@@ -171,12 +189,12 @@ if(role === 'admin'){
 }})
 app.get('/createroom',ensureAuthenticated,   (req, res) => {
     role=req.user.role
-    if(role === 'admin'){  
+    if(role === 'admin'){
         res.redirect('/admin')
-    }if(role === 'student'){  
+    }if(role === 'student'){
         res.redirect('/student')
     }
-    if(role === 'staff'){ 
+    if(role === 'staff'){
 
     res.render("createroom", {
         name:req.user.fullname
@@ -189,12 +207,12 @@ app.get('/createroom',ensureAuthenticated,   (req, res) => {
 app.get('/editroom',ensureAuthenticated,   (req, res) => {
 
     role=req.user.role
-    if(role === 'admin'){  
+    if(role === 'admin'){
         res.redirect('/admin')
-    }if(role === 'student'){  
+    }if(role === 'student'){
         res.redirect('/student')
     }
-    if(role === 'staff'){ 
+    if(role === 'staff'){
     res.render("editroom", {
         name:req.user.fullname
 
@@ -217,12 +235,12 @@ app.get('/settings',ensureAuthenticated,  (req, res) => {
 app.get('/createaccount',ensureAuthenticated,  (req, res) => {
 
     role=req.user.role
-    if(role === 'staff'){  
+    if(role === 'staff'){
         res.redirect('/staff')
-    }if(role === 'student'){  
+    }if(role === 'student'){
         res.redirect('/student')
     }
-    if(role === 'admin'){ 
+    if(role === 'admin'){
     res.render("createaccount", {
         name:req.user.fullname
 
@@ -242,12 +260,12 @@ app.get('/settings/payment',ensureAuthenticated,  (req, res) => {
 })
 app.get('/editaccount',ensureAuthenticated,  (req, res) => {
     role=req.user.role
-    if(role === 'staff'){  
+    if(role === 'staff'){
         res.redirect('/staff')
-    }if(role === 'student'){  
+    }if(role === 'student'){
         res.redirect('/student')
     }
-    if(role === 'admin'){ 
+    if(role === 'admin'){
     res.render("editaccount", {
       name:req.user.fullname
 
@@ -259,12 +277,12 @@ app.get('/editaccount',ensureAuthenticated,  (req, res) => {
 app.get('/student',ensureAuthenticated,  (req, res) => {
 
     role=req.user.role
-    if(role === 'admin'){  
+    if(role === 'admin'){
         res.redirect('/admin')
-    }if(role === 'staff'){  
+    }if(role === 'staff'){
         res.redirect('/staff')
     }
-    if(role === 'student'){ 
+    if(role === 'student'){
 
     res.render("student", {
         name:req.user.fullname,
@@ -294,13 +312,13 @@ app.get('/roomData',ensureAuthenticated,  (req, res) => {
 
 app.get('/userData',ensureAuthenticated,  (req, res) => {
     role=req.user.role
-    if(role === 'staff'){  
+    if(role === 'staff'){
         res.redirect('/staff')
-    }if(role === 'student'){ 
+    }if(role === 'student'){
         console.log("student")
         res.redirect('/student')
     }
-    if(role === 'admin'){ 
+    if(role === 'admin'){
     User.find({}, function(err, user) {
         Userslist = user
 
@@ -318,15 +336,15 @@ app.get('/userData',ensureAuthenticated,  (req, res) => {
 
 }})
 
- 
+
 app.get('/staff',ensureAuthenticated,  (req, res) => { role=req.user.role
-    if(role === 'admin'){  
+    if(role === 'admin'){
         res.redirect('/admin')
-    }if(role === 'student'){ 
+    }if(role === 'student'){
         console.log("student")
         res.redirect('/student')
     }
-    if(role === 'staff'){ 
+    if(role === 'staff'){
     res.render("staff", {
         name:req.user.fullname,
 
@@ -861,7 +879,7 @@ if (launchstartdate>launchenddate){
              if (launchStatus==='true' && !timecheck.test(openinghour) && !timecheck.test(closinghour)){
                 errors.push({ msg: "Please enter a valid time ending with :00"})
             }
-        
+
         if (launchstartdate>launchenddate){
                 errors.push({ msg: "Please ensure your launch end date is after your launch start date"})
             }
