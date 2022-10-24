@@ -18,7 +18,7 @@
 <script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
 
 <link rel="icon" href="https://64.media.tumblr.com/bafc236f8913370429d52ee13d363ff9/tumblr_nkm7541saS1r6wywso1_500.gifv">
-<title>Staff Dashboard</title>
+<title>Room Booking Management</title>
 </head>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
@@ -98,7 +98,7 @@
                 <th scope="col">Launch Start Date</th>
                 <th scope="col">Launch End Date</th>
                 <th scope="col">Timerange</th>
-                <th scope="col">Timeslots</th> 
+                <th scope="col">Timeslots</th>
                     </tr>
                 </thead>
             </table></p>
@@ -119,7 +119,7 @@
     <th scope="col">Launch Start Date</th>
     <th scope="col">Launch End Date</th>
     <th scope="col">Timerange</th>
-    <th scope="col">Timeslots</th> 
+    <th scope="col">Timeslots</th>
 
                     </tr>
                 </thead>
@@ -183,7 +183,7 @@ table1 = $('#lala').DataTable({
 
      "lengthMenu": [ [15, 50, 100, -1], [15, 50, 100, "All"] ],
      "pagingType": "simple",
-     scrollY: 400,
+    // scrollY: 400,
      select: false,
 
      scroller:       true,
@@ -238,7 +238,7 @@ table.scroller.measure();
             var obtainprice = data.price
             var obtainpromotionalCode = data.promotionalCode
             var obtainroomCapacity = data.roomCapacity
-            var obtaintimerange= data.timerange 
+            var obtaintimerange= data.timerange
             localStorage.setItem('room-ID',obtainroomID)
 
             localStorage.setItem('launchstartdate-ID',obtainlaunchstartdate)
@@ -259,17 +259,17 @@ table.scroller.measure();
                      table1.$('tr.selected').removeClass('selected');
                      $(this).addClass('selected');
             var obtainroomID = data.roomID
-            
+
 
             var obtainlaunchstartdate  = data.launchstartdate
             var obtainlaunchenddate  = data.launchenddate
             var obtainprice = data.price
             var obtainpromotionalCode = data.promotionalCode
             var obtainroomCapacity = data.roomCapacity
-            
+
             var obtainopeninghour = data.openinghour
-            
-            localStorage.setItem('room-ID',obtainroomID) 
+
+            localStorage.setItem('room-ID',obtainroomID)
 
             localStorage.setItem('launchstartdate-ID',obtainlaunchstartdate)
             localStorage.setItem('launchenddate-ID',obtainlaunchenddate)
@@ -282,7 +282,6 @@ table.scroller.measure();
     });
 
 });
-
 
 
 
