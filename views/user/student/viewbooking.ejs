@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="stylesheets/fonts/icomoon/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="stylesheets/css/owl.carousel.min.css">
+<link rel="stylesheet" href="stylesheets/css/bootstrap.min.css">
+<link rel="stylesheet" href="stylesheets/css/style.css">
+
+<style> 
+  .button {
+background-color: pink;
+border: none;
+color: black;
+padding: 10px 20px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+margin: 4px 2px;
+cursor: pointer;
+border-radius: 16px;
+}
+  </style>
+
+
+<style>
+  {box-sizing: border-box;}
+  
+  /* Button used to open the contact form - fixed at the bottom of the page */
+  
+  /* The popup form - hidden by default */
+  .form-popup {
+    position: inherit;
+    display: none; 
+     
+    bottom: 500;  
+  }
+  
+  /* Add styles to the form container */
+  .form-container {
+    max-width: 300px;
+    padding: 10px; 
+  }
+  
+  /* Full-width input fields */
+  .form-container input[type=text], .form-container input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none; 
+  }
+  
+  /* When the inputs get focus, do something */
+  .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  
+    outline: none;
+  }
+  
+  /* Set a style for the submit/login button */
+  .form-container .btn {
+    background-color: #04AA6D;
+  
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+  }
+  
+  /* Add a red background color to the cancel button */
+  .form-container .cancel {
+    background-color: red;
+  }
+  
+  /* Add some hover effects to buttons */
+  .form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+  }
+  </style>
+
+<link rel="stylesheet" type="text/css" href="/DataTables/datatables.css">
+
+<script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
+
+<link rel="icon" href="https://64.media.tumblr.com/bafc236f8913370429d52ee13d363ff9/tumblr_nkm7541saS1r6wywso1_500.gifv">
+<title>Room Booking Management</title>
+</head>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
+  <div class="navbar-nav">
+  <a href="/staffDash" class="nav-link nav-item navbar-brand" id="home"><i class="fa fa-fw fa-home"></i> Home</a>
+</div>
+
+
+<div class="btn-group open">
+  <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> <%= name%></a>
+  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+  </a>
+  <ul class="dropdown-menu">
+    <li><a href="/settings"><i class="fa fa-cog "></i> Settings</a></li>
+    <li><a href="/logout"><i class="fa fa-sign-out "></i> Logout</a></li>
+  </ul>
+</div>
+ 
+
+</nav>
+
+
+<body>
+
+  <script src="stylesheets/js/jquery-3.3.1.min.js"></script>
+  <script src="stylesheets/js/popper.min.js"></script>
+  <script src="stylesheets/js/bootstrap.min.js"></script>
+  <script src="stylesheets/js/main.js"></script>
+
+  <div class='container-fluid'>
+    <div class='row vh-100'>
+      <div class='col-2 h-100 bg-light'>
+        <div style="margin-top:25%;">
+          <nav class="nav nav-pills nav-fill flex-column">
+          <a class="nav-link" href="#">Dashboard</a>
+          <a class="nav-link" href="/student">Book a Room</a>
+          <a class="nav-link active" href="/viewbookings">View my Bookings</a> 
+          <a class="nav-link disabled" href="#">Consult a lecturer</a> 
+          <a class="nav-link disabled" href="#">Timetable</a> 
+        </nav>
+        </div>
+      </div>
+    <div class='col-10 border'>
+      <div style="margin-top:5%;">
+        
+        <div class="form-popup" id="myForm">
+
+          <a href="/modifybooking">
+            <button class="dt-button"   type="button"><span>Modify Booking</span></button>
+          </a>
+          <a href="/cancelbooking">
+            <button class="dt-button"   type="button"><span>Cancel Booking</span></button>
+          </a>
+        </div>
+  <p>
+
+  
+  
+          <p>     <table id="example"style="width:100%" >
+                <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+            <th scope="col">Room ID</th>
+    <th scope="col">Date</th>
+    <th scope="col">Timeslot</th>
+    <th scope="col">Booked By</th>
+    <th scope="col">Payment Status</th> 
+                    </tr>
+                </thead>
+            </table></p> 
+       
+  </div>
+</div>
+</div>
+</div>
+<!-- TABLE -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.1/css/dataTables.bootstrap5.min.css">
+<script>
+  
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.1/js/dataTables.bootstrap5.min.js"></script>
+
+<script type="text/javascript" class="init">
+
+$(document).ready(function() {
+  // Create a new DataTable object
+  table = $('#example').DataTable({
+
+
+"lengthMenu": [ [15, 50, 100, -1], [15, 50, 100, "All"] ],
+"pagingType": "simple",
+scrollY: 400,
+select: true,
+
+scrollCollapse: true,
+order: [[ 1, 'asc' ]],
+ajax: {
+  url: '/bookingdata',
+},
+columns: [
+     { data: '_id',
+           visible: false, },
+      { data: 'roomID' },
+      { data: 'Date' },
+      { data: 'Timeslot' },
+      { data: 'BookedBy',
+           visible: false, },
+      { data: 'PaymentStatus'}
+  ]
+})
+ 
+
+      $('#example tbody').on('click', 'tr', function () {
+                 var data = table.row(this).data();
+
+                 if ($(this).hasClass('selected')) {
+                     $(this).removeClass('selected');
+                 } else {
+                     table.$('tr.selected').removeClass('selected');
+                     $(this).addClass('selected');
+                    document.getElementById("myForm").style.display = "block";
+            var obtainroomID = data.roomID
+
+            var obtainlaunchstartdate  = data.launchstartdate
+            var obtainlaunchenddate  = data.launchenddate
+            var obtainprice = data.price
+            var obtainpromotionalCode = data.promotionalCode
+            var obtainroomCapacity = data.roomCapacity
+            var obtaintimerange= data.timerange
+            localStorage.setItem('room-ID',obtainroomID)
+
+            localStorage.setItem('launchstartdate-ID',obtainlaunchstartdate)
+            localStorage.setItem('launchenddate-ID',obtainlaunchenddate)
+            localStorage.setItem('price-ID',obtainprice)
+            localStorage.setItem('promotionalCode-ID',obtainpromotionalCode)
+            localStorage.setItem('roomCapacity-ID',obtainroomCapacity)
+            localStorage.setItem('timerange-ID',obtaintimerange)
+        }
+
+    }); 
+        }
+
+    );
+
+  
+
+
+
+</script>
+
+</body>

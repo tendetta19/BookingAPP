@@ -19,6 +19,7 @@ app.use(express.static("views"))
 const PORT = process.env.PORT || 3000;
 const User= require('./models/user.js')
 const rooms= require('./models/roomcreation.js')
+const bookings= require('./models/bookings.js')
 const passport= require('passport')
 require('./config/passport')(passport)
 app.use(express.urlencoded({ extended:false}))
@@ -65,7 +66,15 @@ app.get('/', (req, res) => {
     console.log('Home page loaded')
     res.render('./user/index')
 })
+app.get('/viewbooking', (req, res) => { 
+    res.render('./user/student/viewbooking', {
+        name:req.user.fullname
 
+
+    })
+
+
+})
 app.post('/',  async (req, res, next) => {
     const {userID, password} = req.body
 
@@ -336,6 +345,27 @@ app.get('/userData',ensureAuthenticated,  (req, res) => {
 
 }})
 
+app.get('/bookingdata',ensureAuthenticated,  (req, res) => {
+    
+    const name= req.user.fullname
+    console.log(name)
+  //not protected for now
+    bookings.find({BookedBy: name}, function(err, booking) {
+        Bookingslist = booking 
+
+        res.json({
+            "data": Bookingslist
+          })
+
+
+    }
+    )
+
+
+
+
+
+})
 
 app.get('/staff',ensureAuthenticated,  (req, res) => { role=req.user.role
     if(role === 'admin'){
