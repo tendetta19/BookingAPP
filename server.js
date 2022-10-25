@@ -974,8 +974,8 @@ if (launchstartdate>launchenddate){
          $ matches the end of the string, so if there's anything after the comma and space then the match will fail.*/
          const pricecheck  = /^[1-9][\.\d]*(,\d+)?$/
          if (!pricecheck.test(price)){
-                 errors.push({ msg: "Please enter a valid price"})
-             }
+                 errors.push({ msg: "Please enter a valid price"})}
+             
              if (launchStatus==='true' && !timecheck.test(openinghour) && !timecheck.test(closinghour)){
                 errors.push({ msg: "Please enter a valid time ending with :00"})
             }
