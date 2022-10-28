@@ -28,14 +28,13 @@
   <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> <%= name%></a>
   <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
   </a>
-  <ul class="dropdown-menu">
-    <li><a href="/settings"><i class="fa fa-cog "></i> Settings</a></li>
+  <ul class="dropdown-menu"> 
     <li><a href="/logout"><i class="fa fa-sign-out "></i> Logout</a></li>
   </ul>
 </div>
 
 </nav>
-<body>
+<body onload="startTime()">
   <div class='container-fluid'>
   <div class='row vh-100'>
     <div class='col-2 h-100 bg-light'>
@@ -51,7 +50,8 @@
 
       <div class='col-10 border'>
         <div style="margin-top:5%;">
-          Welcome, <%= name%>!
+          Welcome, <%= name%>! <br>
+<div id="txt"></div><br>
           <div class='row'>
             <div class='col'>
               <div class="card-deck">
@@ -89,7 +89,23 @@
   </div>
 
 
-
+<script> 
+  function startTime() {
+    const today = new Date();
+    let h = today.getHours();
+    let m = today.getMinutes();
+    let s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('txt').innerHTML =  "The time now is: "+ h + ":" + m + ":" + s;
+    setTimeout(startTime, 1000);
+  }
+  
+  function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+  }
+  </script>
 
       <script src="stylesheets/js/jquery-3.3.1.min.js"></script>
       <script src="stylesheets/js/popper.min.js"></script>

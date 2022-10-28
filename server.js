@@ -116,17 +116,7 @@ app.get('/forgetpassword',  (req, res) => {
 
 
 })
-app.get('/settings/changePassword',ensureAuthenticated,  (req, res) => {
-
-
-    res.render("settings/changePassword", {
-        name:req.user.fullname
-
-
-    })
-
-
-})
+ 
 app.get('/register',  (req, res) => {
 
 
@@ -221,18 +211,7 @@ app.get('/editroom',ensureAuthenticated,   (req, res) => {
     })
 
 
-}})
-app.get('/settings',ensureAuthenticated,  (req, res) => {
-
-
-    res.render("./user/settings", {
-        name:req.user.fullname
-
-
-    })
-
-
-})
+}}) 
 app.get('/createaccount',ensureAuthenticated,  (req, res) => {
 
     role=req.user.role
@@ -249,16 +228,7 @@ app.get('/createaccount',ensureAuthenticated,  (req, res) => {
     })
 
 
-}})
-app.get('/settings/payment',ensureAuthenticated,  (req, res) => {
-      res.render("settings/payment", {
-        name:req.user.fullname
-
-
-    })
-
-
-})
+}}) 
 app.get('/editaccount',ensureAuthenticated,  (req, res) => {
     role=req.user.role
     if(role === 'staff'){
@@ -477,14 +447,7 @@ app.post('/studentDash',  async (req, res) => {
     
 
 
-app.post('/changePassword',  async (req, res) => {
-    const {ipassword, password, confirmPassword} = req.body
-    const hashedpassword = await bcrypt.hash(req.body.password, 10)
-    let errors = []
-    name=req.user.fullname
-    //bcrypt.compare(password, user.hashedpassword, (err, isMatch)
-    })
-
+ 
 
 app.post('/register',  async (req, res) => {
     const hashedpassword = await bcrypt.hash(req.body.password, 10)
