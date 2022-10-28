@@ -257,7 +257,7 @@ table.scroller.measure();
                      table1.$('tr.selected').removeClass('selected');
                      $(this).addClass('selected');
             var obtainroomID = data.roomID
-
+           
 
             var obtainlaunchstartdate  = data.launchstartdate
             var obtainlaunchenddate  = data.launchenddate
@@ -265,10 +265,11 @@ table.scroller.measure();
             var obtainpromotionalCode = data.promotionalCode
             var obtainroomCapacity = data.roomCapacity
 
-            var obtainopeninghour = data.openinghour
-
+            var obtainopeninghour = data.openinghour 
             localStorage.setItem('room-ID',obtainroomID)
 
+            localStorage.setItem('unit-ID',unit)
+            localStorage.setItem('level-ID',level)
             localStorage.setItem('launchstartdate-ID',obtainlaunchstartdate)
             localStorage.setItem('launchenddate-ID',obtainlaunchenddate)
             localStorage.setItem('price-ID',obtainprice)

@@ -756,8 +756,9 @@ $ matches the end of the string, so if there's anything after the comma and spac
 
 app.post('/createroom',  async (req, res) => {
    // console.log(name)
-    const {roomID, price, roomCapacity, promotionalCode, launchStatus,launchstartdate,launchenddate,openinghour,closinghour} = req.body
-
+    const {unit,level,block, price, roomCapacity, promotionalCode, launchStatus,launchstartdate,launchenddate,openinghour,closinghour} = req.body
+    const roomID= 'BLK '+block+' '+'L-'+level+'-'+ unit.toUpperCase()
+ 
 
     const timeslot = ''
     const name = req.user.fullname
@@ -940,8 +941,8 @@ if (launchstartdate>launchenddate){
 
         app.post('/editroom',  async (req, res) => {
             // console.log(name)
-            let {roomID, price, roomCapacity, promotionalCode, launchStatus,launchstartdate,launchenddate,deleteroom,openinghour,closinghour} = req.body
-
+            let {unit,level,block, price, roomCapacity, promotionalCode, launchStatus,launchstartdate,launchenddate,deleteroom,openinghour,closinghour} = req.body
+            const roomID= 'BLK '+block+' '+'L-'+level+'-'+ unit.toUpperCase()
              const timeslot = ''
              const name = req.user.fullname
              let errors = []

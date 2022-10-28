@@ -53,17 +53,38 @@
           <h3>Create a new room</h3>
                 <%- include('../../../views/partials/messages.ejs') %>
             <form action="/createroom" method="post">
+              <div class="form-control">
+                <label for="block">Choose a Block:</label>
+                <select id="block" name="block">
+                  <option value="A">Block A</option>
+                  <option value="B">Block B</option>
+                  <option value="C">Block C</option>
+                  <option value="D">Block D</option>
+                  <option value="E">Block E</option>
+                  <option value="F">Block F</option>
+                  <option value="G">Block G</option>
+                  <option value="H">Block H</option>
+                </select>
+              </div>
               <div class="form-group">
-                <label for="roomID">Room ID</label>
+                <label for="level">Level</label>
                 <input
-                type="text"
+                type="number"
                 class="form-control"
-                name="roomID"
-                id="roomID"
+                name="level"
+                id="level"
                 required
                 />
-              </div>
-
+            </div> <div class="form-group">
+              <label for="unit">Unit Name</label>
+              <input
+              type="text"
+              class="form-control"
+              name="unit"
+              id="unit"
+              required
+              />
+          </div>
               <div class="form-group">
                   <label for="roomCapacity">Capacity</label>
                   <input
