@@ -156,7 +156,7 @@
                         class="form-control"
                         name="launchstartdate"
                         id="launchstartdate"
-                        min="2022-01-01"
+                        min=<%= d %>
                         max="2099-12-31"
                         />
                       </div>
@@ -171,7 +171,7 @@
                         class="form-control"
                         name="launchenddate"
                       id="launchenddate"
-                      min="2022-01-01"
+                      min=<%= d %>
                       max="2099-12-31"
                       />
                     </div>
@@ -201,9 +201,11 @@
     </div>
 
     <script>
+       
       function img(x)
       {if(x==0)
         document.getElementById('launchgroup').style.display='flex'
+       
         else
         document.getElementById('launchgroup').style.display='none'
        return

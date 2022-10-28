@@ -179,6 +179,8 @@ if(role === 'admin'){
 
 }})
 app.get('/createroom',ensureAuthenticated,   (req, res) => {
+    
+const todaysdate  = new Date().toISOString().slice(0, 10) 
     role=req.user.role
     if(role === 'admin'){
         res.redirect('/adminDash')
@@ -188,7 +190,8 @@ app.get('/createroom',ensureAuthenticated,   (req, res) => {
     if(role === 'staff'){
 
     res.render("./user/staff/createroom", {
-        name:req.user.fullname
+        name:req.user.fullname,
+        d:todaysdate
 
 
     })
@@ -197,6 +200,7 @@ app.get('/createroom',ensureAuthenticated,   (req, res) => {
 }})
 app.get('/editroom',ensureAuthenticated,   (req, res) => {
 
+    const todaysdate  = new Date().toISOString().slice(0, 10) 
     role=req.user.role
     if(role === 'admin'){
         res.redirect('/adminDash')
@@ -205,7 +209,9 @@ app.get('/editroom',ensureAuthenticated,   (req, res) => {
     }
     if(role === 'staff'){
     res.render("./user/staff/editroom", {
-        name:req.user.fullname
+        name:req.user.fullname,
+        
+        d:todaysdate
 
 
     })
