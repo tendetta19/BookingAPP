@@ -47,19 +47,9 @@
   selectCapacity1 = document.getElementById("selectCapacity").value
 
  
-  p =  roomIDs1[0]['launchstartdate'] 
-    
 
 
-  for(x in p) {
-  start = new Date(roomIDs1[x]['launchstartdate'] );
-  end = new Date(roomIDs1[x]['launchenddate']);
-  if (start.getTime() <= selectDate.getTime() &&
-  selectDate.getTime() <= end.getTime() &&
-   roomIDs1[x]['roomCapacity'] >= selectCapacity){
-    console.log(i)
-  }
-}
+ 
 }</script>
   <script src="stylesheets/js/jquery-3.3.1.min.js"></script>
   <script src="stylesheets/js/popper.min.js"></script>
