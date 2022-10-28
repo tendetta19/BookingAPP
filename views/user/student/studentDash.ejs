@@ -46,11 +46,10 @@
   selectDate = new Date(document.getElementById("selectDate").value)
   selectCapacity1 = document.getElementById("selectCapacity").value
 
- 
-
-
- 
-}</script>
+  localStorage.setItem('capacity-ID',selectCapacity)
+  alert(c)
+  }
+</script>
   <script src="stylesheets/js/jquery-3.3.1.min.js"></script>
   <script src="stylesheets/js/popper.min.js"></script>
   <script src="stylesheets/js/bootstrap.min.js"></script>
@@ -68,7 +67,7 @@
     </nav>
     </div>
   </div>
-          
+
     <div class='col-10 border'>
       <div style="margin-top:5%;">
         <div class='row justify-content-start'>
@@ -116,8 +115,7 @@
     <tbody>
     <script>
     </script>
-
-              Hello Capcity is <%= c%> <br> Selected Date is <%=d%>
+ Hello Capcity is <%= c%> <br> Selected Date is <%=d%>
 <%  txt = "";
 
               let selectDate = new Date(d);
@@ -146,27 +144,7 @@
 </table>
 </p>
 <a href="/payment"><button class="dt-button" id='getBookingDeets'  type="button"><span>Next</span></button></a>
-<p><%= txt%></p>
           </div>
-          <div class='col'>
-            <table id='tableTry' class="table table-bordered" style="width:100%">
-            <thead>
-  <tr>
-    <th 'width=100%'>roomID</th>
-    <th 'width=100%'>Slots</th>
-  </tr>
-</thead>
-<tbody>
-<%roomIDs1.forEach(rooms => {%>
-    <tr>
-      <th><%= rooms.roomID %></th>
-      <th><%= rooms.timeslots %></th>
-</tr>
-<%})%>
-</tbody>
-</table>
-<p id='demo'></p>
-
           </div>
         </div>
 </div>
