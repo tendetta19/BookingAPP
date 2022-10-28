@@ -161,7 +161,8 @@ const todaysdate  = new Date().toISOString().slice(0, 10)
 
     res.render("./user/student/studentDash", {
         c:1,
-        d:todaysdate
+        d:todaysdate,
+        name:req.user.fullname,
 
 
 
@@ -466,7 +467,8 @@ app.post('/studentDash',  async (req, res) => {
     
     res.render("./user/student/studentDash", {
         d:selectDate,
-        c:selectCapacity
+        c:selectCapacity,
+        name:req.user.fullname,
         
 
 
