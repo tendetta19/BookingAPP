@@ -153,8 +153,7 @@ app.get('/staffDash',ensureAuthenticated,   (req, res) => {
 
 }})
 app.get('/studentDash',   (req, res) => {
-const todaysdate  = new Date().toISOString().slice(0, 10)
-console.log(todaysdate)
+const todaysdate  = new Date().toISOString().slice(0, 10) 
       rooms.find({}, {roomID:1, launchstartdate:1, launchenddate:1, roomCapacity:1, timeslots:1, _id:0}, function(err, roomIDs){
           roomIDs1 = roomIDs
           bobt = roomIDs.length
