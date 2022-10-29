@@ -18,6 +18,7 @@ app.use(express.static("views"))
 //set port ${PORT} <-- calls from variable (must use ` `)
 const PORT = process.env.PORT || 3000;
 const User= require('./models/user.js')
+const bookings= require('./models/bookings.js')
 const rooms= require('./models/roomcreation.js')
 const passport= require('passport')
 require('./config/passport')(passport)
@@ -178,6 +179,35 @@ if(role === 'admin'){
 
 
 }})
+app.get('/viewbooking', (req, res) => { 
+    res.render('./user/student/viewbooking', {
+        name:req.user.fullname
+
+
+    })
+
+
+})
+app.get('/bookingdata',ensureAuthenticated,  (req, res) => {
+
+    const name= req.user.fullname 
+  //not protected for now
+    bookings.find({BookedBy: name}, function(err, booking) {
+        Bookingslist = booking 
+
+        res.json({
+            "data": Bookingslist
+          })
+
+
+    }
+    )
+
+
+
+
+
+})
 app.get('/createroom',ensureAuthenticated,   (req, res) => {
     
 const todaysdate  = new Date().toISOString().slice(0, 10) 
@@ -317,8 +347,7 @@ app.get('/userData',ensureAuthenticated,  (req, res) => {
 app.get('/staff',ensureAuthenticated,  (req, res) => { role=req.user.role
     if(role === 'admin'){
         res.redirect('/adminDash')
-    }if(role === 'student'){
-        console.log("student")
+    }if(role === 'student'){ 
         res.redirect('/studentDash')
     }
     if(role === 'staff'){
