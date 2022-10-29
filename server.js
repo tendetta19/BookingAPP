@@ -211,7 +211,7 @@ app.get('/editroom',ensureAuthenticated,   (req, res) => {
     res.render("./user/staff/editroom", {
         name:req.user.fullname,
         
-        d:todaysdate
+        d:todaysdate 
 
 
     })
