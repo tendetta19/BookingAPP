@@ -45,26 +45,29 @@
 localStorage.setItem('roomTime-ID', "")
 bookDate = localStorage.getItem('date-ID').value
 bookID = localStorage.getItem('room-ID').value
-
+newTime = ""
   function buttonSelecter() {
 
         var y = document.getElementById(event.target.id).id;
         var x = document.getElementById(event.target.id);
+        newTime = y.substr(y.indexOf('&')+1);
         g = " ";
 
         let elems = document.getElementsByClassName("button");
 
         if (x.style.backgroundColor == 'pink'){
           g = document.getElementById(y).value
+          document.getElementById("newTime").innerHTML = "Change your timeslot from <strong><%=t%></strong> to "+"<strong>"+newTime+"</strong>";
+          document.getElementById("selectTimeslot").value = newTime
           for(let i = 0; i < elems.length; i++){
             elems[i].style.backgroundColor = 'pink'}
           x.style.backgroundColor = 'red';
         } else {
             x.style.backgroundColor = 'pink';
             y = '';
-
+            document.getElementById("newTime").innerHTML = ""
         }
-
+        localStorage.setItem('roomTime-ID',y)
       }
 
 </script>
@@ -90,6 +93,7 @@ bookID = localStorage.getItem('room-ID').value
       <div style="margin-top:5%;">
         <div class='row justify-content-start'>
           <div class='col-2'>
+                            <h4>Change timeslot</h4>
             <div class="form-group">
               <label for="selectDate">Date</label>
               <input
@@ -105,7 +109,6 @@ bookID = localStorage.getItem('room-ID').value
           <div class='col-2' style="margin-top:2%">
         </div>
       </div>
-            <p>
               <div class='col'>
                 <table id='tableTry2' class="table table-bordered" style="width:100%">
                 <thead class="thead-dark">
@@ -117,25 +120,8 @@ bookID = localStorage.getItem('room-ID').value
     <tbody>
     <script>
     </script>
-    <%
-    filterRoom = roomIDs1.filter(function(test){
-      return test.roomID == r;
-    });
-    filterBooked = booking1.filter(function(test){
-      return test.Date == d;
-    });
-    filterBookedSlot = filterBooked.filter(function(test){
-      return test.roomID == r;
-    });
-    array = []
-    for(b in filterBookedSlot){
-      array.push(filterBookedSlot[b]['timeslots'])
-}
-
-    %>
-    <%=filterBookedSlot%>
     <!--maybe style this nicely-->
-    Filtering rooms with a capacity of on  <b><%=d%></b>
+    Timeslots for roomID <b><%=r%></b> on <b><%=d%></b>
 <%  txt = "";
 
               let selectDate = d
@@ -172,9 +158,15 @@ bookID = localStorage.getItem('room-ID').value
 
 </tbody>
 </table>
-</p>
-<a href="#"><button class="dt-button" id='getBookingDeets' onclick="getDeets()"  type="button"><span>Next</span></button></a>
-          </div>
+<p id="newTime"></p>
+<form action="/editbooking" method="post">
+<input type="hidden" id="selectDate" name="selectDate" value="false">
+<input type="hidden" id="selectRoomID" name="selectRoomID" value="false">
+<input type="hidden" id="selectTimeslot" name="selectTimeslot" value="false">
+<input type="hidden" id="newTimeslot" name="newTimeslot" value="false">
+<input type="hidden" id="editBooking" name="editBooking" value="true">
+<a href="#"><button class="dt-button" onclick="getBook()"  type="submit"><span>Modify Booking</span></button></a>
+</form>
           </div>
         </div>
 </div>
@@ -187,11 +179,13 @@ bookID = localStorage.getItem('room-ID').value
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.1/js/dataTables.bootstrap5.min.js"></script>
 <script>
 
-function getDeets(){
-  if (localStorage.getItem('roomTime-ID') == ""){
+function getBook(){
+  if (document.getElementById("newTime").innerHTML == ""){
     alert("Please select a timeslot!")
   } else {
-    window.location.href = '/payment'
+    document.getElementById("selectDate").value = <%=d%>
+    document.getElementById("selectRoomID").value = <%=r%>
+    document.getElementById("selectTimeslot").value = <%=t%>
   }
 }
 

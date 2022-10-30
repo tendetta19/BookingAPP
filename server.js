@@ -572,7 +572,47 @@ app.post('/studentDash',  async (req, res) => {
 
 
         })})
+        app.post('/editbooking',  async (req, res) => {
+            const {selectDate, selectRoomID, selectTimeslot, newTimeslot, editBooking} = req.body
+            let errors = []
 
+            if(errors.length > 0){
+                res.render('./user/student/editbooking', {
+                    errors,
+                    name:req.user.fullname
+
+                })
+            } else{
+              if(editBooking==='true'){
+                bookings.findOneAndUpdate({roomID: selectRoomID, Date: selectDate, Timeslot: selectTimeslot},
+                  {roomID: selectroomID, Date: selectDate, Timeslot: newTimeSlot}
+
+                )
+
+
+
+
+
+                     .then(user => {
+                             req.flash(
+                             'success_msg',
+                             'Booking updated!'
+                             );
+                             res.redirect('/viewbooking');
+                         })
+                         .catch(err => console.log(err));
+                       }
+}
+                     }
+
+
+                //validation passed
+
+
+
+
+
+        )
 
 
 app.post('/register',  async (req, res) => {

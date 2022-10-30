@@ -288,9 +288,9 @@ span.price {
  </div>
 </form>
 <form action="/payment" method="post">
-  <input type="text" class="form-control-plaintext" name="Date" readonly id="Date" value=bookDate>
-  <input type="text" class="form-control-plaintext" name="roomID" readonly id="roomID" value=bookID>
-  <input type="text" class="form-control-plaintext" name="Timeslot" readonly id="Timeslot" value=bookTime>
+  <input type="hidden"  name="Date" readonly id="Date" value=bookDate>
+  <input type="hidden"  name="roomID" readonly id="roomID" value=bookID>
+  <input type="hidden"  name="Timeslot" readonly id="Timeslot" value=bookTime>
        <button type="submit" class="btn btn-primary btn-block">Pay</button>
 </form>
 
