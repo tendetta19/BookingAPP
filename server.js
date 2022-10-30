@@ -550,7 +550,28 @@ app.post('/studentDash',  async (req, res) => {
 
 
     )
+    app.post('/viewbooking',  async (req, res) => {
+        const {selectDate, selectRoomID, selectTimeslot} = req.body
+        console.log(selectDate, selectRoomID, selectTimeslot)
+        rooms.find({}, {roomID:1, roomCapacity:1, timeslots:1, price:1, promotionalCode:1, _id:0}, function(err, roomIDs){
+            roomIDs1 = roomIDs
+            bobt = roomIDs.length
+        bookings.find({}, {roomID:1, Timeslot:1, Date:1, _id:0, }, function(err, bookingss){
+          booking1 = bookingss
 
+
+
+        res.render("./user/student/editbooking", {
+            d:selectDate,
+            r:selectRoomID,
+            t:selectTimeslot,
+            name:req.user.fullname,
+
+})})
+
+
+
+        })})
 
 
 

@@ -17,12 +17,12 @@
 <script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
 
 <link rel="icon" href="https://64.media.tumblr.com/bafc236f8913370429d52ee13d363ff9/tumblr_nkm7541saS1r6wywso1_500.gifv">
-<title>Room Booking</title>
+<title>Edit Booking</title>
 </head>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
   <div class="navbar-nav">
-  <a href="/viewbooking" class="nav-link nav-item navbar-brand" id="test"><i class="fa fa-fw fa-home"></i> Home</a>
+  <a href="/studentDash" class="nav-link nav-item navbar-brand" id="test"><i class="fa fa-fw fa-home"></i> Home</a>
 </div>
 
 
@@ -43,14 +43,8 @@
 <body>
 <script>
 localStorage.setItem('roomTime-ID', "")
-localStorage.setItem('date-ID', "<%=d%>")
-
-    function getRooms(){
-  selectDate = new Date(document.getElementById("selectDate").value)
-  selectCapacity1 = document.getElementById("selectCapacity").value
-
-  localStorage.setItem('capacity-ID',selectCapacity)
-  }
+bookDate = localStorage.getItem('date-ID').value
+bookID = localStorage.getItem('room-ID').value
 
   function buttonSelecter() {
 
@@ -70,8 +64,7 @@ localStorage.setItem('date-ID', "<%=d%>")
             y = '';
 
         }
-        localStorage.setItem('roomTime-ID',y)
-        localStorage.setItem('pricePromo-ID',g)
+
       }
 
 </script>
@@ -97,7 +90,6 @@ localStorage.setItem('date-ID', "<%=d%>")
       <div style="margin-top:5%;">
         <div class='row justify-content-start'>
           <div class='col-2'>
-            <form action="/studentDash" method="post">
             <div class="form-group">
               <label for="selectDate">Date</label>
               <input
@@ -105,27 +97,12 @@ localStorage.setItem('date-ID', "<%=d%>")
               class="form-control"
               name="selectDate"
               id="selectDate"
-              min="<%=e%>"
-              max="2099-12-31"
-              value=<%= d %>
+              value= <%=d%>
+              readonly
               />
             </div>
           </div>
-            <div class='col-2'>
-              <div class="form-group">
-                <label for="selectCapacity">Capacity</label>
-                <input
-                type="string"
-                class="form-control"
-                name="selectCapacity"
-                placeholder="Number of people"
-                id="selectCapacity"
-                value=<%= c %>
-                />
-            </div>
-          </div>
           <div class='col-2' style="margin-top:2%">
-            <button class="dt-button" id='getAvailable' onclick='getRooms()' type="submit"><span>Show available rooms</span></button></form>
         </div>
       </div>
             <p>
@@ -140,46 +117,59 @@ localStorage.setItem('date-ID', "<%=d%>")
     <tbody>
     <script>
     </script>
+    <%
+    filterRoom = roomIDs1.filter(function(test){
+      return test.roomID == r;
+    });
+    filterBooked = booking1.filter(function(test){
+      return test.Date == d;
+    });
+    filterBookedSlot = filterBooked.filter(function(test){
+      return test.roomID == r;
+    });
+    array = []
+    for(b in filterBookedSlot){
+      array.push(filterBookedSlot[b]['timeslots'])
+}
+
+    %>
+    <%=filterBookedSlot%>
     <!--maybe style this nicely-->
-    Filtering rooms with a capacity of <b><%= c%></b> on  <b><%=d%></b>
+    Filtering rooms with a capacity of on  <b><%=d%></b>
 <%  txt = "";
 
-              let selectDate = new Date(d);
-              let selectCapacity = c
+              let selectDate = d
               time = "";
-              filterDate = booking1.filter(function(test){
+              filterRoom = roomIDs1.filter(function(test){
+                return test.roomID == r;
+              });
+              filterBooked = booking1.filter(function(test){
                 return test.Date == d;
               });
-
-              for(x in roomIDs1) {
-                start = new Date(roomIDs1[x]['launchstartdate']);
-                end = new Date(roomIDs1[x]['launchenddate']);
-                filterDateRm = filterDate.filter(function(test){
-                  return test.roomID == roomIDs1[x]['roomID'];
-                });
+              filterBookedSlot = filterBooked.filter(function(test){
+                return test.roomID == r;
+              });
 
 
-                if (start.getTime() <= selectDate.getTime() &&
-                selectDate.getTime() <= end.getTime() &&
-                roomIDs1[x]['roomCapacity'] >= selectCapacity) {%>
+
+              %>
                   <tr>
                     <th class="text-center align-middle">
-                      <%= roomIDs1[x]['roomID']%>
-                      </th>
-                  <th>
+                      <%= r%>
+                      </th>                  <th>
                     <%
                     array = []
-                    for(b in filterDateRm){
-                      array.push(filterDateRm[b]['Timeslot'])
+                    for(b in filterBookedSlot){
+                      array.push(filterBookedSlot[b]['Timeslot'])
                     }
-                    for(y in roomIDs1[x]['timeslots']) {
-                      if(array.includes(roomIDs1[x]['timeslots'][y].substring(4,15))){%>
-                      <button id="<%=roomIDs1[x]['roomID']+"\&"+roomIDs1[x]['timeslots'][y].substring(4,15)%>" value="<%=roomIDs1[x]['price']+"\&"+roomIDs1[x]['promotionalCode']%>" disabled onclick="buttonSelecter()" class="btn btn-secondary" ><%=roomIDs1[x]['timeslots'][y].substring(4,15)%></button>
+                    for(y in filterRoom[0]['timeslots']) {
+                      if(array.includes(filterRoom[0]['timeslots'][y].substring(4,15))){%>
+                      <button id="<%=filterRoom[0]['roomID']+"\&"+filterRoom[0]['timeslots'][y].substring(4,15)%>" value="<%=filterRoom[0]['price']+"\&"+filterRoom['promotionalCode']%>" disabled onclick="buttonSelecter()" class="btn btn-secondary" ><%=filterRoom[0]['timeslots'][y].substring(4,15)%></button>
                       <%} else {%>
-                        <button id="<%=roomIDs1[x]['roomID']+"\&"+roomIDs1[x]['timeslots'][y].substring(4,15)%>" value="<%=roomIDs1[x]['price']+"\&"+roomIDs1[x]['promotionalCode']%>" onclick="buttonSelecter()" class="button" ><%=roomIDs1[x]['timeslots'][y].substring(4,15)%></button>
+                        <button id="<%=filterRoom[0]['roomID']+"\&"+filterRoom[0]['timeslots'][y].substring(4,15)%>" value="<%=filterRoom[0]['price']+"\&"+filterRoom['promotionalCode']%>" onclick="buttonSelecter()" class="button" ><%=filterRoom[0]['timeslots'][y].substring(4,15)%></button>
                       <%}};%>
                       </th>
-                      <%}}%>
+
 </tbody>
 </table>
 </p>

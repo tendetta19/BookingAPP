@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="stylesheets/css/bootstrap.min.css">
 <link rel="stylesheet" href="stylesheets/css/style.css">
 
-<style> 
+<style>
   .button {
 background-color: pink;
 border: none;
@@ -27,42 +27,42 @@ border-radius: 16px;
   </style>
 
 
-<style> 
-  
+<style>
+
   /* Button used to open the contact form - fixed at the bottom of the page */
-  
+
   /* The popup form - hidden by default */
   .form-popup {
     position: inherit;
-    display: none; 
-     
-    bottom: 500;  
+    display: none;
+
+    bottom: 500;
   }
-  
+
   /* Add styles to the form container */
   .form-container {
     max-width: 300px;
-    padding: 10px; 
+    padding: 10px;
   }
-  
+
   /* Full-width input fields */
   .form-container input[type=text], .form-container input[type=password] {
     width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
-    border: none; 
+    border: none;
   }
-  
+
   /* When the inputs get focus, do something */
   .form-container input[type=text]:focus, .form-container input[type=password]:focus {
-  
+
     outline: none;
   }
-  
+
   /* Set a style for the submit/login button */
   .form-container .btn {
     background-color: #04AA6D;
-  
+
     padding: 16px 20px;
     border: none;
     cursor: pointer;
@@ -70,12 +70,12 @@ border-radius: 16px;
     margin-bottom:10px;
     opacity: 0.8;
   }
-  
+
   /* Add a red background color to the cancel button */
   .form-container .cancel {
     background-color: red;
   }
-  
+
   /* Add some hover effects to buttons */
   .form-container .btn:hover, .open-button:hover {
     opacity: 1;
@@ -100,11 +100,11 @@ border-radius: 16px;
   <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> <%= name%></a>
   <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
   </a>
-  <ul class="dropdown-menu"> 
+  <ul class="dropdown-menu">
     <li><a href="/logout"><i class="fa fa-sign-out "></i> Logout</a></li>
   </ul>
 </div>
- 
+
 
 </nav>
 
@@ -123,31 +123,37 @@ border-radius: 16px;
           <nav class="nav nav-pills nav-fill flex-column">
           <a class="nav-link" href="#">Dashboard</a>
           <a class="nav-link" href="/student">Book a Room</a>
-          <a class="nav-link active" href="/viewbookings">View my Bookings</a> 
-          <a class="nav-link disabled" href="#">Consult a lecturer</a> 
-          <a class="nav-link disabled" href="#">Timetable</a> 
+          <a class="nav-link active" href="/viewbookings">View my Bookings</a>
+          <a class="nav-link disabled" href="#">Consult a lecturer</a>
+          <a class="nav-link disabled" href="#">Timetable</a>
         </nav>
         </div>
       </div>
     <div class='col-10 border'>
       <div style="margin-top:5%;">
         <button class="dt-button" style="top:200; left:10"> <a href="Student(ListBookings).html" target="_self">View Rooms</a> </button>
-         
+
         <div class="form-popup" id="myForm">
 
           <button style="text-align:center;" type="button" class="btn cancel" onclick="closeForm()">X</button>
-         
-          <a href="/modifybooking">
-            <button class="dt-button"   type="button"><span>Modify Booking</span></button>
+
+            <form action="/viewbooking" method="post">
+
+              <input type="hidden" id="selectDate" name="selectDate" value="false">
+              <input type="hidden" id="selectRoomID" name="selectRoomID" value="false">
+              <input type="hidden" id="selectTimeslot" name="selectTimeslot" value="false">
+          <a href="/editbooking">
+            <button class="dt-button" onclick="getBook()"  type="submit"><span>Modify Booking</span></button>
           </a>
+        </form>
           <a href="/cancelbooking">
             <button class="dt-button"   type="button"><span>Cancel Booking</span></button>
           </a>
         </div>
   <p>
 
-  
-  
+
+
           <p>     <table id="example"style="width:100%" >
                 <thead>
                     <tr>
@@ -156,11 +162,11 @@ border-radius: 16px;
     <th scope="col">Date</th>
     <th scope="col">Timeslot</th>
     <th scope="col">Booked By</th>
-    <th scope="col">Payment Status</th> 
+    <th scope="col">Payment Status</th>
                     </tr>
                 </thead>
-            </table></p> 
-       
+            </table></p>
+
   </div>
 </div>
 </div>
@@ -168,13 +174,14 @@ border-radius: 16px;
 <!-- TABLE -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.1/css/dataTables.bootstrap5.min.css">
 <script>
-  
+
 function openForm() {
   document.getElementById("myForm").style.display = "block";
 }
 function closeForm() {
   document.getElementById("myForm").style.display = "none";
 }
+
 </script>
 <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
@@ -205,10 +212,11 @@ columns: [
       { data: 'Timeslot' },
       { data: 'BookedBy',
            visible: false, },
-      { data: 'PaymentStatus'}
+      { data: 'PaymentStatus',
+    visible: false}
   ]
 })
- 
+
 
       $('#example tbody').on('click', 'tr', function () {
                  var data = table.row(this).data();
@@ -219,33 +227,30 @@ columns: [
                      table.$('tr.selected').removeClass('selected');
                      $(this).addClass('selected');
                     document.getElementById("myForm").style.display = "block";
-            var obtainroomID = data.roomID
 
-            var obtainlaunchstartdate  = data.launchstartdate
-            var obtainlaunchenddate  = data.launchenddate
-            var obtainprice = data.price
-            var obtainpromotionalCode = data.promotionalCode
-            var obtainroomCapacity = data.roomCapacity
-            var obtaintimerange= data.timerange
-            localStorage.setItem('room-ID',obtainroomID)
-
-            localStorage.setItem('launchstartdate-ID',obtainlaunchstartdate)
-            localStorage.setItem('launchenddate-ID',obtainlaunchenddate)
-            localStorage.setItem('price-ID',obtainprice)
-            localStorage.setItem('promotionalCode-ID',obtainpromotionalCode)
-            localStorage.setItem('roomCapacity-ID',obtainroomCapacity)
-            localStorage.setItem('timerange-ID',obtaintimerange)
+    document.getElementById('selectDate').value = data.Date
+    document.getElementById('selectTimeslot').value = data.Timeslot
+    document.getElementById('selectRoomID').value = data.roomID
+                    var obtainroomID = data.roomID
+                    var obtainDate  = data.Date
+                    var obtainTimeslot  = data.Timeslot
+                    localStorage.setItem('room-ID',obtainroomID)
+                    localStorage.setItem('date-ID',obtainDate)
+                    localStorage.setItem('timeslot-ID',obtainTimeslot)
         }
 
-    }); 
+    });
         }
 
     );
 
-  
 
 
 
+
+</script>
+<script>
+console.log(localStorage.getItem('date-ID').value)
 </script>
 
 </body>
