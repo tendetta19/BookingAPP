@@ -30,7 +30,7 @@
   <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> <%= name%></a>
   <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
   </a>
-  <ul class="dropdown-menu"> 
+  <ul class="dropdown-menu">
     <li><a href="/logout"><i class="fa fa-sign-out "></i> Logout</a></li>
   </ul>
 </div>
@@ -41,11 +41,39 @@
 
 
 <body>
-<script>  function getRooms(){
+<script>
+localStorage.setItem('roomTime-ID', "")
+localStorage.setItem('date-ID', "<%=d%>")
+
+    function getRooms(){
   selectDate = new Date(document.getElementById("selectDate").value)
   selectCapacity1 = document.getElementById("selectCapacity").value
-  
+
+  localStorage.setItem('capacity-ID',selectCapacity)
   }
+
+  function buttonSelecter() {
+
+        var y = document.getElementById(event.target.id).id;
+        var x = document.getElementById(event.target.id);
+        g = " ";
+
+        let elems = document.getElementsByClassName("button");
+
+        if (x.style.backgroundColor == 'pink'){
+          g = document.getElementById(y).value
+          for(let i = 0; i < elems.length; i++){
+            elems[i].style.backgroundColor = 'pink'}
+          x.style.backgroundColor = 'red';
+        } else {
+            x.style.backgroundColor = 'pink';
+            y = '';
+
+        }
+        localStorage.setItem('roomTime-ID',y)
+        localStorage.setItem('pricePromo-ID',g)
+      }
+
 </script>
   <script src="stylesheets/js/jquery-3.3.1.min.js"></script>
   <script src="stylesheets/js/popper.min.js"></script>
@@ -77,7 +105,7 @@
               class="form-control"
               name="selectDate"
               id="selectDate"
-              min="2022-01-01"
+              min="<%=e%>"
               max="2099-12-31"
               value=<%= d %>
               />
@@ -103,45 +131,59 @@
             <p>
               <div class='col'>
                 <table id='tableTry2' class="table table-bordered" style="width:100%">
-                <thead>
+                <thead class="thead-dark">
       <tr>
-        <th width=100>roomID</th>
-        <th width=700>Slots</th>
+        <th style="width:100px" class="text-center">roomID</th>
+        <th style="width:700px" class="text-center">Slots</th>
       </tr>
     </thead>
     <tbody>
     <script>
     </script>
     <!--maybe style this nicely-->
-    Fitering rooms with a capacity of <b><%= c%></b> on  <b><%=d%></b>
+    Filtering rooms with a capacity of <b><%= c%></b> on  <b><%=d%></b>
 <%  txt = "";
 
               let selectDate = new Date(d);
               let selectCapacity = c
               time = "";
-
+              filterDate = booking1.filter(function(test){
+                return test.Date == d;
+              });
 
               for(x in roomIDs1) {
                 start = new Date(roomIDs1[x]['launchstartdate']);
                 end = new Date(roomIDs1[x]['launchenddate']);
+                filterDateRm = filterDate.filter(function(test){
+                  return test.roomID == roomIDs1[x]['roomID'];
+                });
+
 
                 if (start.getTime() <= selectDate.getTime() &&
                 selectDate.getTime() <= end.getTime() &&
                 roomIDs1[x]['roomCapacity'] >= selectCapacity) {%>
                   <tr>
-                    <th>
+                    <th class="text-center align-middle">
                       <%= roomIDs1[x]['roomID']%>
                       </th>
                   <th>
-                    <% for(y in roomIDs1[x]['timeslots']) {%>
-                      <button id="<%=roomIDs1[x]['roomID']+"\*"+roomIDs1[x]['timeslots'][y].substring(4,15)%>" onclick="myFunction()" class="button" ><%=roomIDs1[x]['timeslots'][y].substring(4,15)%></button>
-                      <%;}%>
+                    <%
+                    array = []
+                    for(b in filterDateRm){
+                      array.push(filterDateRm[b]['Timeslot'])
+                    }
+                    for(y in roomIDs1[x]['timeslots']) {
+                      if(array.includes(roomIDs1[x]['timeslots'][y].substring(4,15))){%>
+                      <button id="<%=roomIDs1[x]['roomID']+"\&"+roomIDs1[x]['timeslots'][y].substring(4,15)%>" value="<%=roomIDs1[x]['price']+"\&"+roomIDs1[x]['promotionalCode']%>" disabled onclick="buttonSelecter()" class="btn btn-secondary" ><%=roomIDs1[x]['timeslots'][y].substring(4,15)%></button>
+                      <%} else {%>
+                        <button id="<%=roomIDs1[x]['roomID']+"\&"+roomIDs1[x]['timeslots'][y].substring(4,15)%>" value="<%=roomIDs1[x]['price']+"\&"+roomIDs1[x]['promotionalCode']%>" onclick="buttonSelecter()" class="button" ><%=roomIDs1[x]['timeslots'][y].substring(4,15)%></button>
+                      <%}};%>
                       </th>
-                      <%} else{txt += 'NIL, '}}%>
+                      <%}}%>
 </tbody>
 </table>
 </p>
-<a href="/payment"><button class="dt-button" id='getBookingDeets'  type="button"><span>Next</span></button></a>
+<a href="#"><button class="dt-button" id='getBookingDeets' onclick="getDeets()"  type="button"><span>Next</span></button></a>
           </div>
           </div>
         </div>
@@ -154,16 +196,14 @@
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.1/js/dataTables.bootstrap5.min.js"></script>
 <script>
-function getDate() {
-  currentDate = document.getElementById('selectDate')
-}
-$(function() {
-   $("#tableTry").dataTable({
-       "iDisplayLength": 1,
-       "aLengthMenu": [[10, 25, 50, 100,  -1], [10, 25, 50, 100, "All"]]
-      });
-  });
 
+function getDeets(){
+  if (localStorage.getItem('roomTime-ID') == ""){
+    alert("Please select a timeslot!")
+  } else {
+    window.location.href = '/payment'
+  }
+}
 
 </script>
 <style>

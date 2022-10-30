@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="stylesheets/fonts/icomoon/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="stylesheets/css/owl.carousel.min.css">
+<link rel="stylesheet" href="stylesheets/css/bootstrap.min.css">
+<link rel="stylesheet" href="stylesheets/css/style.css">
+
+<link rel="stylesheet" type="text/css" href="/DataTables/datatables.css">
+
+<script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
+
+<link rel="icon" href="https://64.media.tumblr.com/bafc236f8913370429d52ee13d363ff9/tumblr_nkm7541saS1r6wywso1_500.gifv">
+<title>Payment</title>
+</head>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
+  <div class="navbar-nav">
+  <a href="/studentDash" class="nav-link nav-item navbar-brand" id="test"><i class="fa fa-fw fa-home"></i> Home</a>
+</div>
+
+
+<div class="btn-group open">
+  <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i></a>
+  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+  </a>
+  <ul class="dropdown-menu">
+    <li><a href="/settings"><i class="fa fa-cog "></i> Settings</a></li>
+    <li><a href="/logout"><i class="fa fa-sign-out "></i> Logout</a></li>
+  </ul>
+</div>
+
+</nav>
+
+</nav>
+<style>
+span.price {
+  float: right;
+  color: grey;
+}
+</style>
+<body>
+  <script>
+  bookRmTime = localStorage.getItem('roomTime-ID')
+  bookDate = localStorage.getItem('date-ID')
+  bookPricePromo = localStorage.getItem('pricePromo-ID')
+
+  bookID = bookRmTime.substr(0, bookRmTime.indexOf('&'))
+  bookTime = bookRmTime.substr(bookRmTime.indexOf('&')+1)
+  bookTimeReadable = (bookTime.slice(0, 5) + " " + bookTime.slice(5, 6) + " " + bookTime.slice(6))
+  bookPrice = bookPricePromo.substr(0, bookPricePromo.indexOf('&'))
+  bookPromo = bookPricePromo.substr(bookPricePromo.indexOf('&')+1)
+  total = bookPrice
+
+  function checkPromo(){
+    if (document.getElementById('promo').value != bookPromo){
+      alert("Promo Code does not exist!")
+    } else {
+      discount = bookPrice / 2
+      document.getElementById("getDiscount").innerHTML = "-$" + discount.toFixed(2)
+      document.getElementById('Discount1').style.display = "flex"
+      total = bookPrice - discount
+      document.getElementById('getTotal').innerHTML = "$" + total.toFixed(2)
+    }
+  }
+
+  function hideA(x) {
+     if (x.checked) {
+       document.getElementById("A").style.display = "none";
+       document.getElementById("B").style.display = "initial";
+     }
+   }
+
+   function hideB(x) {
+     if (x.checked) {
+       document.getElementById("B").style.display = "none";
+       document.getElementById("A").style.display = "initial";
+     }
+   }
+
+   function validateForm() {
+
+   	  var name = document.getElementById("inputName").value;
+
+      if (name == null || name.trim() == "") {
+        document.getElementById("nameError").innerHTML = "Name must be filled up";
+        return false;
+      }
+      if (/^[A-Z]+$/.test(name) == false) {
+        document.getElementById("nameError").innerHTML = "Input does not match"
+        return false;
+      }
+      else {
+        document.getElementById("nameError").innerHTML = "";
+      }
+
+
+      var card = document.getElementById("inputCNumber").value;
+
+      if (card == null || card.trim() == "") {
+        document.getElementById("cardError").innerHTML = "Card number must be filled up";
+        return false;
+      }
+      if (/^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$/.test(card) == false) {
+        document.getElementById("cardError").innerHTML = "Input does not match"
+        return false;
+      }
+      else {
+        document.getElementById("cardError").innerHTML = "";
+      }
+
+
+      var date1 = document.getElementById("inputDate").value;
+
+      if (date1 == null || date1.trim() == "") {
+        document.getElementById("monthError").innerHTML = "Expiry month must be filled up";
+        return false;
+      }
+      if (/^[0-1][0-9]$/.test(date1) == false) {
+        document.getElementById("monthError").innerHTML = "Input does not match"
+        return false;
+      }
+      else {
+        document.getElementById("monthError").innerHTML = "";
+      }
+
+
+      var date2 = document.getElementById("expyear").value;
+
+      if (date2 == null || date2.trim() == "") {
+        document.getElementById("yearError").innerHTML = "Expiry year must be filled up";
+        return false;
+      }
+      if (/^[0-9]{2}$/.test(date2) == false) {
+        document.getElementById("yearError").innerHTML = "Input does not match"
+        return false;
+      }
+      else {
+        document.getElementById("yearError").innerHTML = "";
+      }
+
+
+      var cvv1 = document.getElementById("inputCVV").value;
+
+      if (cvv1 == null || cvv1.trim() == "") {
+        document.getElementById("cvvError").innerHTML = "CVV must be filled up";
+        return false;
+      }
+      if (/^[0-9]{3}$/.test(cvv1) == false) {
+        document.getElementById("cvvError").innerHTML = "Input does not match"
+        return false;
+      }
+      else {
+        document.getElementById("cvvError").innerHTML = "";
+      }
+
+   }
+  </script>
+  <script src="stylesheets/js/jquery-3.3.1.min.js"></script>
+  <script src="stylesheets/js/popper.min.js"></script>
+  <script src="stylesheets/js/bootstrap.min.js"></script>
+  <script src="stylesheets/js/main.js"></script>
+
+<div class='container-fluid'>
+<div class='row vh-100'>
+  <div class='col-2 h-100 bg-light'>
+    <div style="margin-top:25%;">
+      <nav class="nav nav-pills nav-fill flex-column">
+      <a class="nav-link" href="/studentDash">Dashboard</a>
+      <a class="nav-link active" href="#">Room Booking</a>
+      <a class="nav-link disabled" href="#">Consult a Lecturer</a>
+      <a class="nav-link disabled" href="#">Timetable</a>
+    </nav>
+    </div>
+  </div>
+    <div class ='col-3 border-left'>
+      <div class='row' style="margin-left:5%;">
+      <div class ='col border border-secondary rounded' style="margin-top:25%;background-color:#DFDFDF;">
+        <h4 class='pt-3'>Booking Summary</h4><hr>
+        <div class='row'>
+<div class='col pt-2'>
+  <p>Date</p> <p style="color:black">
+  </div>
+  <div class='col pt-2'>
+    <p id="getDate" class="text-right"></p>
+  </div>
+</div>
+<div class='row'>
+<div class='col pt-2'>
+  <p>RoomID</p> <p style="color:black">
+  </div>
+  <div class='col pt-2'>
+    <p id="getRoomID" class="text-right"></p>
+  </div>
+</div>
+<div class='row'>
+<div class='col pt-2'>
+  <p>Timeslot</p> <p style="color:black">
+  </div>
+  <div class='col pt-2'>
+    <p id ="getTime" class="text-right"></p>
+  </div>
+</div>
+  <hr>
+        <div class='row'>
+          <div class='col-9'>
+        <input class="form-control" type="text" id="promo" placeholder="Promocode">
+      </div>
+      <div class='col'>
+        <button type="button" onclick="checkPromo()" class="btn btn-link">Apply</button>
+      </div>
+    </div>
+        <hr>
+        <div class='row'>
+        <div class='col pt-2'>
+          <p>Subtotal</p>
+          </div>
+          <div class='col pt-2'>
+            <p id ="getBookPrice" class="text-right" style="color:#999999;"></p>
+          </div>
+        </div>
+        <div class='row' id="Discount1" style="display:none">
+        <div class='col pt-2'>
+          <p>Discount</p>
+          </div>
+          <div class='col pt-2'>
+            <p id ="getDiscount" class="text-right" style="color:#999999;"></p>
+          </div>
+        </div>
+        <div class='row'>
+        <div class='col pt-2'>
+          <p class="font-weight-bold" style="font-size:20px;">Total</p>
+          </div>
+          <div class='col pt-2'>
+            <p id ="getTotal" class="text-right font-weight-bold" style="font-size:20px;"></p>
+          </div>
+        </div>
+
+
+</div>
+    </div>
+  </div>
+    <div class='col-5'>
+      <div class='row' style="margin:5%;">
+      <div class='col border border-secondary rounded' style="margin-top:10%;background-color:#DFDFDF;">
+                <h4 class='pt-3'>Payment</h4><hr>
+                <label for="fname">Accepted Cards</label>
+
+                <div class="icon-container">
+                  <i class="fa fa-cc-visa" style="color:navy;"></i>
+                  <i class="fa fa-cc-amex" style="color:blue;"></i>
+                  <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                  <i class="fa fa-cc-discover" style="color:orange;"></i>
+                </div>
+<form class="needs-validation" novalidate>
+ <div class="form-group">
+   <label for="inputAddress">Card Number</label>
+   <input type="text" class="form-control" id="inputCNumber" placeholder="0000-0000-0000-0000" required>
+   <div class="invalid-feedback">Please enter a valid card number</div>
+ </div>
+ <div class="form-row">
+   <div class="form-group col-5">
+     <label for="inputCity">Cardholder Name</label>
+     <input type="text" class="form-control" id="inputName" placeholder="justingpanglover123" required>
+        <div class="invalid-feedback">Please enter a valid cardholder name</div>
+   </div>
+   <div class="form-group col">
+     <label for="inputState">Expiration Date</label>
+     <input type="text" class="form-control" id="inputDate" placeholder="MM / YY" required>
+        <div class="invalid-feedback">Please enter a valid expiry date</div>
+   </div>
+   <div class="form-group col">
+     <label for="inputState">CVV</label>
+      <input type="text" class="form-control" id="inputCVV" placeholder="3 digits" required>
+         <div class="invalid-feedback">Please enter a valid CVV</div>
+   </div>
+
+ </div>
+ <div class='form-row'>
+   <div class='form-group col'>
+     <button type="submit" class="btn btn-primary btn-block">Pay</button>
+   </div>
+ </div>
+</form>
+<form action="/payment" method="post">
+  <input type="text" class="form-control-plaintext" name="Date" readonly id="Date" value=bookDate>
+  <input type="text" class="form-control-plaintext" name="roomID" readonly id="roomID" value=bookID>
+  <input type="text" class="form-control-plaintext" name="Timeslot" readonly id="Timeslot" value=bookTime>
+       <button type="submit" class="btn btn-primary btn-block">Pay</button>
+</form>
+
+
+
+          </div>
+        </div>
+          </div>
+          <div class='col-2 h-100 border-left'>
+          </div>
+        </div>
+</div>
+
+<!-- TABLE -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.1/css/dataTables.bootstrap5.min.css">
+
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.1/js/dataTables.bootstrap5.min.js"></script>
+<script>
+  document.getElementById("getDate").innerHTML = bookDate
+  document.getElementById("getTime").innerHTML = bookTimeReadable
+  document.getElementById("getRoomID").innerHTML = bookID
+  document.getElementById("getBookPrice").innerHTML = "$"+bookPrice+".00"
+  document.getElementById("getTotal").innerHTML = "$"+total+".00"
+  document.getElementById("Date").value = bookDate
+  document.getElementById("Timeslot").value = bookTime
+  document.getElementById("roomID").value = bookID
+</script>
+
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
+
+</body>
