@@ -117,7 +117,7 @@ app.get('/forgetpassword',  (req, res) => {
 
 
 })
- 
+
 app.get('/register',  (req, res) => {
 
 
@@ -143,23 +143,47 @@ app.get('/staffDash',ensureAuthenticated,   (req, res) => {
 
 
 }})
-app.get('/studentDash',   (req, res) => {
-const todaysdate  = new Date().toISOString().slice(0, 10) 
-      rooms.find({}, {roomID:1, launchstartdate:1, launchenddate:1, roomCapacity:1, timeslots:1, _id:0}, function(err, roomIDs){
+app.get('/studentDash',ensureAuthenticated,   (req, res) => {
+
+  role=req.user.role
+  if(role === 'admin'){
+      res.redirect('/adminDash')
+  }if(role === 'staff'){
+      res.redirect('/staffDash')
+  }
+  if(role === 'student'){
+const todaysdate  = new Date().toISOString().slice(0, 10)
+console.log(todaysdate)
+      rooms.find({}, {roomID:1, launchstartdate:1, launchenddate:1, roomCapacity:1, timeslots:1, price:1, promotionalCode:1, _id:0}, function(err, roomIDs){
           roomIDs1 = roomIDs
           bobt = roomIDs.length
+      bookings.find({}, {roomID:1, Timeslot:1, Date:1, _id:0, }, function(err, bookingss){
+        booking1 = bookingss
 
 
     res.render("./user/student/studentDash", {
+      name:req.user.fullname,
         c:1,
         d:todaysdate,
-        name:req.user.fullname,
+        e:todaysdate,
 
 
 
-    }) 
 
+    })
 })
+})
+
+}})
+app.get('/payment',  (req, res) => {
+
+    role=req.user.role
+
+    res.render("./user/student/payment", {
+name:req.user.fullname
+
+    })
+
 
 })
 app.get('/adminDash',ensureAuthenticated,   (req, res) => {
@@ -179,7 +203,7 @@ if(role === 'admin'){
 
 
 }})
-app.get('/viewbooking', (req, res) => { 
+app.get('/viewbooking', (req, res) => {
     res.render('./user/student/viewbooking', {
         name:req.user.fullname
 
@@ -190,10 +214,10 @@ app.get('/viewbooking', (req, res) => {
 })
 app.get('/bookingdata',ensureAuthenticated,  (req, res) => {
 
-    const name= req.user.fullname 
+    const name= req.user.fullname
   //not protected for now
     bookings.find({BookedBy: name}, function(err, booking) {
-        Bookingslist = booking 
+        Bookingslist = booking
 
         res.json({
             "data": Bookingslist
@@ -209,8 +233,8 @@ app.get('/bookingdata',ensureAuthenticated,  (req, res) => {
 
 })
 app.get('/createroom',ensureAuthenticated,   (req, res) => {
-    
-const todaysdate  = new Date().toISOString().slice(0, 10) 
+
+const todaysdate  = new Date().toISOString().slice(0, 10)
     role=req.user.role
     if(role === 'admin'){
         res.redirect('/adminDash')
@@ -230,7 +254,7 @@ const todaysdate  = new Date().toISOString().slice(0, 10)
 }})
 app.get('/editroom',ensureAuthenticated,   (req, res) => {
 
-    const todaysdate  = new Date().toISOString().slice(0, 10) 
+    const todaysdate  = new Date().toISOString().slice(0, 10)
     role=req.user.role
     if(role === 'admin'){
         res.redirect('/adminDash')
@@ -240,14 +264,14 @@ app.get('/editroom',ensureAuthenticated,   (req, res) => {
     if(role === 'staff'){
     res.render("./user/staff/editroom", {
         name:req.user.fullname,
-        
-        d:todaysdate 
+
+        d:todaysdate
 
 
     })
 
 
-}}) 
+}})
 app.get('/createaccount',ensureAuthenticated,  (req, res) => {
 
     role=req.user.role
@@ -264,7 +288,7 @@ app.get('/createaccount',ensureAuthenticated,  (req, res) => {
     })
 
 
-}}) 
+}})
 app.get('/editaccount',ensureAuthenticated,  (req, res) => {
     role=req.user.role
     if(role === 'staff'){
@@ -347,7 +371,7 @@ app.get('/userData',ensureAuthenticated,  (req, res) => {
 app.get('/staff',ensureAuthenticated,  (req, res) => { role=req.user.role
     if(role === 'admin'){
         res.redirect('/adminDash')
-    }if(role === 'student'){ 
+    }if(role === 'student'){
         res.redirect('/studentDash')
     }
     if(role === 'staff'){
@@ -465,24 +489,70 @@ app.post('/forgetpassword',  async (req, res) => {
 
 )}})
 const selectDate= ''
-
+const todaysdate  = new Date().toISOString().slice(0, 10)
 const selectCapacity= ''
 app.post('/studentDash',  async (req, res) => {
-    const {selectDate, selectCapacity} = req.body   
-    
+    const {selectDate, selectCapacity} = req.body
+
     res.render("./user/student/studentDash", {
         d:selectDate,
         c:selectCapacity,
-        name:req.user.fullname,
-        
+        e:todaysdate,
+        name:req.user.fullname
+
 
 
 
     })})
-    
+    app.post('/payment',  async (req, res) => {
+        const {roomID, Date, Timeslot} = req.body
+        const name = req.user.fullname
+        const role = req.user.role
+        const PaymentStatus = ""
+
+        let errors = []
+
+    	const BookedBy = name
+
+        if(errors.length > 0){
+            res.render('./user/student/payment', {
+                errors,
+                name:req.user.fullname
+
+            })
+        }  else  {
+                        const newBooking = new bookings({
+                            roomID,
+                            Date,
+                            Timeslot,
+                            BookedBy,
+                            role,
+                            PaymentStatus
+                        })
+                        newBooking
+                            .save()
+                            .then(user => {
+                                req.flash(
+                                'success_msg',
+                                'Room Booked!'
+                                );
+                                res.redirect('/studentDash');
+                            })
+                            .catch(err => console.log(err));
+
+                    }
+
+                }
 
 
- 
+
+
+
+
+    )
+
+
+
 
 app.post('/register',  async (req, res) => {
     const hashedpassword = await bcrypt.hash(req.body.password, 10)
@@ -793,7 +863,7 @@ app.post('/createroom',  async (req, res) => {
    // console.log(name)
     const {unit,level,block, price, roomCapacity, promotionalCode, launchStatus,launchstartdate,launchenddate,openinghour,closinghour} = req.body
     const roomID= 'BLK '+block+' '+'L-'+level+'-'+ unit.toUpperCase()
- 
+
 
     const timeslot = ''
     const name = req.user.fullname
