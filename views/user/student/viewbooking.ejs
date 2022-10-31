@@ -131,25 +131,40 @@ border-radius: 16px;
       </div>
     <div class='col-10 border'>
       <div style="margin-top:5%;">
-        <button class="dt-button" style="top:200; left:10"> <a href="Student(ListBookings).html" target="_self">View Rooms</a> </button>
-
-        <div class="form-popup" id="myForm">
-
-          <button style="text-align:center;" type="button" class="btn cancel" onclick="closeForm()">X</button>
-
             <form action="/viewbooking" method="post">
+        <button class="dt-button" style="top:200; left:10"> <a href="/viewbooking" target="_self">Book a Room</a> </button>
+        <button class="dt-button disabled" disabled = "disabled" id="myForm" type="submit" style="top:200; left:10">Modify Booking</button>
+        <button class="dt-button disabled" disabled = "disabled" id="myForm1" type="button" data-toggle="modal" data-target="#exampleModalCenter" style="top:200; left:10">Cancel Booking</button>
 
               <input type="hidden" id="selectDate" name="selectDate" value="false">
               <input type="hidden" id="selectRoomID" name="selectRoomID" value="false">
               <input type="hidden" id="selectTimeslot" name="selectTimeslot" value="false">
-          <a href="#">
-            <button class="dt-button" type="submit"><span>Modify Booking</span></button>
-          </a>
-        </form>
-          <a href="/cancelbooking">
-            <button class="dt-button"   type="button"><span>Cancel Booking</span></button>
-          </a>
+              <input type="hidden" id="cancelBooking" name="cancelBooking" value="false">
+
         </div>
+        <!-- Modal -->
+        <div>
+                      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h6 class="modal-title" id="exampleModalLongTitle">Cancel Booking</h6>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body text-center">
+                              Are you sure you want to cancel this booking?
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <input type="submit" onclick="myFunction()" class="btn btn-danger">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+        </div>
+      </form>
   <p>
 
 
@@ -174,6 +189,11 @@ border-radius: 16px;
 <!-- TABLE -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.1/css/dataTables.bootstrap5.min.css">
 <script>
+function myFunction() {
+  document.getElementById('cancelBooking').value='true'
+}
+
+
 
 function openForm() {
   document.getElementById("myForm").style.display = "block";
@@ -223,10 +243,17 @@ columns: [
 
                  if ($(this).hasClass('selected')) {
                      $(this).removeClass('selected');
+                     document.getElementById("myForm").classList.add('disabled');
+                     document.getElementById("myForm").setAttribute("disabled", "disabled")
+                     document.getElementById("myForm1").classList.add('disabled');
+                     document.getElementById("myForm1").setAttribute("disabled", "disabled")
                  } else {
                      table.$('tr.selected').removeClass('selected');
                      $(this).addClass('selected');
-                    document.getElementById("myForm").style.display = "block";
+                    document.getElementById("myForm").classList.remove('disabled');
+                    document.getElementById("myForm").removeAttribute("disabled")
+                    document.getElementById("myForm1").classList.remove('disabled');
+                    document.getElementById("myForm1").removeAttribute("disabled")
 
     document.getElementById('selectDate').value = data.Date
     document.getElementById('selectTimeslot').value = data.Timeslot

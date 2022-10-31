@@ -551,15 +551,15 @@ app.post('/studentDash',  async (req, res) => {
 
     )
     app.post('/viewbooking',  async (req, res) => {
-        const {selectDate, selectRoomID, selectTimeslot} = req.body
-        console.log(selectDate, selectRoomID, selectTimeslot)
+        const {selectDate, selectRoomID, selectTimeslot, cancelBooking} = req.body
+
         rooms.find({}, {roomID:1, roomCapacity:1, timeslots:1, price:1, promotionalCode:1, _id:0}, function(err, roomIDs){
             roomIDs1 = roomIDs
             bobt = roomIDs.length
         bookings.find({}, {roomID:1, Timeslot:1, Date:1, _id:0, }, function(err, bookingss){
           booking1 = bookingss
 
-
+          if (cancelBooking === "false"){
 
         res.render("./user/student/editbooking", {
             d:selectDate,
@@ -567,13 +567,27 @@ app.post('/studentDash',  async (req, res) => {
             t:selectTimeslot,
             name:req.user.fullname,
 
-})})
+})} else{
+  bookings.findOneAndDelete({roomID: selectRoomID, Date: selectDate, Timeslot: selectTimeslot})
+
+  .then(user => {
+      req.flash(
+      'success_msg',
+      'Booking cancelled!'
+      );
+      res.redirect('/viewbooking');
+
+})}
+
+
+})
 
 
 
         })})
         app.post('/editbooking',  async (req, res) => {
             const {selectDate, selectRoomID, selectTimeslot, newTimeslot, editBooking} = req.body
+            console.log(selectDate, selectRoomID, selectTimeslot, newTimeslot, editBooking)
             let errors = []
 
             if(errors.length > 0){
@@ -585,7 +599,7 @@ app.post('/studentDash',  async (req, res) => {
             } else{
               if(editBooking==='true'){
                 bookings.findOneAndUpdate({roomID: selectRoomID, Date: selectDate, Timeslot: selectTimeslot},
-                  {roomID: selectroomID, Date: selectDate, Timeslot: newTimeSlot}
+                  {roomID: selectRoomID, Date: selectDate, Timeslot: newTimeslot}
 
                 )
 

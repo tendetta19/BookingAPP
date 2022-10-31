@@ -58,7 +58,9 @@ newTime = ""
         if (x.style.backgroundColor == 'pink'){
           g = document.getElementById(y).value
           document.getElementById("newTime").innerHTML = "Change your timeslot from <strong><%=t%></strong> to "+"<strong>"+newTime+"</strong>";
-          document.getElementById("selectTimeslot").value = newTime
+          document.getElementById("newTimeslot").value = newTime
+          document.getElementById("editBooking").value = "true"
+
           for(let i = 0; i < elems.length; i++){
             elems[i].style.backgroundColor = 'pink'}
           x.style.backgroundColor = 'red';
@@ -66,6 +68,8 @@ newTime = ""
             x.style.backgroundColor = 'pink';
             y = '';
             document.getElementById("newTime").innerHTML = ""
+            document.getElementById("newTimeslot").value = ""
+            document.getElementById("editBooking").value = "false"
         }
         localStorage.setItem('roomTime-ID',y)
       }
@@ -160,11 +164,11 @@ newTime = ""
 </table>
 <p id="newTime"></p>
 <form action="/editbooking" method="post">
-<input type="hidden" id="selectDate" name="selectDate" value="false">
-<input type="hidden" id="selectRoomID" name="selectRoomID" value="false">
-<input type="hidden" id="selectTimeslot" name="selectTimeslot" value="false">
-<input type="hidden" id="newTimeslot" name="newTimeslot" value="false">
-<input type="hidden" id="editBooking" name="editBooking" value="true">
+<input type="text" id="selectDate" name="selectDate" value=<%=d%>>
+<input type="text" id="selectRoomID" name="selectRoomID" value=<%=r%>>
+<input type="text" id="selectTimeslot" name="selectTimeslot" value=<%=t%>>
+<input type="text" id="newTimeslot" name="newTimeslot">
+<input type="text" id="editBooking" name="editBooking">
 <a href="#"><button class="dt-button" onclick="getBook()"  type="submit"><span>Modify Booking</span></button></a>
 </form>
           </div>
@@ -178,14 +182,11 @@ newTime = ""
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.1/js/dataTables.bootstrap5.min.js"></script>
 <script>
-
 function getBook(){
   if (document.getElementById("newTime").innerHTML == ""){
     alert("Please select a timeslot!")
   } else {
-    document.getElementById("selectDate").value = <%=d%>
-    document.getElementById("selectRoomID").value = <%=r%>
-    document.getElementById("selectTimeslot").value = <%=t%>
+
   }
 }
 
