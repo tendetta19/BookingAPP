@@ -554,7 +554,7 @@ app.post('/bookaroom',  async (req, res) => {
                                 'success_msg',
                                 'Room Booked!'
                                 );
-                                res.redirect('/viewbookings');
+                                res.redirect('/viewbooking');
                             })
                             .catch(err => console.log(err));
 
