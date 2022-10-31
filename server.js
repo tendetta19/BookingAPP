@@ -145,6 +145,24 @@ app.get('/staffDash',ensureAuthenticated,   (req, res) => {
 }})
 app.get('/studentDash',ensureAuthenticated,   (req, res) => {
 
+    role=req.user.role
+    if(role === 'admin'){
+        res.redirect('/adminDash')
+    }if(role === 'staff'){
+        res.redirect('/staffDash')
+    }
+    if(role === 'student'){
+
+    res.render("./user/student/studentDash", {
+        name:req.user.fullname
+
+
+    })
+
+
+}})
+app.get('/bookaroom',ensureAuthenticated,   (req, res) => {
+
   role=req.user.role
   if(role === 'admin'){
       res.redirect('/adminDash')
@@ -161,7 +179,7 @@ console.log(todaysdate)
         booking1 = bookingss
 
 
-    res.render("./user/student/studentDash", {
+    res.render("./user/student/bookaroom", {
       name:req.user.fullname,
         c:1,
         d:todaysdate,
@@ -491,10 +509,10 @@ app.post('/forgetpassword',  async (req, res) => {
 const selectDate= ''
 const todaysdate  = new Date().toISOString().slice(0, 10)
 const selectCapacity= ''
-app.post('/studentDash',  async (req, res) => {
+app.post('/bookaroom',  async (req, res) => {
     const {selectDate, selectCapacity} = req.body
 
-    res.render("./user/student/studentDash", {
+    res.render("./user/student/bookaroom", {
         d:selectDate,
         c:selectCapacity,
         e:todaysdate,
@@ -536,7 +554,7 @@ app.post('/studentDash',  async (req, res) => {
                                 'success_msg',
                                 'Room Booked!'
                                 );
-                                res.redirect('/studentDash');
+                                res.redirect('/viewbookings');
                             })
                             .catch(err => console.log(err));
 

@@ -1,30 +1,28 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="stylesheets/fonts/icomoon/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <link rel="stylesheet" href="stylesheets/css/owl.carousel.min.css">
+
+<!-- Bootastrap CSS -->
 <link rel="stylesheet" href="stylesheets/css/bootstrap.min.css">
+
+<!-- Style -->
 <link rel="stylesheet" href="stylesheets/css/style.css">
-
-
-<link rel="stylesheet" type="text/css" href="/DataTables/datatables.css">
-
-<script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
-
 <link rel="icon" href="https://64.media.tumblr.com/bafc236f8913370429d52ee13d363ff9/tumblr_nkm7541saS1r6wywso1_500.gifv">
-<title>Room Booking</title>
+<title>Create a room</title>
 </head>
-
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
   <div class="navbar-nav">
-  <a href="/viewbooking" class="nav-link nav-item navbar-brand" id="test"><i class="fa fa-fw fa-home"></i> Home</a>
-</div>
 
+    <a href="/staffDash" class="nav-link nav-item navbar-brand active" id="home"><i class="fa fa-fw fa-home"></i> Home</a>
+
+  </div>
 
 <div class="btn-group open">
   <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> <%= name%></a>
@@ -36,188 +34,81 @@
 </div>
 
 </nav>
+<body onload="startTime()">
+  <div class='container-fluid'>
+  <div class='row vh-100'>
+    <div class='col-2 h-100 bg-light'>
+      <div style="margin-top:25%;">
+        <nav class="nav nav-pills nav-fill flex-column">
+        <a class="nav-link active" href="#">Dashboard</a>
+        <a class="nav-link" href="/viewbooking">Room Booking System</a>
+        <a class="nav-link disabled" href="#">Consult a lecturer</a>
+        <a class="nav-link disabled" href="#">Timetable</a>
+      </nav>
+      </div>
+    </div>
 
-</nav>
-
-
-<body>
-<script>
-localStorage.setItem('roomTime-ID', "")
-localStorage.setItem('date-ID', "<%=d%>")
-
-    function getRooms(){
-  selectDate = new Date(document.getElementById("selectDate").value)
-  selectCapacity1 = document.getElementById("selectCapacity").value
-
-  localStorage.setItem('capacity-ID',selectCapacity)
-  }
-
-  function buttonSelecter() {
-
-        var y = document.getElementById(event.target.id).id;
-        var x = document.getElementById(event.target.id);
-        g = " ";
-
-        let elems = document.getElementsByClassName("button");
-
-        if (x.style.backgroundColor == 'pink'){
-          g = document.getElementById(y).value
-          for(let i = 0; i < elems.length; i++){
-            elems[i].style.backgroundColor = 'pink'}
-          x.style.backgroundColor = 'red';
-        } else {
-            x.style.backgroundColor = 'pink';
-            y = '';
-
-        }
-        localStorage.setItem('roomTime-ID',y)
-        localStorage.setItem('pricePromo-ID',g)
-      }
-
-</script>
-  <script src="stylesheets/js/jquery-3.3.1.min.js"></script>
-  <script src="stylesheets/js/popper.min.js"></script>
-  <script src="stylesheets/js/bootstrap.min.js"></script>
-  <script src="stylesheets/js/main.js"></script>
-
-<div class='container-fluid'>
-<div class='row vh-100'>
-  <div class='col-2 h-100 bg-light'>
-    <div style="margin-top:25%;">
-      <nav class="nav nav-pills nav-fill flex-column">
-      <a class="nav-link" href="/studentDash">Dashboard</a>
-      <a class="nav-link active" href="#">Room Booking</a>
-      <a class="nav-link disabled" href="#">Consult a Lecturer</a>
-      <a class="nav-link disabled" href="#">Timetable</a>
-    </nav>
+      <div class='col-10 border'>
+        <div style="margin-top:5%;">
+          Welcome, <%= name%>! <br>
+<div id="txt"></div><br>
+          <div class='row'>
+            <div class='col'>
+              <div class="card-deck">
+                <div class="card">
+                  <div class="card-body text-center">
+                    <i class="fa fa-book text-primary" style="font-size: 90px"></i>
+                  </div>
+                    <div class="card-footer">
+                      <h5 class="card-title text-center text-primary">Room Booking System</h5>
+                      <a href="/viewbooking" class="stretched-link"></a>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-body text-center">
+                    <i class="fa fa-comments text-muted" style="font-size: 90px"></i>
+                  </div>
+                  <div class="card-footer">
+                    <h5 class="card-title text-center text-muted">Consult a lecturer</h5>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-body text-center">
+                    <i class="fa fa-calendar text-muted" style="font-size: 90px"></i>
+                  </div>
+                  <div class="card-footer">
+                    <h5 class="card-title text-center text-muted">Timetable</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-    <div class='col-10 border'>
-      <div style="margin-top:5%;">
-        <div class='row justify-content-start'>
-          <div class='col-2'>
-            <form action="/studentDash" method="post">
-            <div class="form-group">
-              <label for="selectDate">Date</label>
-              <input
-              type="date"
-              class="form-control"
-              name="selectDate"
-              id="selectDate"
-              min="<%=e%>"
-              max="2099-12-31"
-              value=<%= d %>
-              />
-            </div>
-          </div>
-            <div class='col-2'>
-              <div class="form-group">
-                <label for="selectCapacity">Capacity</label>
-                <input
-                type="string"
-                class="form-control"
-                name="selectCapacity"
-                placeholder="Number of people"
-                id="selectCapacity"
-                value=<%= c %>
-                />
-            </div>
-          </div>
-          <div class='col-2' style="margin-top:2%">
-            <button class="dt-button" id='getAvailable' onclick='getRooms()' type="submit"><span>Show available rooms</span></button></form>
-        </div>
-      </div>
-            <p>
-              <div class='col'>
-                <table id='tableTry2' class="table table-bordered" style="width:100%">
-                <thead class="thead-dark">
-      <tr>
-        <th style="width:100px" class="text-center">roomID</th>
-        <th style="width:700px" class="text-center">Slots</th>
-      </tr>
-    </thead>
-    <tbody>
-    <script>
-    </script>
-    <!--maybe style this nicely-->
-    Filtering rooms with a capacity of <b><%= c%></b> on  <b><%=d%></b>
-<%  txt = "";
 
-              let selectDate = new Date(d);
-              let selectCapacity = c
-              time = "";
-              filterDate = booking1.filter(function(test){
-                return test.Date == d;
-              });
-
-              for(x in roomIDs1) {
-                start = new Date(roomIDs1[x]['launchstartdate']);
-                end = new Date(roomIDs1[x]['launchenddate']);
-                filterDateRm = filterDate.filter(function(test){
-                  return test.roomID == roomIDs1[x]['roomID'];
-                });
-
-
-                if (start.getTime() <= selectDate.getTime() &&
-                selectDate.getTime() <= end.getTime() &&
-                roomIDs1[x]['roomCapacity'] >= selectCapacity) {%>
-                  <tr>
-                    <th class="text-center align-middle">
-                      <%= roomIDs1[x]['roomID']%>
-                      </th>
-                  <th>
-                    <%
-                    array = []
-                    for(b in filterDateRm){
-                      array.push(filterDateRm[b]['Timeslot'])
-                    }
-                    for(y in roomIDs1[x]['timeslots']) {
-                      if(array.includes(roomIDs1[x]['timeslots'][y].substring(4,15))){%>
-                      <button id="<%=roomIDs1[x]['roomID']+"\&"+roomIDs1[x]['timeslots'][y].substring(4,15)%>" value="<%=roomIDs1[x]['price']+"\&"+roomIDs1[x]['promotionalCode']%>" disabled onclick="buttonSelecter()" class="btn btn-secondary" ><%=roomIDs1[x]['timeslots'][y].substring(4,15)%></button>
-                      <%} else {%>
-                        <button id="<%=roomIDs1[x]['roomID']+"\&"+roomIDs1[x]['timeslots'][y].substring(4,15)%>" value="<%=roomIDs1[x]['price']+"\&"+roomIDs1[x]['promotionalCode']%>" onclick="buttonSelecter()" class="button" ><%=roomIDs1[x]['timeslots'][y].substring(4,15)%></button>
-                      <%}};%>
-                      </th>
-                      <%}}%>
-</tbody>
-</table>
-</p>
-<a href="#"><button class="dt-button" id='getBookingDeets' onclick="getDeets()"  type="button"><span>Next</span></button></a>
-          </div>
-          </div>
-        </div>
-</div>
-</div>
-<!-- TABLE -->
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.1/css/dataTables.bootstrap5.min.css">
-
-<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.1/js/dataTables.bootstrap5.min.js"></script>
 <script>
-
-function getDeets(){
-  if (localStorage.getItem('roomTime-ID') == ""){
-    alert("Please select a timeslot!")
-  } else {
-    window.location.href = '/payment'
+  function startTime() {
+    const today = new Date();
+    let h = today.getHours();
+    let m = today.getMinutes();
+    let s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('txt').innerHTML =  "The time now is: "+ h + ":" + m + ":" + s;
+    setTimeout(startTime, 1000);
   }
-}
 
-</script>
-<style>
-  .button {
-background-color: pink;
-border: none;
-color: black;
-padding: 10px 20px;
-text-align: center;
-text-decoration: none;
-display: inline-block;
-margin: 4px 2px;
-cursor: pointer;
-border-radius: 16px;
-}
-  </style>
-</body>
+  function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+  }
+  </script>
+
+      <script src="stylesheets/js/jquery-3.3.1.min.js"></script>
+      <script src="stylesheets/js/popper.min.js"></script>
+      <script src="stylesheets/js/bootstrap.min.js"></script>
+      <script src="stylesheets/js/main.js"></script>
+      </body>
