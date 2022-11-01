@@ -250,6 +250,26 @@ app.get('/bookingdata',ensureAuthenticated,  (req, res) => {
 
 
 })
+app.get('/timeslotdata',ensureAuthenticated,  (req, res) => {
+
+    const name= req.user.fullname
+  //not protected for now
+    bookings.find({createdBy: name}, function(err, booking) {
+        Bookingslist = booking
+
+        res.json({
+            "data": Bookingslist
+          })
+
+
+    }
+    )
+
+
+
+
+
+})
 app.get('/createroom',ensureAuthenticated,   (req, res) => {
 
 const todaysdate  = new Date().toISOString().slice(0, 10)
@@ -525,7 +545,7 @@ app.post('/bookaroom',  async (req, res) => {
   
     app.post('/payment',  async (req, res) => {
         const {roomID, Date, Timeslot} = req.body
-        const name = req.user.fullname
+        const name = req.user.userID
         const role = req.user.role
         const PaymentStatus = ""
      

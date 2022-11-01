@@ -107,17 +107,12 @@
                     <tr>
                       <th scope="col">ID</th>
                         <th scope="col">Room ID</th>
-                <th scope="col">Price ($)</th>
-                <th scope="col">Promotional Code</th>
-                <th scope="col">Room Capacity</th>
+                <th scope="col">Date</th>
                 <th scope="col">Timeslot</th>
-                <th scope="col">Created By</th>
                 <th scope="col">Booked By</th>
-                <th scope="col">Launch Status</th>
-    <th scope="col">Launch Start Date</th>
-    <th scope="col">Launch End Date</th>
-    <th scope="col">Timerange</th>
-    <th scope="col">Timeslots</th>
+                <th scope="col">Created By</th>
+                <th scope="col">Role</th>
+                <th scope="col">Payment Status</th>  
 
                     </tr>
                 </thead>
@@ -188,32 +183,17 @@ table1 = $('#lala').DataTable({
      scrollCollapse: true,
      order: [[ 1, 'asc' ]],
      ajax: {
-       url: '/roomData',
+       url: '/timeslotdata',
      },
      columns: [
-         { data: '_id',
-              visible: false, },
+         { data: '_id', visible:false},
          { data: 'roomID' },
-         { data: 'price' ,
-         visible: false, },
-         { data: 'promotionalCode',
-         visible: false, },
-         { data: 'roomCapacity' ,
-         visible: false, },
-         { data: 'timeslot' },
-         { data: 'createdBy' ,
-         visible: false, },
-         { data: 'bookedBy' },
-         { data: 'launchStatus',
-         visible: false, },
-    { data: 'launchstartdate' ,
-         visible: false, },
-    { data: 'launchenddate' ,
-         visible: false, },
-    { data: 'timerange' ,
-         visible: false, },
-    { data: 'timeslots',
-              visible: false, },
+         { data: 'Date'},
+         { data: 'Timeslot'},
+         { data: 'BookedBy'}, 
+         { data: 'createdBy', visible:false}, 
+         { data: 'role', visible:false},
+         { data: 'PaymentStatus', visible:false}
        ]
      })
      $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
@@ -256,27 +236,7 @@ table.scroller.measure();
                  } else {
                      table1.$('tr.selected').removeClass('selected');
                      $(this).addClass('selected');
-            var obtainroomID = data.roomID
-           
-
-            var obtainlaunchstartdate  = data.launchstartdate
-            var obtainlaunchenddate  = data.launchenddate
-            var obtainprice = data.price
-            var obtainpromotionalCode = data.promotionalCode
-            var obtainroomCapacity = data.roomCapacity
-
-            var obtainopeninghour = data.openinghour 
-            localStorage.setItem('room-ID',obtainroomID)
-
-            localStorage.setItem('unit-ID',unit)
-            localStorage.setItem('level-ID',level)
-            localStorage.setItem('launchstartdate-ID',obtainlaunchstartdate)
-            localStorage.setItem('launchenddate-ID',obtainlaunchenddate)
-            localStorage.setItem('price-ID',obtainprice)
-            localStorage.setItem('promotionalCode-ID',obtainpromotionalCode)
-            localStorage.setItem('roomCapacity-ID',obtainroomCapacity)
-            localStorage.setItem('openinghour-ID',obtainopeninghour)
-        }
+                   }
 
     });
 
