@@ -253,7 +253,7 @@ app.get('/paymentsuccess',ensureAuthenticated,  (req, res) => { role=req.user.ro
 }})
 app.get('/bookingdata',ensureAuthenticated,  (req, res) => {
 
-    const name= req.user.fullname
+    const name= req.user.userID
   //not protected for now
     bookings.find({BookedBy: name}, function(err, booking) {
         Bookingslist = booking
