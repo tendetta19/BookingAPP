@@ -521,13 +521,21 @@ app.post('/bookaroom',  async (req, res) => {
 
 
 
-    })})
+    })}) 
+  
     app.post('/payment',  async (req, res) => {
         const {roomID, Date, Timeslot} = req.body
         const name = req.user.fullname
         const role = req.user.role
         const PaymentStatus = ""
-
+     
+     
+          createdBy2 = await rooms.find({roomID:roomID}, {createdBy:1});
+       
+          var createdBy = createdBy2.toString().substring(createdBy2.toString().lastIndexOf(":")+3,createdBy2.toString().lastIndexOf('\''))
+    
+       
+       
         let errors = []
 
     	const BookedBy = name
@@ -545,7 +553,8 @@ app.post('/bookaroom',  async (req, res) => {
                             Timeslot,
                             BookedBy,
                             role,
-                            PaymentStatus
+                            PaymentStatus,
+                            createdBy
                         })
                         newBooking
                             .save()
@@ -560,7 +569,7 @@ app.post('/bookaroom',  async (req, res) => {
 
                     }
 
-                }
+              }
 
 
 

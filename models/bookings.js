@@ -18,6 +18,10 @@ const UserSchema= new mongoose.Schema(
         BookedBy: {
             type:String,
             required: true
+        }, 
+        createdBy: {
+            type:String,
+            required: true
         },
         role: {
             type:String,
