@@ -232,7 +232,7 @@ app.get('/viewbooking', (req, res) => {
 })
 app.get('/bookingdata',ensureAuthenticated,  (req, res) => {
 
-    const name= req.user.fullname
+    const name= req.user.userID
   //not protected for now
     bookings.find({BookedBy: name}, function(err, booking) {
         Bookingslist = booking
