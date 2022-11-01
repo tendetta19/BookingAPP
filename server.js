@@ -230,6 +230,27 @@ app.get('/viewbooking', (req, res) => {
 
 
 })
+app.get('/paymentsuccess',ensureAuthenticated,  (req, res) => { role=req.user.role
+    if(role === 'admin'){
+        res.redirect('/adminDash')
+    }if(role === 'staff'){
+        res.redirect('/staffDash')
+    }
+    if(role === 'student'){
+    res.render("./user/student/paymentsuccess", {
+        name:req.user.fullname,
+
+
+
+    },
+
+    )
+
+
+
+
+
+}})
 app.get('/bookingdata',ensureAuthenticated,  (req, res) => {
 
     const name= req.user.fullname
@@ -541,21 +562,21 @@ app.post('/bookaroom',  async (req, res) => {
 
 
 
-    })}) 
-  
+    })})
+
     app.post('/payment',  async (req, res) => {
         const {roomID, Date, Timeslot} = req.body
         const name = req.user.userID
         const role = req.user.role
         const PaymentStatus = ""
-     
-     
+
+
           createdBy2 = await rooms.find({roomID:roomID}, {createdBy:1});
-       
+
           var createdBy = createdBy2.toString().substring(createdBy2.toString().lastIndexOf(":")+3,createdBy2.toString().lastIndexOf('\''))
-    
-       
-       
+
+
+
         let errors = []
 
     	const BookedBy = name
@@ -583,7 +604,7 @@ app.post('/bookaroom',  async (req, res) => {
                                 'success_msg',
                                 'Room Booked!'
                                 );
-                                res.redirect('/viewbooking');
+                                res.redirect('/paymentsuccess');
                             })
                             .catch(err => console.log(err));
 

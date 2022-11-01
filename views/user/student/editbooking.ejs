@@ -164,11 +164,11 @@ newTime = ""
 </table>
 <p id="newTime"></p>
 <form action="/editbooking" method="post">
-<input type="text" id="selectDate" name="selectDate" value=<%=d%>>
-<input type="text" id="selectRoomID" name="selectRoomID" value=<%=r%>>
-<input type="text" id="selectTimeslot" name="selectTimeslot" value=<%=t%>>
-<input type="text" id="newTimeslot" name="newTimeslot">
-<input type="text" id="editBooking" name="editBooking">
+<input type="hidden" id="selectDate" name="selectDate" value=<%=d%>>
+<input type="hidden" id="selectRoomID" name="selectRoomID" value=<%=r%>>
+<input type="hidden" id="selectTimeslot" name="selectTimeslot" value=<%=t%>>
+<input type="hidden" id="newTimeslot" name="newTimeslot">
+<input type="hidden" id="editBooking" name="editBooking">
 <a href="#"><button class="dt-button" onclick="getBook()"  type="submit"><span>Modify Booking</span></button></a>
 </form>
           </div>

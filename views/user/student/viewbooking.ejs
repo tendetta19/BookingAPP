@@ -131,7 +131,7 @@ border-radius: 16px;
     <div class='col-10 border'>
       <div style="margin-top:5%;">
 
-        <button class="dt-button" style="top:200; left:10"> <a href="/bookaroom" target="_self">Book a Room</a> </button>
+        <a href="/bookaroom"><button class="dt-button" type="button"><span>Book a room</span></button></a>
         <form action="/viewbooking" method="post" style="display:inline-block">
         <button class="dt-button disabled" disabled = "disabled" id="myForm" type="submit" style="top:200; left:10">Modify Booking</button>
         <button class="dt-button disabled" disabled = "disabled" id="myForm1" type="button" data-toggle="modal" data-target="#exampleModalCenter" style="top:200; left:10">Cancel Booking</button>
@@ -166,7 +166,11 @@ border-radius: 16px;
         </div>
       </form>
   <p>
-
+<div class="row" style="margin-top:5%;">
+  <div class="col">
+  <h3>My bookings</h3>
+</div>
+</div>
 
 
           <p>     <table id="example"style="width:100%" >
