@@ -251,6 +251,27 @@ app.get('/paymentsuccess',ensureAuthenticated,  (req, res) => { role=req.user.ro
 
 
 }})
+app.get('/modifysuccess',ensureAuthenticated,  (req, res) => { role=req.user.role
+    if(role === 'admin'){
+        res.redirect('/adminDash')
+    }if(role === 'staff'){
+        res.redirect('/staffDash')
+    }
+    if(role === 'student'){
+    res.render("./user/student/modifysuccess", {
+        name:req.user.fullname,
+
+
+
+    },
+
+    )
+
+
+
+
+
+}})
 app.get('/bookingdata',ensureAuthenticated,  (req, res) => {
 
     const name= req.user.userID
@@ -680,7 +701,7 @@ app.post('/bookaroom',  async (req, res) => {
                              'success_msg',
                              'Booking updated!'
                              );
-                             res.redirect('/viewbooking');
+                             res.redirect('/modifysuccess');
                          })
                          .catch(err => console.log(err));
                        }

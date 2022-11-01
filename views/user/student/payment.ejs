@@ -102,7 +102,7 @@ span.price {
   </div>
     <div class ='col-3 border-left'>
       <div class='row' style="margin-left:5%;">
-      <div class ='col border border-secondary rounded' style="margin-top:25%;background-color:#DFDFDF;">
+      <div class ='col border border-secondary rounded' style="margin-top:25%;background-color:#EEEEEE;">
         <h4 class='pt-3'>Booking Summary</h4><hr>
         <div class='row'>
 <div class='col pt-2'>
@@ -169,7 +169,7 @@ span.price {
   </div>
     <div class='col-5'>
       <div class='row' style="margin:5%;">
-      <div class='col border border-secondary rounded' style="margin-top:10%;background-color:#DFDFDF;">
+      <div class='col border border-secondary rounded' style="margin-top:10%;background-color:#EEEEEE;">
                 <h4 class='pt-3'>Payment</h4><hr>
                 <label for="fname">Accepted Cards</label>
 
@@ -195,21 +195,20 @@ span.price {
    </div>
    <div class="form-group col">
      <label for="inputState">CVV</label>
-      <input type="text" class="form-control" id="inputCVV" placeholder="3 digits" pattern="[0-9]{3}" minlength="3" maxlength="3" title="Only numbers allowed" required>
+      <input type="text" class="form-control" id="inputCVV" placeholder="3 digits" pattern="[0-9]{3}" minlength="3" maxlength="3" title="3 digits required" required>
    </div>
 
  </div>
  <div class='form-row'>
    <div class='form-group col'>
-   </div>
- </div>
   <input type="hidden"  name="Date" readonly id="Date" value=bookDate>
   <input type="hidden"  name="roomID" readonly id="roomID" value=bookID>
   <input type="hidden"  name="Timeslot" readonly id="Timeslot" value=bookTime>
        <button type="submit" class="btn btn-primary btn-block">Pay</button>
 </form>
 
-
+</div>
+</div>
 
           </div>
         </div>

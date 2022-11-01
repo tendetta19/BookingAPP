@@ -17,7 +17,7 @@
 <script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
 
 <link rel="icon" href="https://64.media.tumblr.com/bafc236f8913370429d52ee13d363ff9/tumblr_nkm7541saS1r6wywso1_500.gifv">
-<title>Room Booking</title>
+<title>Book a room</title>
 </head>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
@@ -174,7 +174,7 @@ localStorage.setItem('date-ID', "<%=d%>")
                     }
                     for(y in roomIDs1[x]['timeslots']) {
                       if(array.includes(roomIDs1[x]['timeslots'][y].substring(4,15))){%>
-                      <button id="<%=roomIDs1[x]['roomID']+"\&"+roomIDs1[x]['timeslots'][y].substring(4,15)%>" value="<%=roomIDs1[x]['price']+"\&"+roomIDs1[x]['promotionalCode']%>" disabled onclick="buttonSelecter()" class="btn btn-secondary" ><%=roomIDs1[x]['timeslots'][y].substring(4,15)%></button>
+                      <button id="<%=roomIDs1[x]['roomID']+"\&"+roomIDs1[x]['timeslots'][y].substring(4,15)%>" value="<%=roomIDs1[x]['price']+"\&"+roomIDs1[x]['promotionalCode']%>" disabled onclick="buttonSelecter()" class="buttonDisable" ><%=roomIDs1[x]['timeslots'][y].substring(4,15)%></button>
                       <%} else {%>
                         <button id="<%=roomIDs1[x]['roomID']+"\&"+roomIDs1[x]['timeslots'][y].substring(4,15)%>" value="<%=roomIDs1[x]['price']+"\&"+roomIDs1[x]['promotionalCode']%>" onclick="buttonSelecter()" class="button" ><%=roomIDs1[x]['timeslots'][y].substring(4,15)%></button>
                       <%}};%>
@@ -217,6 +217,19 @@ text-decoration: none;
 display: inline-block;
 margin: 4px 2px;
 cursor: pointer;
+border-radius: 16px;
+}
+
+.buttonDisable {
+background-color: #D5D5D5;
+border: none;
+color: black;
+padding: 10px 20px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+margin: 4px 2px;
+cursor: default;
 border-radius: 16px;
 }
   </style>

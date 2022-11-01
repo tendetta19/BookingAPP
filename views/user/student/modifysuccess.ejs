@@ -15,7 +15,7 @@
 <!-- Style -->
 <link rel="stylesheet" href="stylesheets/css/style.css">
 <link rel="icon" href="https://64.media.tumblr.com/bafc236f8913370429d52ee13d363ff9/tumblr_nkm7541saS1r6wywso1_500.gifv">
-<title>Payment Successful</title>
+<title>Modify Booking Successful</title>
 </head>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
   <div class="navbar-nav">
@@ -34,20 +34,20 @@
 </div>
 
 </nav>
-<body>
+<script>
+bookDate = localStorage.getItem('date-ID').value
+bookID = localStorage.getItem('room-ID').value
+myfunction(){
+  document.getElementById('pp').innerHTML = "Your new booking slot for Room" ;
+}
+</script>
+<body onload="myfunction()">
   <style>
     .body1 {
       background-image: url('./stylesheets/images/Beautify-Pink.png');
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
-    }
-
-    div.mid {
-      position: absolute;
-      font-size: 80px;
-      top: 200px;
-      left: 530px;
     }
 
     .button {
@@ -61,8 +61,8 @@
   position: absolute;
   left: 875px;
   top: 500px;
-
 }
+
 
   </style>
   <div class='container-fluid'>
@@ -80,20 +80,22 @@
 
       <div class='col-8 border body1'>
         <div style="margin-top:5%;">
-          <div class="mid"> Your booking is successful </div>
-
-
-          <button class="button"> <a href="/viewbooking">Back to Room Bookings</a></button>
+          <div class="row justify-content-center">
+            <div class ="col">
+            <h1 class="text-center">You have modified your booking</h1> <br>
+              <p id='pp'>HDOAIJDOWAIJOJA</p>
+          <a href="/viewbooking"><button class="button" type="button"><span>Back to Room Booking</span></button></a>
+          </div>
 
       </div>
     </div>
+  </div>
       <div class='col-2 h-100 bg-light'>
         </div>
   </div>
 
 
 <script>
-
   </script>
 
       <script src="stylesheets/js/jquery-3.3.1.min.js"></script>

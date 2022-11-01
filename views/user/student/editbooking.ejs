@@ -154,7 +154,7 @@ newTime = ""
                     }
                     for(y in filterRoom[0]['timeslots']) {
                       if(array.includes(filterRoom[0]['timeslots'][y].substring(4,15))){%>
-                      <button id="<%=filterRoom[0]['roomID']+"\&"+filterRoom[0]['timeslots'][y].substring(4,15)%>" value="<%=filterRoom[0]['price']+"\&"+filterRoom['promotionalCode']%>" disabled onclick="buttonSelecter()" class="btn btn-secondary" ><%=filterRoom[0]['timeslots'][y].substring(4,15)%></button>
+                      <button id="<%=filterRoom[0]['roomID']+"\&"+filterRoom[0]['timeslots'][y].substring(4,15)%>" value="<%=filterRoom[0]['price']+"\&"+filterRoom['promotionalCode']%>" disabled onclick="buttonSelecter()" class="buttonDisable" ><%=filterRoom[0]['timeslots'][y].substring(4,15)%></button>
                       <%} else {%>
                         <button id="<%=filterRoom[0]['roomID']+"\&"+filterRoom[0]['timeslots'][y].substring(4,15)%>" value="<%=filterRoom[0]['price']+"\&"+filterRoom['promotionalCode']%>" onclick="buttonSelecter()" class="button" ><%=filterRoom[0]['timeslots'][y].substring(4,15)%></button>
                       <%}};%>
@@ -202,6 +202,19 @@ text-decoration: none;
 display: inline-block;
 margin: 4px 2px;
 cursor: pointer;
+border-radius: 16px;
+}
+
+.buttonDisable {
+background-color: #D5D5D5;
+border: none;
+color: black;
+padding: 10px 20px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+margin: 4px 2px;
+cursor: default;
 border-radius: 16px;
 }
   </style>
