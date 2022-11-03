@@ -275,9 +275,10 @@ app.get('/modifysuccess',ensureAuthenticated,  (req, res) => { role=req.user.rol
 }})
 app.get('/bookingdata',ensureAuthenticated,  (req, res) => {
 
+    const todaysdate= new Date().toISOString().slice(0, 10)
     const name= req.user.userID
   //not protected for now
-    bookings.find({BookedBy: name}, function(err, booking) {
+    bookings.find({BookedBy: name, Date: { $gte: todaysdate }}, function(err, booking) {
         Bookingslist = booking
 
         res.json({
@@ -294,10 +295,10 @@ app.get('/bookingdata',ensureAuthenticated,  (req, res) => {
 
 })
 app.get('/timeslotdata',ensureAuthenticated,  (req, res) => {
-
+    const todaysdate= new Date().toISOString().slice(0, 10)
     const name= req.user.fullname
   //not protected for now
-    bookings.find({createdBy: name}, function(err, booking) {
+    bookings.find({createdBy: name, Date: { $gte: todaysdate }}, function(err, booking) {
         Bookingslist = booking
 
         res.json({
@@ -405,7 +406,10 @@ app.get('/student',ensureAuthenticated,  (req, res) => {
 
 }})
 app.get('/roomData',ensureAuthenticated,  (req, res) => {
-    rooms.find({}, function(err, room) {
+    
+    const todaysdate= new Date().toISOString().slice(0, 10)
+    console.log(todaysdate)
+    rooms.find({launchenddate: { $gte: todaysdate }}, function(err, room) {
         roomsList = room
 
         res.json({
