@@ -173,7 +173,7 @@ app.get('/bookaroom',ensureAuthenticated,   (req, res) => {
   if(role === 'student'){
 const todaysdate  = new Date().toISOString().slice(0, 10)
 console.log(todaysdate)
-      rooms.find({}, {roomID:1, launchstartdate:1, launchenddate:1, roomCapacity:1, timeslots:1, price:1, promotionalCode:1, _id:0}, function(err, roomIDs){
+      rooms.find({}, {roomID:1, launchstartdate:1, launchenddate:1, launchStatus:1, roomCapacity:1, timeslots:1, price:1, promotionalCode:1, _id:0}, function(err, roomIDs){
           roomIDs1 = roomIDs
           bobt = roomIDs.length
       bookings.find({}, {roomID:1, Timeslot:1, Date:1, _id:0, }, function(err, bookingss){
@@ -406,7 +406,7 @@ app.get('/student',ensureAuthenticated,  (req, res) => {
 
 }})
 app.get('/roomData',ensureAuthenticated,  (req, res) => {
-    
+
     const todaysdate= new Date().toISOString().slice(0, 10)
     console.log(todaysdate)
     rooms.find({launchenddate: { $gte: todaysdate }}, function(err, room) {

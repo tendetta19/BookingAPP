@@ -161,7 +161,8 @@ localStorage.setItem('date-ID', "<%=d%>")
 
                 if (start.getTime() <= selectDate.getTime() &&
                 selectDate.getTime() <= end.getTime() &&
-                roomIDs1[x]['roomCapacity'] >= selectCapacity) {%>
+                roomIDs1[x]['roomCapacity'] >= selectCapacity &&
+                roomIDs1[x]['launchStatus'] == "true") {%>
                   <tr>
                     <th class="text-center align-middle">
                       <%= roomIDs1[x]['roomID']%>
