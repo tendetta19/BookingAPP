@@ -43,8 +43,6 @@
 <body>
 <script>
 localStorage.setItem('roomTime-ID', "")
-bookDate = localStorage.getItem('date-ID').value
-bookID = localStorage.getItem('room-ID').value
 newTime = ""
   function buttonSelecter() {
 
@@ -186,7 +184,7 @@ function getBook(){
   if (document.getElementById("newTime").innerHTML == ""){
     alert("Please select a timeslot!")
   } else {
-
+    localStorage.setItem("newTime-ID", newTime)
   }
 }
 

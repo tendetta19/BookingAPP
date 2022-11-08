@@ -35,10 +35,11 @@
 
 </nav>
 <script>
-bookDate = localStorage.getItem('date-ID').value
-bookID = localStorage.getItem('room-ID').value
-myfunction(){
-  document.getElementById('pp').innerHTML = "Your new booking slot for Room" ;
+bookDate = localStorage.getItem("testing")
+bookID = localStorage.getItem('testing2')
+newTime = localStorage.getItem('newTime-ID')
+function myfunction(){
+  document.getElementById('pp').innerHTML = "Your new booking slot for Room <b>" +bookID+"</b> on <b>"+bookDate+"</b> is <b>"+newTime+"</b>" ;
 }
 </script>
 <body onload="myfunction()">
@@ -83,7 +84,7 @@ myfunction(){
           <div class="row justify-content-center">
             <div class ="col">
             <h1 class="text-center">You have modified your booking</h1> <br>
-              <p id='pp'>HDOAIJDOWAIJOJA</p>
+              <p class="text-center" id='pp'>Loading...</p>
           <a href="/viewbooking"><button class="button" type="button"><span>Back to Room Booking</span></button></a>
           </div>
 
@@ -98,7 +99,9 @@ myfunction(){
 <script>
  setTimeout(function(){
     window.location.href = '/viewbooking';
- }, 3000);
+ }, 5000);
+  </script>
+  <script>
   </script>
 
       <script src="stylesheets/js/jquery-3.3.1.min.js"></script>

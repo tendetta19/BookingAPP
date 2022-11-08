@@ -158,7 +158,7 @@ border-radius: 16px;
                             </div>
                             <div class="modal-footer justify-content-center">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              <input type="submit" onclick="myFunction()" class="btn btn-danger">
+                              <input type="submit" onclick="myFunction()" value="Confirm" class="btn btn-danger">
                             </div>
                           </div>
                         </div>
@@ -262,12 +262,11 @@ columns: [
     document.getElementById('selectDate').value = data.Date
     document.getElementById('selectTimeslot').value = data.Timeslot
     document.getElementById('selectRoomID').value = data.roomID
-                    var obtainroomID = data.roomID
-                    var obtainDate  = data.Date
-                    var obtainTimeslot  = data.Timeslot
-                    localStorage.setItem('room-ID',obtainroomID)
-                    localStorage.setItem('date-ID',obtainDate)
-                    localStorage.setItem('timeslot-ID',obtainTimeslot)
+    ddd = document.getElementById('selectDate').value
+    localStorage.setItem("testing", ddd)
+    rrr = document.getElementById('selectRoomID').value
+    localStorage.setItem("testing2", rrr)
+
         }
 
     });
@@ -281,7 +280,6 @@ columns: [
 
 </script>
 <script>
-console.log(localStorage.getItem('date-ID').value)
 </script>
 
 </body>
