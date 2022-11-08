@@ -35,11 +35,12 @@
 
 </nav>
 <script>
-bookDate = localStorage.getItem("testing")
+bookDate = localStorage.getItem('testing')
 bookID = localStorage.getItem('testing2')
+oldTime = localStorage.getItem('testing3')
 newTime = localStorage.getItem('newTime-ID')
 function myfunction(){
-  document.getElementById('pp').innerHTML = "Your new booking slot for Room <b>" +bookID+"</b> on <b>"+bookDate+"</b> is <b>"+newTime+"</b>" ;
+  document.getElementById('pp').innerHTML = "Your timeslot has been changed from <b>" +oldTime+"</b> to <b>"+newTime+"</b>" ;
 }
 </script>
 <body onload="myfunction()">
