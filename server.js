@@ -410,7 +410,8 @@ app.get('/roomData',ensureAuthenticated,  (req, res) => {
 
     const todaysdate= new Date().toISOString().slice(0, 10)
     console.log(todaysdate)
-    rooms.find({launchenddate: { $gte: todaysdate }}, function(err, room) {
+    rooms. find( { $or: [{launchenddate: { $gte: todaysdate }}, { launchenddate: "" } ] }, function(err, room) {
+       
         roomsList = room
 
         res.json({
@@ -1033,6 +1034,7 @@ app.post('/createroom',  async (req, res) => {
    // console.log(name)
     const {unit,level,block, price, roomCapacity, promotionalCode, launchStatus,launchstartdate,launchenddate,openinghour,closinghour} = req.body
     const roomID= 'BLK '+block+' '+'L-'+level+'-'+ unit.toUpperCase()
+  
     const todaysdate  = new Date().toISOString().slice(0, 10)
     const timeslot = ''
     const name = req.user.fullname
@@ -1085,14 +1087,14 @@ if (launchStatus==='true' && !timecheck.test(openinghour) && !timecheck.test(clo
         } )
 
         .then(user => {
-            if(user){
+            if(user){ 
                 errors.push({msg: 'Room ID already exists!'})
 
                 res.render('./user/staff/createroom', {
                     errors,
                     name:req.user.fullname,
     
-    d:todaysdate
+                     d:todaysdate
 
                 })
             }
