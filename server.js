@@ -330,13 +330,14 @@ const todaysdate  = new Date().toISOString().slice(0, 10)
         d:todaysdate
 
 
-    })
-
+    }) 
 
 }})
 app.get('/editroom',ensureAuthenticated,   (req, res) => {
 
     const todaysdate  = new Date().toISOString().slice(0, 10)
+    
+    d:todaysdate
     role=req.user.role
     if(role === 'admin'){
         res.redirect('/adminDash')
@@ -1032,11 +1033,11 @@ app.post('/createroom',  async (req, res) => {
    // console.log(name)
     const {unit,level,block, price, roomCapacity, promotionalCode, launchStatus,launchstartdate,launchenddate,openinghour,closinghour} = req.body
     const roomID= 'BLK '+block+' '+'L-'+level+'-'+ unit.toUpperCase()
-
-
+    const todaysdate  = new Date().toISOString().slice(0, 10)
     const timeslot = ''
     const name = req.user.fullname
     let errors = []
+                     
 	// const createdBy = name
 	const bookedBy = ''
 	const createdBy = name
@@ -1057,7 +1058,8 @@ if (launchStatus==='true' && !timecheck.test(openinghour) && !timecheck.test(clo
     if(errors.length > 0){
         res.render('./user/staff/createroom', {
             errors,
-            name:req.user.fullname
+            name:req.user.fullname,    
+    d:todaysdate
 
         })
     } else{
@@ -1088,7 +1090,9 @@ if (launchStatus==='true' && !timecheck.test(openinghour) && !timecheck.test(clo
 
                 res.render('./user/staff/createroom', {
                     errors,
-                    name:req.user.fullname
+                    name:req.user.fullname,
+    
+    d:todaysdate
 
                 })
             }
