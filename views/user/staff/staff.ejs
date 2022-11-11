@@ -31,11 +31,11 @@
   <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> <%= name%></a>
   <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
   </a>
-  <ul class="dropdown-menu"> 
+  <ul class="dropdown-menu">
     <li><a href="/logout"><i class="fa fa-sign-out "></i> Logout</a></li>
   </ul>
 </div>
- 
+
 
 </nav>
 
@@ -52,8 +52,8 @@
   <div class='col-2 h-100 bg-light'>
     <div style="margin-top:25%;">
       <nav class="nav nav-pills nav-fill flex-column">
-      <a class="nav-link" href="/staffDash">Dashboard</a>
-      <a class="nav-link active" href="#">Room Booking</a>
+      <a class="nav-link" href="/staffDash">Staff Dashboard</a>
+      <a class="nav-link active" href="#">Room Booking System</a>
       <a class="nav-link disabled" href="#">Student Consultation</a>
       <a class="nav-link disabled" href="#">Timetable</a>
     </nav>
@@ -112,7 +112,7 @@
                 <th scope="col">Booked By</th>
                 <th scope="col">Created By</th>
                 <th scope="col">Role</th>
-                <th scope="col">Payment Status</th>  
+                <th scope="col">Payment Status</th>
 
                     </tr>
                 </thead>
@@ -190,8 +190,8 @@ table1 = $('#lala').DataTable({
          { data: 'roomID' },
          { data: 'Date'},
          { data: 'Timeslot'},
-         { data: 'BookedBy'}, 
-         { data: 'createdBy', visible:false}, 
+         { data: 'BookedBy'},
+         { data: 'createdBy', visible:false},
          { data: 'role', visible:false},
          { data: 'PaymentStatus', visible:false}
        ]

@@ -28,7 +28,7 @@
   <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> <%= name%></a>
   <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
   </a>
-  <ul class="dropdown-menu"> 
+  <ul class="dropdown-menu">
     <li><a href="/logout"><i class="fa fa-sign-out "></i> Logout</a></li>
   </ul>
 </div>
@@ -40,8 +40,8 @@
     <div class='col-sm-2 h-100 bg-light'>
       <div style="margin-top:25%;">
         <nav class="nav nav-pills nav-fill flex-column">
-        <a class="nav-link" href="/staffDash">Dashboard</a>
-        <a class="nav-link active" href="/staff">Room Booking</a>
+        <a class="nav-link" href="/staffDash">Staff Dashboard</a>
+        <a class="nav-link active" href="/staff">Room Booking System</a>
         <a class="nav-link disabled" href="#">Student Consultation</a>
         <a class="nav-link disabled" href="#">Timetable</a>
       </nav>
@@ -216,26 +216,26 @@
 
   const launchstartdate = localStorage.getItem('launchstartdate-ID')
   const launchenddate = localStorage.getItem('launchenddate-ID')
-  const timerange = localStorage.getItem('timerange-ID') 
+  const timerange = localStorage.getItem('timerange-ID')
   var block = roomID.substring(4,5)
 
 
   var unit = roomID.substring(roomID.lastIndexOf('-')+1 )
-  var level = roomID.substring(roomID.indexOf('L-')+2,roomID.lastIndexOf('-')) 
+  var level = roomID.substring(roomID.indexOf('L-')+2,roomID.lastIndexOf('-'))
 
   var openinghour = timerange.slice(0,5)
-  var closinghour = timerange.slice(-5) 
+  var closinghour = timerange.slice(-5)
     document.getElementById('roomCapacity').value = roomCapacity
 
     document.getElementById('promotionalCode').value = promotionalCode
-    document.getElementById('price').value = price 
+    document.getElementById('price').value = price
     document.getElementById('launchstartdate').value = launchstartdate
     document.getElementById('launchenddate').value = launchenddate
     document.getElementById('openinghour').value = openinghour
     document.getElementById('closinghour').value = closinghour
-    document.getElementById('block').value = block 
-    document.getElementById('unit').value = unit 
-    document.getElementById('level').value = level 
+    document.getElementById('block').value = block
+    document.getElementById('unit').value = unit
+    document.getElementById('level').value = level
     function img(x)
       {if(x==0)
         document.getElementById('launchgroup').style.display='block'

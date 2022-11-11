@@ -28,7 +28,7 @@
   <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> <%= name%></a>
   <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
   </a>
-  <ul class="dropdown-menu"> 
+  <ul class="dropdown-menu">
     <li><a href="/logout"><i class="fa fa-sign-out "></i> Logout</a></li>
   </ul>
 </div>
@@ -41,7 +41,7 @@
       <div style="margin-top:25%;">
         <nav class="nav nav-pills nav-fill flex-column">
         <a class="nav-link active" href="#">Dashboard</a>
-        <a class="nav-link" href="/staff">Room Booking</a>
+        <a class="nav-link" href="/staff">Room Booking System</a>
         <a class="nav-link disabled" href="#">Student Consultation</a>
         <a class="nav-link disabled" href="#">Timetable</a>
       </nav>
@@ -89,7 +89,7 @@
   </div>
 
 
-<script> 
+<script>
   function startTime() {
     const today = new Date();
     let h = today.getHours();
@@ -100,7 +100,7 @@
     document.getElementById('txt').innerHTML =  "The time now is: "+ h + ":" + m + ":" + s;
     setTimeout(startTime, 1000);
   }
-  
+
   function checkTime(i) {
     if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
     return i;
