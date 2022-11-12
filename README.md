@@ -7,7 +7,7 @@ The system require using ``18.10.0`` to run.
 Compatible Node.js can be found [here](https://nodejs.org/dist/v18.10.0/). 
 ## Getting started
 
-After installing ``Node.js`` and ``Yarn``, make sure the environment have following variables:
+After installing ``Node.js``, make sure the environment have following variables:
 
 - SESSION_SECRET
 - CONNECTIONSTRING: URL of the MongoDB database for production environment
