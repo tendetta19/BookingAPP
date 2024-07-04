@@ -5,6 +5,7 @@ if (process.env.NODE_ENV !== 'production') {
     //Loading your environment variables is a one-liner:
     require('dotenv').config()
 }
+const path = require('path')
 const datejs =require('datejs')
 const {ensureAuthenticated} = require('./config/auth')
 const flash = require('connect-flash')
@@ -118,6 +119,16 @@ app.get('/forgetpassword',  (req, res) => {
 
 
 })
+// Serve SpeechSDK.js file
+app.get('/SpeechSDK.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'SpeechSDK.js'));
+});
+
+// Serve chat.js file (assuming it's also in the same directory)
+app.get('/chat.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'chat.js'));
+});
+
 
 app.get('/register',  (req, res) => {
 

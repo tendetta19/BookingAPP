@@ -222,20 +222,18 @@ strong {
 textarea {
     font-family: 'Roboto', sans-serif;
 }
-
 video {
     background: #222;
-    margin: 0 0 20px 0;
-    --width: 100%;
-    width: var(--width);
-    height: calc(var(--width) * 0.75);
+    margin: 0 0 20px 0; 
+    width: 100%;
+    height: auto;
 }
 
 ul {
     margin: 0 0 0.5em 0;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 430px) {
     .highlight {
         font-size: 1em;
         margin: 0 0 20px 0;
