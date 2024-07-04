@@ -231,6 +231,16 @@ app.get('/viewbooking', (req, res) => {
 
 
 })
+
+app.get('/speechtotext', (req, res) => {
+    res.render('./user/student/speechtotext', {
+        name:req.user.fullname
+
+
+    })
+
+
+})
 app.get('/paymentsuccess',ensureAuthenticated,  (req, res) => { role=req.user.role
     if(role === 'admin'){
         res.redirect('/adminDash')

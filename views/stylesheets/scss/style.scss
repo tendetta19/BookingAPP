@@ -235,4 +235,50 @@ h2 {
 .control--checkbox input:disabled:checked ~ .control__indicator {
   background-color: #7e0cf5;
   opacity: .2;
+} 
+.footer {
+	background-color: #000;
+	color: #fff;
+	padding: 20px 0;
+	text-align: center;
+}
+.footer .container {
+	display: flex;
+	justify-content: space-between;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+.footer .column {
+	flex: 1;
+	padding: 0 20px;
+}
+.footer .column h3 {
+	font-size: 1.2em;
+	margin-bottom: 10px;
+}
+.footer .column ul {
+	list-style: none;
+	padding: 0;
+}
+.footer .column ul li {
+	margin-bottom: 5px;
+}
+.footer .column ul li a {
+	color: #fff;
+	text-decoration: none;
+}
+.footer .column ul li a:hover {
+	text-decoration: underline;
+}
+.footer .contact-info {
+	text-align: left;
+}
+.footer .contact-info p {
+	margin: 5px 0;
+}
+.footer .copyright {
+	margin-top: 20px;
+	border-top: 1px solid #444;
+	padding-top: 10px;
 }
